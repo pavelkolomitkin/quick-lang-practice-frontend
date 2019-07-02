@@ -1,0 +1,18 @@
+<div class="login-page">
+  <div class="login-box">
+    <app-security-common-header></app-security-common-header>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+
+      <p class="alert alert-success" *ngIf="activatedUser">
+        {{ 'YOU_HAVE_CONFIRMED_YOUR_PROFILE' }} <a routerLink="/security/login">{{ 'SING_IN' }}!</a>
+      </p>
+      <p class="alert alert-danger" *ngIf="activationErrors">
+        {{ activationErrors }}
+      </p>
+
+      <a routerLink="/security/login" class="text-center">{{ 'LOGIN' }}</a>
+
+    </div>
+  </div>
+</div>

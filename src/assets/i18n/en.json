@@ -1,0 +1,50 @@
+{
+  "YOU_HAVE_CONFIRMED_YOUR_PROFILE": "You have confirmed your account! Use your email and password to ",
+  "SING_IN": "Sign in",
+  "REGISTER" : "Sign up",
+  "LOGIN_HEADER": "Sing in",
+  "LOGIN": "Sing in",
+  "SING_IN_TO_START": "Sign in to start",
+  "RESTORE_PASSWORD": "Restore password",
+  "OPTIONAL": "Optional",
+  "YOU_WANT_TO_LEAVE_THIS_PAGE": "Do you want to leave this page",
+
+  "EMAIL": "Email",
+  "PASSWORD": "Password",
+  "RETYPE_PASSWORD": "Retype the password",
+  "REMEMBER_ME": "Remember me",
+  "ACTIVE": "Active",
+
+  "PASSWORD_RECOVERY": "Restore password",
+  "SUBMIT_OK": "Ok",
+  "SAVE": "Save",
+  "YES": "Yes",
+  "NO": "No",
+  "CLOSE": "Close",
+  "CANCEL": "Cancel",
+  "CONFIRM": "Confirm",
+  "ALL": "All",
+  "COLLAPSE": "Collapse",
+  "MESSAGE_WITH_PASSWORD_RECOVERY_WAS_SENT": "The restore password link was sent on your email",
+
+  "RESET_PASSWORD": "Reset password",
+  "THE_PASSWORD_HAS_BEEN_RESET": "The password has been reset",
+  "CHECKING_LINK": "Checking the link",
+  "INVALID_RESTORE_LINK": "The link is invalid",
+  "YOU_RESTORED_YOUR_PASSWORD": "You have restored your password",
+
+  "YOUR_FULL_NAME": "Your full name",
+  "FULL_NAME": "Full name",
+  "I_ACCEPT_AGREEMENT": "Accept the agreement",
+  "YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL": "You have registered successful! Confirm your account by link which was sent on your email!",
+
+
+  "PAGE_NOT_FOUND": "Page not found",
+  "NONE": "Нет",
+  "NO_DATA": "Нет данных",
+  "PERIOD": "Период",
+
+  "LOGIN_ERROR": "Неверный эл. адрес или пароль",
+  "DEVELOPER": "Разработчик",
+  "USER_AGREEMENT": "Пользовательское соглашение"
+}

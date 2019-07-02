@@ -3,14 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {CoreModule} from './core/core.module';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {environment} from '../environments/environment';
+import {AppSecurityLayoutComponent} from './components/app-security-layout/app-security-layout.component';
+import {AppLayoutComponent} from './components/app-layout/app-layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppSecurityLayoutComponent,
+    AppLayoutComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    CoreModule,
+    AppRoutingModule,
+    StoreDevtoolsModule.instrument(
+        {
+          maxAge: 25,
+          logOnly: !environment.production
+        }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

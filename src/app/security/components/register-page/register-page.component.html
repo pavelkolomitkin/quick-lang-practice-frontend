@@ -1,0 +1,22 @@
+<div class="register-page">
+    <div class="register-box">
+        <app-security-common-header></app-security-common-header>
+
+        <div class="register-box-body">
+            <p class="login-box-msg">{{ 'REGISTER' }}</p>
+
+            <app-register-form (onSubmit)="onFormSubmit($event)" [validationErrors]="errors"></app-register-form>
+
+<!--            <div class="social-auth-links text-center">-->
+<!--                <p>- OR -</p>-->
+<!--                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using-->
+<!--                    Facebook</a>-->
+<!--                <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using-->
+<!--                    Google+</a>-->
+<!--            </div>-->
+
+            <a routerLink="/security/login" class="text-center">{{ 'LOGIN' }}</a>
+        </div>
+        <!-- /.form-box -->
+    </div>
+</div>
