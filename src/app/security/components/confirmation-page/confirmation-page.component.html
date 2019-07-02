@@ -4,14 +4,16 @@
     <!-- /.login-logo -->
     <div class="login-box-body">
 
-      <p class="alert alert-success" *ngIf="activatedUser">
-        {{ 'YOU_HAVE_CONFIRMED_YOUR_PROFILE' }} <a routerLink="/security/login">{{ 'SING_IN' }}!</a>
+      <p class="alert alert-success" *ngIf="isUserActivated">
+        {{ 'YOU_HAVE_CONFIRMED_YOUR_PROFILE' | translate }} <a routerLink="/security/login">{{ 'SING_IN' | translate }}!</a>
       </p>
       <p class="alert alert-danger" *ngIf="activationErrors">
-        {{ activationErrors }}
+        <span *ngFor="let error of activationErrors">
+          {{ error.msg }}
+        </span>
       </p>
 
-      <a routerLink="/security/login" class="text-center">{{ 'LOGIN' }}</a>
+      <a routerLink="/security/login" class="text-center">{{ 'LOGIN' | translate }}</a>
 
     </div>
   </div>

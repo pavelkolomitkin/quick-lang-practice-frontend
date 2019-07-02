@@ -9,7 +9,7 @@
             required
             type="email"
             class="form-control"
-            placeholder="{{ 'EMAIL'  }}"
+            placeholder="{{ 'EMAIL' | translate }}"
     >
     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
     <app-form-field-error-list [field]="'email'" [errors]="validationErrors"></app-form-field-error-list>
@@ -21,7 +21,7 @@
             name="fullName"
             type="text"
             class="form-control"
-            placeholder="{{ 'YOUR_FULL_NAME'  }}"
+            placeholder="{{ 'YOUR_FULL_NAME' | translate }}"
     >
     <span class="glyphicon glyphicon-user form-control-feedback"></span>
     <app-form-field-error-list [field]="'fullName'" [errors]="validationErrors"></app-form-field-error-list>
@@ -35,10 +35,10 @@
             required
             type="password"
             class="form-control"
-            placeholder="{{ 'PASSWORD'  }}"
+            placeholder="{{ 'PASSWORD' | translate }}"
     >
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-    <app-form-field-error-list [field]="'password'" [errors]="validationErrors.plainPassword ? validationErrors.plainPassword : {}"></app-form-field-error-list>
+    <app-form-field-error-list [field]="'password'" [errors]="validationErrors"></app-form-field-error-list>
   </div>
 
   <div class="form-group has-feedback">
@@ -49,10 +49,10 @@
             required
             type="password"
             class="form-control"
-            placeholder="{{ 'RETYPE_PASSWORD'  }}"
+            placeholder="{{ 'RETYPE_PASSWORD' | translate }}"
     >
     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-    <app-form-field-error-list [field]="'passwordRepeat'" [errors]="validationErrors.plainPassword ? validationErrors.plainPassword : {}"></app-form-field-error-list>
+    <app-form-field-error-list [field]="'passwordRepeat'" [errors]="validationErrors"></app-form-field-error-list>
   </div>
 
   <div class="row">
@@ -63,13 +63,13 @@
                   type="checkbox"
                   ngModel
                   name="agreement"
-                  required> {{ 'I_ACCEPT_AGREEMENT'  }}
-        </label>&nbsp;<span (click)="onAgreementClickHandler($event)" class="user-agreement-link text-primary">{{ 'USER_AGREEMENT'  }}</span>
+                  required> {{ 'I_ACCEPT_AGREEMENT' | translate }}
+        </label>&nbsp;<span (click)="onAgreementClickHandler($event)" class="user-agreement-link text-primary">{{ 'USER_AGREEMENT' | translate }}</span>
       </div>
     </div>
     <!-- /.col -->
     <div class="col-xs-4">
-      <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block btn-flat btn-block">{{ 'SUBMIT_OK'  }}</button>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block btn-flat btn-block">{{ 'SUBMIT_OK' | translate }}</button>
     </div>
     <!-- /.col -->
   </div>

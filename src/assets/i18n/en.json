@@ -35,16 +35,16 @@
 
   "YOUR_FULL_NAME": "Your full name",
   "FULL_NAME": "Full name",
-  "I_ACCEPT_AGREEMENT": "Accept the agreement",
-  "YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL": "You have registered successful! Confirm your account by link which was sent on your email!",
+  "I_ACCEPT_AGREEMENT": "Accept the ",
+  "YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL": "You have registered successful! Confirm your account by the link which was sent on your email!",
 
 
   "PAGE_NOT_FOUND": "Page not found",
-  "NONE": "Нет",
-  "NO_DATA": "Нет данных",
-  "PERIOD": "Период",
+  "NONE": "None",
+  "NO_DATA": "No data",
+  "PERIOD": "Period",
 
-  "LOGIN_ERROR": "Неверный эл. адрес или пароль",
-  "DEVELOPER": "Разработчик",
-  "USER_AGREEMENT": "Пользовательское соглашение"
+  "LOGIN_ERROR": "Bad credentials",
+  "DEVELOPER": "Developer",
+  "USER_AGREEMENT": "user agreement"
 }

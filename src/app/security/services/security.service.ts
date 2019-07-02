@@ -9,11 +9,9 @@ import {BaseService} from '../../core/services/base.service';
 @Injectable()
 export class SecurityService extends BaseService
 {
-  registerUser(data: RegisterData): Observable<User>
+  registerUser(data: RegisterData): Observable<any>
   {
-    return this.http.post<{ user: User }>('/security/register', data).pipe(
-      map(result => <User> result.user)
-    );
+    return this.http.post('/security/register', data);
   }
 
   registerConfirm(confirmationKey: string): Observable<any>

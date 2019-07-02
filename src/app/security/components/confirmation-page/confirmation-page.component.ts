@@ -6,6 +6,7 @@ import {UserRegistrationConfirmStart} from "../../data/actions";
 import {Subscription} from "rxjs";
 import User from "../../../core/data/model/user.model";
 import {isArray} from "util";
+import {SecurityService} from '../../services/security.service';
 
 
 @Component({
@@ -16,40 +17,30 @@ import {isArray} from "util";
 export class ConfirmationPageComponent implements OnInit, OnDestroy {
 
   routeSubscription: Subscription;
-  confirmationSubscription: Subscription;
-  confirmationErrorSubscription: Subscription;
 
-  activatedUser: User;
+  isUserActivated = false;
   activationErrors;
 
   constructor(
-    private store:Store<State>,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private service: SecurityService
   ) {
 
-    this.confirmationSubscription = store.pipe(select(state => state.security.confirmedUser)).subscribe(
-      (user: User) => {
-        this.activatedUser = user;
-      }
-      );
 
-    this.confirmationErrorSubscription = store.pipe(select(state => state.security.confirmationUserErrors)).subscribe(
-      (errors: Object) => {
-        if (isArray(errors['key']))
-        {
-          this.activationErrors = errors['key'][0];
-        }
-
-      }
-    );
   }
 
   ngOnInit() {
 
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.routeSubscription = this.route.params.subscribe(async (params) => {
 
-      this.store.dispatch(new UserRegistrationConfirmStart(params['key']));
+      try {
+        await this.service.registerConfirm(params['key']).toPromise();
+        this.isUserActivated = true;
+      }
+      catch ({ error }) {
+        this.activationErrors = error['key'];
+      }
 
     });
   }
@@ -57,7 +48,6 @@ export class ConfirmationPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.routeSubscription.unsubscribe();
-    this.confirmationSubscription.unsubscribe();
   }
 
 }

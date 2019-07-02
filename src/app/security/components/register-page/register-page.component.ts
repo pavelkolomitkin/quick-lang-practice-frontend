@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {State} from '../../../app.state';
-import {UserRegistrationStart} from "../../data/actions";
 import RegisterData from "../../data/model/register-data.model";
-import {Subscription} from "rxjs";
+import {SecurityService} from '../../services/security.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -11,27 +9,29 @@ import {Subscription} from "rxjs";
   styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent implements OnInit, OnDestroy {
-  errorSubscription: Subscription;
 
   errors: {} = {};
 
-  constructor(private store:Store<State>) {
-    this.errorSubscription = store.pipe(select(state => state.security.registerUserErrors)).subscribe((errors) => {
-      this.errors = errors;
-    });
-  }
+  constructor(private service: SecurityService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  ngOnDestroy(): void {
-    this.errorSubscription.unsubscribe();
-  }
+  ngOnDestroy(): void {  }
 
 
-  onFormSubmit(data:RegisterData)
+  async onFormSubmit(data:RegisterData)
   {
-    this.store.dispatch(new UserRegistrationStart(data));
+
+    try {
+      await this.service.registerUser(data).toPromise();
+
+      this.router.navigateByUrl('/security/register-success');
+    }
+    catch (errors) {
+      this.errors = errors.error;
+    }
+
   }
 
 }

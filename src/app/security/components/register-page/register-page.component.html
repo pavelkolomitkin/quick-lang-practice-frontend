@@ -3,7 +3,7 @@
         <app-security-common-header></app-security-common-header>
 
         <div class="register-box-body">
-            <p class="login-box-msg">{{ 'REGISTER' }}</p>
+            <p class="login-box-msg">{{ 'REGISTER' | translate}}</p>
 
             <app-register-form (onSubmit)="onFormSubmit($event)" [validationErrors]="errors"></app-register-form>
 
@@ -15,7 +15,7 @@
 <!--                    Google+</a>-->
 <!--            </div>-->
 
-            <a routerLink="/security/login" class="text-center">{{ 'LOGIN' }}</a>
+            <a routerLink="/security/login" class="text-center">{{ 'LOGIN' | translate }}</a>
         </div>
         <!-- /.form-box -->
     </div>

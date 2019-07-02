@@ -66,16 +66,14 @@ export class PasswordResetPageComponent implements OnInit, OnDestroy {
     try {
 
       await this.service.resetPassword(key, {
-        plainPassword: {
-          password: password,
-          passwordRepeat: passwordRepeat
-        }
+        password: password,
+        passwordRepeat: passwordRepeat
       }).toPromise();
 
       this.currentState = PasswordResetPageComponent.SUCCESS_STATE;
     }
     catch (errors) {
-      this.errors = errors.error.errors;
+      this.errors = errors.error;
     }
 
     this.isRequesting = false;
