@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLogoutClickHandler()
+  onLogoutClickHandler(event)
   {
     this.store.dispatch(new UserLogout());
   }

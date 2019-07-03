@@ -35,7 +35,7 @@ export class SecurityService extends BaseService
   {
     return this.http.get<{user: User}>('/profile').pipe(
       map((result) => {
-        return User.createFromRawData(result.user);
+        return User.createFromRawData(result);
       })
     );
   }

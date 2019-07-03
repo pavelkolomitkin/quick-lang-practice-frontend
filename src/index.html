@@ -24,10 +24,36 @@
   <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
+  <style>
+
+    @keyframes spinner {
+      to {transform: rotate(360deg);}
+    }
+
+    .spinner:before {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50px;
+      height: 50px;
+      margin-top: -25px;
+      margin-left: -25px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      border-top-color: #07d;
+      animation: spinner .6s linear infinite;
+    }
+
+
+  </style>
 
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="spinner"></div>
+  </app-root>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>

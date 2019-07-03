@@ -10,9 +10,9 @@ export default class User
 
     public roles: Array<string> = [];
 
-    public createdAt: number;
+    public createdAt?: string;
 
-    public updatedAt: number;
+    public updatedAt?: string;
 
     isAdmin()
     {
