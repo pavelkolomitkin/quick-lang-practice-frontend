@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <div class="form-group has-feedback">
+    <input
+            id="emailInput"
+            ngModel
+            name="email"
+            email
+            required
+            type="email"
+            class="form-control"
+            placeholder="{{ 'EMAIL' | translate }}">
+    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+  </div>
+  <div class="form-group has-feedback">
+    <input
+            id="passwordInput"
+            ngModel
+            name="password"
+            autocomplete
+            required
+            type="password" class="form-control" placeholder="{{ 'PASSWORD' | translate }}">
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+    <app-form-field-error-list [field]="'email'" [errors]="errors"></app-form-field-error-list>
+  </div>
+
+  <div class="form-group form-check">
+    <input type="checkbox"
+           ngModel
+           name="rememberMe"
+           class="form-check-input"
+           id="rememberMe">
+    <label class="form-check-label" for="rememberMe">{{ 'REMEMBER_ME' | translate }}</label>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">{{ 'SIGN_IN' | translate }}</button>
+  </div>
+</form>

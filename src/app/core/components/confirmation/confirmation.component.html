@@ -1,0 +1,6 @@
+<div>
+  <app-confirmation-window
+          *ngFor="let confirmation of confirmations"
+          [confirmation]="confirmation"
+          (onConfirm)="onConfirmHandler($event)"></app-confirmation-window>
+</div>

@@ -1,0 +1,11 @@
+<h4 class="card-title box-title form-label-color">{{ 'REGISTER' | translate }}</h4>
+<div class="card-content">
+    <app-register-form (onSubmit)="onFormSubmit($event)" [validationErrors]="errors"></app-register-form>
+
+    <div class="box-body footer-links">
+        <div class="pull-right">
+            <a routerLink="/security/login" class="btn btn-link btn-sm">{{ 'SIGN_IN' | translate }}</a>
+            <a routerLink="/security/password-recovery-request" class="btn btn-link btn-sm">{{ 'RESTORE_PASSWORD' | translate }}</a>
+        </div>
+    </div>
+</div>

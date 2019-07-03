@@ -1,0 +1,14 @@
+<h4 class="card-title box-title form-label-color">{{ 'LOGIN' | translate }}</h4>
+<div class="card-content">
+    <div class="login-box-body">
+
+        <app-login-form [errors]="errors" (onSubmitEvent)="onFormSubmit($event)"></app-login-form>
+
+        <div class="box-body footer-links">
+            <div class="pull-right">
+                <a routerLink="/security/register" class="btn btn-link btn-sm">{{ 'REGISTER' | translate }}</a>
+                <a routerLink="/security/password-recovery-request" class="btn btn-link btn-sm">{{ 'RESTORE_PASSWORD' | translate }}</a>
+            </div>
+        </div>
+    </div>
+</div>

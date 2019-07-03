@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+body
+{
+    background: #f1f2f7;
+}
+
+.form-control
+{
+    font-size: 0.9rem !important;
+}
+
+form, .form-label-color
+{
+    color: #909090 !important;
+}
+
+a
+{
+    text-decoration: none !important;
+}

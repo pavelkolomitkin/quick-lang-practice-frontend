@@ -1,0 +1,23 @@
+<!--<div class="wrapper">-->
+<!--    <app-header></app-header>-->
+<!--    <app-main-menu></app-main-menu>-->
+<!--    <div class="content-wrapper">-->
+<!--        <app-content-header></app-content-header>-->
+<!--        <app-content>-->
+<!--            <ng-content></ng-content>-->
+<!--        </app-content>-->
+<!--    </div>-->
+<!--    <app-main-footer></app-main-footer>-->
+<!--    <div class="control-sidebar-bg"></div>-->
+<!--</div>-->
+
+<aside id="left-panel" class="left-panel" app-main-menu>
+</aside>
+<div class="right-panel">
+    <app-header></app-header>
+    <app-content>
+        <ng-content></ng-content>
+    </app-content>
+    <div class="clear-fix"></div>
+    <app-main-footer></app-main-footer>
+</div>
