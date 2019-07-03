@@ -1,3 +1,63 @@
-<p>
-  profile works!
-</p>
+<div class="row" *ngIf="!!user">
+
+  <div class="col-md-4">
+
+    <section class="card">
+      <div class="card-header user-header alt bg-info">
+        <div class="media">
+          <a href="#" style="min-width: 85px">
+            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="assets/picture/default_avatar.png">
+          </a>
+          <div class="media-body">
+            <h2 class="text-light display-6">{{ user.fullName }}</h2>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a href="#"> <i class="fa fa-upload"></i> Change avatar</a>
+        </li>
+<!--        <li class="list-group-item">-->
+<!--          <a href="#"> <i class="fa fa-tasks"></i> Recent Activity <span class="badge badge-danger pull-right">15</span></a>-->
+<!--        </li>-->
+<!--        <li class="list-group-item">-->
+<!--          <a href="#"> <i class="fa fa-bell-o"></i> Notification <span class="badge badge-success pull-right">11</span></a>-->
+<!--        </li>-->
+<!--        <li class="list-group-item">-->
+<!--          <a href="#"> <i class="fa fa-comments-o"></i> Message <span class="badge badge-warning pull-right r-activity">03</span></a>-->
+<!--        </li>-->
+      </ul>
+    </section>
+
+  </div>
+
+
+  <div class="col-md-8">
+
+    <section class="card">
+      <div class="card-header">About yourself</div>
+
+      <div class="card-body">
+
+        <app-client-about
+                [user]="user"
+                [isEditable]="(user).id === user.id"
+        ></app-client-about>
+
+      </div>
+
+    </section>
+
+    <section class="card">
+      <div class="card-header">Your language skills</div>
+
+      <div class="card-body">
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

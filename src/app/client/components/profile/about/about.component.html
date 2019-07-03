@@ -1,0 +1,22 @@
+<p *ngIf="!isEditing">
+  <ng-container *ngIf="!user.aboutYourSelf">
+    None
+  </ng-container>
+  <ng-container *ngIf="!!user.aboutYourSelf">
+    {{ user.aboutYourSelf }}
+  </ng-container>
+  <span class="btn btn-default" *ngIf="isEditable" (click)="onEditClickHandler($event)">
+    <i class="fa fa-edit"></i>
+  </span>
+</p>
+<form #form="ngForm" *ngIf="isEditing">
+  <div class="form-group">
+    <textarea
+            placeholder="Tell about yourself..."
+            (blur)="onEndEditing($event)"
+            [(ngModel)]="userAbout"
+            name="userAbout"
+            class="form-control"
+    ></textarea>
+  </div>
+</form>

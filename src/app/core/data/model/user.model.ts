@@ -1,6 +1,8 @@
+import {LanguageSkill} from './language-skill.model';
+
 export default class User
 {
-    public id: number;
+    public id: string;
 
     public email: string;
 
@@ -13,6 +15,10 @@ export default class User
     public createdAt?: string;
 
     public updatedAt?: string;
+
+    public aboutYourSelf?: string;
+
+    private skills: Array<LanguageSkill> = [];
 
     isAdmin()
     {
