@@ -1,22 +1,11 @@
-<div class="register-page">
-    <div class="register-box">
-        <app-security-common-header></app-security-common-header>
+<h4 class="card-title box-title form-label-color">{{ 'REGISTER' | translate }}</h4>
+<div class="card-content">
+    <app-register-form (onSubmit)="onFormSubmit($event)" [validationErrors]="errors"></app-register-form>
 
-        <div class="register-box-body">
-            <p class="login-box-msg">{{ 'REGISTER' | translate}}</p>
-
-            <app-register-form (onSubmit)="onFormSubmit($event)" [validationErrors]="errors"></app-register-form>
-
-<!--            <div class="social-auth-links text-center">-->
-<!--                <p>- OR -</p>-->
-<!--                <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using-->
-<!--                    Facebook</a>-->
-<!--                <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using-->
-<!--                    Google+</a>-->
-<!--            </div>-->
-
-            <a routerLink="/security/login" class="text-center">{{ 'LOGIN' | translate }}</a>
+    <div class="box-body footer-links">
+        <div class="pull-right">
+            <a routerLink="/security/login" class="btn btn-link btn-sm">{{ 'SIGN_IN' | translate }}</a>
+            <a routerLink="/security/password-recovery-request" class="btn btn-link btn-sm">{{ 'RESTORE_PASSWORD' | translate }}</a>
         </div>
-        <!-- /.form-box -->
     </div>
 </div>

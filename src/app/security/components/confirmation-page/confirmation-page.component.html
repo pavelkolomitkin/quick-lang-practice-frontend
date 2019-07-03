@@ -1,20 +1,16 @@
-<div class="login-page">
-  <div class="login-box">
-    <app-security-common-header></app-security-common-header>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-
-      <p class="alert alert-success" *ngIf="isUserActivated">
-        {{ 'YOU_HAVE_CONFIRMED_YOUR_PROFILE' | translate }} <a routerLink="/security/login">{{ 'SING_IN' | translate }}!</a>
-      </p>
-      <p class="alert alert-danger" *ngIf="activationErrors">
+<div class="card-body">
+  <p class="alert alert-success" *ngIf="isUserActivated">
+    {{ 'YOU_HAVE_CONFIRMED_YOUR_PROFILE' | translate }} <a routerLink="/security/login">{{ 'SIGN_IN' | translate }}!</a>
+  </p>
+  <p class="alert alert-danger" *ngIf="activationErrors">
         <span *ngFor="let error of activationErrors">
           {{ error.msg }}
         </span>
-      </p>
+  </p>
 
-      <a routerLink="/security/login" class="text-center">{{ 'LOGIN' | translate }}</a>
-
+  <div class="box-body footer-links">
+    <div class="pull-right">
+      <a routerLink="/security/password-recovery-request" class="btn btn-link btn-sm">{{ 'RESTORE_PASSWORD' | translate }}</a>
     </div>
   </div>
 </div>

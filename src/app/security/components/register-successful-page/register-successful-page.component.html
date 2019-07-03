@@ -1,15 +1,11 @@
-<div class="login-page">
-  <div class="login-box">
-    <app-security-common-header></app-security-common-header>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
+<div class="card-body">
+  <p class="alert alert-success">
+    {{ 'YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL' | translate }}
+  </p>
 
-      <p class="alert alert-success">
-        {{ 'YOU_REGISTERED_SUCCESSFUL_CHECK_EMAIL' | translate }}
-      </p>
-
-      <a routerLink="/security/login" class="text-center">{{ 'LOGIN' | translate }}</a>
-
+  <div class="box-body footer-links">
+    <div class="pull-right">
+      <a routerLink="/security/login" class="btn btn-link btn-sm">{{ 'SIGN_IN' | translate }}</a>
     </div>
   </div>
 </div>
