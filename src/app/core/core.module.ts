@@ -32,6 +32,7 @@ import {UserAgreementService} from './services/user-agreement-service';
 import {appInitializeHandler, AppInitializerService} from './services/app-initializer.service';
 import {ConfirmationComponent} from './components/confirmation/confirmation.component';
 import {RouterModule} from '@angular/router';
+import {ToastrModule} from 'ngx-toastr';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -62,6 +63,7 @@ const httpInterceptorProviders = [
     RouterModule,
     NgxPermissionsModule.forRoot(),
     SharedModule,
+    ToastrModule.forRoot(),
     StoreModule.forRoot({
       core: coreReducer,
       security: securityReducer,
@@ -93,6 +95,7 @@ const httpInterceptorProviders = [
     NgxPermissionsModule,
     SharedModule,
     StoreModule,
+    ToastrModule,
     EffectsModule,
     GlobalProgressComponent,
     CommonLayoutComponent,
@@ -102,7 +105,7 @@ const httpInterceptorProviders = [
     MainFooterComponent,
     MainMenuComponent,
     ConfirmationComponent,
-    MessageNotifierComponent,
+    MessageNotifierComponent
   ]
 })
 export class CoreModule { }

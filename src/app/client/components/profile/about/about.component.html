@@ -12,6 +12,8 @@
 <form #form="ngForm" *ngIf="isEditing">
   <div class="form-group">
     <textarea
+            #textField
+            [rows]="10"
             placeholder="Tell about yourself..."
             (blur)="onEndEditing($event)"
             [(ngModel)]="userAbout"
