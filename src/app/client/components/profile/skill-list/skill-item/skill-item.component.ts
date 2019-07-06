@@ -1,12 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {LanguageSkill} from '../../../../../core/data/model/language-skill.model';
 import {ProfileService} from '../../../../services/profile.service';
 import {State} from '../../../../../app.state';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {GlobalNotifyErrorMessage} from '../../../../../core/data/actions';
 import {NotifyMessage} from '../../../../../core/data/model/notify-message.model';
 import {ConfirmActionService} from '../../../../../core/services/confirm-action.service';
 import {ConfirmationActionOption} from '../../../../../core/data/model/confirmation-action-option.model';
+import {LanguageLevel} from '../../../../../core/data/model/language-level.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: '[app-client-skill-item]',
@@ -21,6 +23,14 @@ export class SkillItemComponent implements OnInit {
 
   @Input() skill: LanguageSkill;
 
+  @ViewChild('levelSelector') levelSelector: ElementRef;
+  @ViewChild('editButton') editButton: ElementRef;
+
+  isEditing: boolean = false;
+
+  selectedLevel: LanguageLevel;
+  languageLevels: Observable<Array<LanguageLevel>>;
+
   constructor(
       private store: Store<State>,
       private service: ProfileService,
@@ -28,6 +38,9 @@ export class SkillItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.selectedLevel = this.skill.level;
+    this.languageLevels = this.store.pipe(select(state => state.core.languageLevels));
 
   }
 
@@ -57,6 +70,52 @@ export class SkillItemComponent implements OnInit {
         ]
         );
 
+  }
+
+  // @HostListener('document:click', ['$event']) onDocumentClick(event: MouseEvent)
+  // {
+  //   if (
+  //       this.levelSelector &&
+  //       !this.levelSelector.nativeElement.contains(event.target)
+  //   )
+  //   {
+  //     this.isEditing = false;
+  //   }
+  // }
+
+  onEditClickHandler(event)
+  {
+    this.isEditing = true;
+
+    setTimeout(() => {
+
+      this.levelSelector.nativeElement.focus();
+
+    }, 10);
+  }
+
+  onLevelBlurHandler(event)
+  {
+    this.isEditing = false;
+  }
+
+  async onLevelChangeHandler(event)
+  {
+    this.isEditing = false;
+
+    this.skill.level = this.selectedLevel;
+
+    this.skill = await this.service.updateSkill(this.skill).toPromise();
+  }
+
+  compareEntity(a: any, b: any)
+  {
+    if (!a || !b)
+    {
+      return false;
+    }
+
+    return a.id === b.id;
   }
 
 }

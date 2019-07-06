@@ -33,6 +33,17 @@ export class ProfileService extends BaseService
         );
     }
 
+    updateSkill(skill: LanguageSkill)
+    {
+        return this.http.put<{ skill: LanguageSkill }>('/client/skill/' + skill.id, {
+            level: skill.level.id
+        }).pipe(
+            map(({ skill }) => {
+                return skill;
+            })
+        );
+    }
+
     removeSkill(skill: LanguageSkill)
     {
         return this.http.delete('/client/skill/' + skill.id);

@@ -1,8 +1,27 @@
 <td>
   {{ skill.language.name }}
 </td>
-<td>
+<td *ngIf="!isEditing">
   {{ skill.level.title }}
+  <ng-container *ngIf="isEditable">
+    <span class="btn btn-default" (click)="onEditClickHandler($event)" #editButton>
+    <i class="fa fa-edit"></i>
+  </span>
+  </ng-container>
+</td>
+<td *ngIf="isEditing">
+  <select [autofocus]="true"
+          #levelSelector
+          (blur)="onLevelBlurHandler($event)"
+          class="form-control"
+          [(ngModel)]="selectedLevel"
+          [compareWith]="compareEntity"
+          [required]="true"
+          name="selectedLevel"
+          (ngModelChange)="onLevelChangeHandler($event)"
+  >
+    <option *ngFor="let level of languageLevels | async" [ngValue]="level">{{ level.title }}</option>
+  </select>
 </td>
 <td *ngIf="isEditable">
   <span class="btn btn-danger" (click)="onDeleteClickHandler($event)">
