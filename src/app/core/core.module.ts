@@ -33,6 +33,10 @@ import {appInitializeHandler, AppInitializerService} from './services/app-initia
 import {ConfirmationComponent} from './components/confirmation/confirmation.component';
 import {RouterModule} from '@angular/router';
 import {ToastrModule} from 'ngx-toastr';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import {LanguageService} from './services/language.service';
+import {LanguageLevelService} from './services/language-level.service';
+import {ConfirmActionService} from './services/confirm-action.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -64,6 +68,7 @@ const httpInterceptorProviders = [
     NgxPermissionsModule.forRoot(),
     SharedModule,
     ToastrModule.forRoot(),
+    ModalModule.forRoot(),
     StoreModule.forRoot({
       core: coreReducer,
       security: securityReducer,
@@ -82,6 +87,9 @@ const httpInterceptorProviders = [
     FileUploadService,
     ConfirmLeavePageGuardService,
     UserAgreementService,
+    LanguageService,
+    LanguageLevelService,
+    ConfirmActionService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,
@@ -96,6 +104,7 @@ const httpInterceptorProviders = [
     SharedModule,
     StoreModule,
     ToastrModule,
+    ModalModule,
     EffectsModule,
     GlobalProgressComponent,
     CommonLayoutComponent,

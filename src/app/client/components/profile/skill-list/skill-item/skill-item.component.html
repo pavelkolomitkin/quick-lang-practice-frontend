@@ -1,0 +1,11 @@
+<td>
+  {{ skill.language.name }}
+</td>
+<td>
+  {{ skill.level.title }}
+</td>
+<td *ngIf="isEditable">
+  <span class="btn btn-danger" (click)="onDeleteClickHandler($event)">
+    <i class="fa fa-trash"></i>
+  </span>
+</td>

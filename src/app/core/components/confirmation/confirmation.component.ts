@@ -15,34 +15,38 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
   confirmations: Array<ActionConfirmation> = [];
 
-  lastConfirmationSubscription: Subscription;
+  confirmationSubscription: Subscription;
 
   constructor(private store: Store<State>) {
+
 
   }
 
   ngOnInit() {
 
-
-    this.lastConfirmationSubscription = this.store.pipe(
+    this.confirmationSubscription = this.store.pipe(
         select(state => state.core.lastInitConfirmation),
-        filter(result => result !== null)
-    ).subscribe((confirmation: ActionConfirmation) => {
+        filter(result => !!result)
+      ).subscribe((confirmation: ActionConfirmation) => {
+
       this.confirmations.push(confirmation);
+
     });
 
   }
 
   ngOnDestroy(): void {
-    this.lastConfirmationSubscription.unsubscribe();
+
+    this.confirmationSubscription.unsubscribe();
+
   }
 
   onConfirmHandler(confirmation: ActionConfirmation)
   {
-    confirmation.status = ActionConfirmation.HANDLED_STATUS;
-    this.store.dispatch(new GlobalConfirmationResponse(confirmation));
+    const index = this.confirmations.findIndex((item: ActionConfirmation) => {
+      return (item === confirmation);
+    });
 
-    const index = this.confirmations.findIndex(item => item.id === confirmation.id);
     if (index !== -1)
     {
       this.confirmations.splice(index, 1);

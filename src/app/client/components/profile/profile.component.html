@@ -42,7 +42,7 @@
 
         <app-client-about
                 [user]="user"
-                [isEditable]="(user).id === user.id"
+                [isEditable]="(authorizedUser | async).id === user.id"
         ></app-client-about>
 
       </div>
@@ -53,7 +53,10 @@
       <div class="card-header">Your language skills</div>
 
       <div class="card-body">
-
+        <app-client-skill-list
+                [isEditable]="(authorizedUser | async).id === user.id"
+                [user]="user"
+        ></app-client-skill-list>
       </div>
 
     </section>

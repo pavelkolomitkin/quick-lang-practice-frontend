@@ -18,7 +18,7 @@ export default class User
 
     public aboutYourSelf?: string;
 
-    private skills: Array<LanguageSkill> = [];
+    public skills: Array<LanguageSkill> = [];
 
     isAdmin()
     {

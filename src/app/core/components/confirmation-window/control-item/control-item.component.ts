@@ -19,6 +19,10 @@ export class ControlItemComponent implements OnInit {
 
   onClickHandler(event)
   {
+    if (this.action.callBackAction)
+    {
+      this.action.callBackAction();
+    }
     this.actionEmit.emit(this.action);
   }
 

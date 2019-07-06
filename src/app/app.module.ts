@@ -9,6 +9,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {AppSecurityLayoutComponent} from './components/app-security-layout/app-security-layout.component';
 import {AppLayoutComponent} from './components/app-layout/app-layout.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AppLayoutComponent} from './components/app-layout/app-layout.component';
           maxAge: 25,
           logOnly: !environment.production
         }
-    )
+    ),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

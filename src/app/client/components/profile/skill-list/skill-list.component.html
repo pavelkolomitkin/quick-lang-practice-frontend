@@ -1,0 +1,42 @@
+<ng-container *ngIf="user.skills.length > 0">
+  <table class="table table-borderless table-hover">
+    <thead>
+    <tr>
+      <th>Language</th>
+      <th>Level</th>
+      <th *ngIf="isEditable"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+            *ngFor="let skill of user.skills"
+            app-client-skill-item
+            [skill]="skill"
+            isEditable="isEditable"
+            (onDelete)="onDeleteSkillHandler($event)"
+    ></tr>
+    </tbody>
+  </table>
+</ng-container>
+<ng-container *ngIf="user.skills.length === 0">
+  <p class="alert alert-info">You haven't pointed your language skills!</p>
+</ng-container>
+<span
+        *ngIf="isEditable"
+        class="btn btn-success"
+      (click)="onAddButtonClickHandler($event)">
+  <i class="fa fa-plus"></i> Add Skill
+</span>
+
+
+<ng-template #addSkillModalTemplate>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Add Skill</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-client-add-skill-form (onCreate)="onSkillCreateHandler($event); modalRef.hide();"></app-client-add-skill-form>
+  </div>
+</ng-template>
