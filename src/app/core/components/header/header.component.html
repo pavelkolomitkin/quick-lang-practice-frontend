@@ -12,7 +12,11 @@
     <div class="top-right">
         <div class="header-menu">
             <div class="header-left">
-                <a [routerLink]="'/client/search'" class="search-trigger"><i class="fa fa-search"></i></a>
+<!--                <a [routerLink]="'/client/search'" class="search-trigger"><i class="fa fa-search"></i></a>-->
+
+                <ng-container *ngxPermissionsOnly="['ROLE_CLIENT_USER']">
+                    <div class="dropdown for-message" app-practice-language-status [authorizedUser]="user | async"></div>
+                </ng-container>
 <!--                <div class="form-inline">-->
 <!--                    <form class="search-form">-->
 <!--                        <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">-->

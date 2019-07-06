@@ -48,4 +48,24 @@ export class ProfileService extends BaseService
     {
         return this.http.delete('/client/skill/' + skill.id);
     }
+
+    setPracticeSkillStatus(skill: LanguageSkill = null)
+    {
+        if (!skill)
+        {
+            return this.http.put<{ skill: LanguageSkill }>('/client/practice-skill/off', {}).pipe(
+                map(({ skill }) => {
+                    return skill;
+                })
+            );
+        }
+        else
+        {
+            return this.http.put<{ skill: LanguageSkill }>('/client/practice-skill/on/' + skill.id, {}).pipe(
+                map(({ skill }) => {
+                    return skill;
+                })
+            );
+        }
+    }
 }

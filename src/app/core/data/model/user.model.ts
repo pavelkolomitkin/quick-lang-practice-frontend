@@ -18,6 +18,8 @@ export default class User
 
     public aboutYourSelf?: string;
 
+    public readyToPracticeSkill?: LanguageSkill;
+
     public skills: Array<LanguageSkill> = [];
 
     isAdmin()

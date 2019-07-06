@@ -5,7 +5,6 @@ import { SearchComponent } from './components/search/search.component';
 import {SharedModule} from '../shared/shared.module';
 import {ClientRoutingModule} from './client-routing.module';
 import { AboutComponent } from './components/profile/about/about.component';
-import {ProfileService} from './services/profile.service';
 import { SkillListComponent } from './components/profile/skill-list/skill-list.component';
 import { SkillItemComponent } from './components/profile/skill-list/skill-item/skill-item.component';
 import { AddSkillFormComponent } from './components/profile/skill-list/add-skill-form/add-skill-form.component';
@@ -25,7 +24,7 @@ import { AddSkillFormComponent } from './components/profile/skill-list/add-skill
     ClientRoutingModule
   ],
   providers: [
-      ProfileService
+
   ]
 })
 export class ClientModule { }
