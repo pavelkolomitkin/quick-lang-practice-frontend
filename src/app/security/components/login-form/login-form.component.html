@@ -21,7 +21,7 @@
             type="password" class="form-control" placeholder="{{ 'PASSWORD' | translate }}">
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
-    <app-form-field-error-list [field]="'email'" [errors]="errors"></app-form-field-error-list>
+    <app-form-field-error-list [field]="'email'" [errors]="!hasError ? {} : { email: 'Bad credentials' }"></app-form-field-error-list>
   </div>
 
   <div class="form-group form-check">

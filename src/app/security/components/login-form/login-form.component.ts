@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 })
 export class LoginFormComponent implements OnInit {
 
-  @Input() errors: Observable<Object>;
+  @Input() hasError;
 
   @Output() onSubmitEvent: EventEmitter<{credentials: LoginCredentials, rememberUser: boolean}> = new EventEmitter();
 

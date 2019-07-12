@@ -38,8 +38,8 @@ export class ConfirmationPageComponent implements OnInit, OnDestroy {
         await this.service.registerConfirm(params['key']).toPromise();
         this.isUserActivated = true;
       }
-      catch ({ error }) {
-        this.activationErrors = error['key'];
+      catch ({ error: { errors } }) {
+        this.activationErrors = errors['key'];
       }
 
     });

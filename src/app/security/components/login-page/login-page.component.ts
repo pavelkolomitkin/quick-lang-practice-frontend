@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import LoginCredentials from '../../data/model/login-credentials.model';
 import {UserLoginStart} from '../../data/actions';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',
@@ -29,7 +30,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.errors = store.pipe(select(state => state.security.loginErrors));
+    this.errors = store.pipe(
+        select(state => state.security.loginErrors),
+        filter(result => Object.keys(result).length > 0)
+    );
   }
 
   ngOnInit() {

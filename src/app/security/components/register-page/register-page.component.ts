@@ -28,8 +28,8 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
 
       this.router.navigateByUrl('/security/register-success');
     }
-    catch (errors) {
-      this.errors = errors.error;
+    catch ({ error: { errors } }) {
+      this.errors = errors;
     }
 
   }
