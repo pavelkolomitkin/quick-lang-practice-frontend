@@ -38,7 +38,6 @@ import {LanguageService} from './services/language.service';
 import {LanguageLevelService} from './services/language-level.service';
 import {ConfirmActionService} from './services/confirm-action.service';
 import { PracticeLanguageStatusComponent } from './components/header/client/practice-language-status/practice-language-status.component';
-import {ProfileService as ClientProfileService} from '../client/services/profile.service';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -93,7 +92,6 @@ const httpInterceptorProviders = [
     LanguageService,
     LanguageLevelService,
     ConfirmActionService,
-    ClientProfileService,
     AppInitializerService,
     {
       provide: APP_INITIALIZER,

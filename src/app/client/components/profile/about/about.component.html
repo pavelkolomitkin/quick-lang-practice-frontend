@@ -1,9 +1,10 @@
 <p *ngIf="!isEditing">
-  <ng-container *ngIf="!user.aboutYourSelf">
+  <ng-container *ngIf="!internalUser.aboutYourSelf">
     None
   </ng-container>
-  <ng-container *ngIf="!!user.aboutYourSelf">
-    {{ user.aboutYourSelf }}
+  <ng-container *ngIf="!!internalUser.aboutYourSelf">
+    <span [innerHTML]="internalUser.aboutYourSelf | multiLine">
+    </span>
   </ng-container>
   <span class="btn btn-default" *ngIf="isEditable" (click)="onEditClickHandler($event)">
     <i class="fa fa-edit"></i>
@@ -16,7 +17,7 @@
             [rows]="10"
             placeholder="Tell about yourself..."
             (blur)="onEndEditing($event)"
-            [(ngModel)]="userAbout"
+            [(ngModel)]="internalUser.aboutYourSelf"
             name="userAbout"
             class="form-control"
     ></textarea>

@@ -1,5 +1,4 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {ProfileService} from '../../../../../client/services/profile.service';
 import {Store} from '@ngrx/store';
 import {State} from '../../../../../app.state';
 import User from '../../../../data/model/user.model';
@@ -16,7 +15,6 @@ export class PracticeLanguageStatusComponent implements OnInit {
 
   constructor(
       private store: Store<State>,
-      private service: ProfileService,
       private changeDetector: ChangeDetectorRef
   ) { }
 
@@ -30,12 +28,12 @@ export class PracticeLanguageStatusComponent implements OnInit {
   {
     if (this.authorizedUser.readyToPracticeSkill && (this.authorizedUser.readyToPracticeSkill.id === skill.id))
     {
-      this.authorizedUser.readyToPracticeSkill = await this.service.setPracticeSkillStatus(null).toPromise();
+      //this.authorizedUser.readyToPracticeSkill = await this.service.setPracticeSkillStatus(null).toPromise();
 
     }
     else
     {
-      this.authorizedUser.readyToPracticeSkill = await this.service.setPracticeSkillStatus(skill).toPromise();
+      //this.authorizedUser.readyToPracticeSkill = await this.service.setPracticeSkillStatus(skill).toPromise();
     }
 
     this.changeDetector.markForCheck();

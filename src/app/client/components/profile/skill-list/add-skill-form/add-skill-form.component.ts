@@ -7,6 +7,7 @@ import {LanguageLevel} from '../../../../../core/data/model/language-level.model
 import {LanguageSkill} from '../../../../../core/data/model/language-skill.model';
 import {NgForm} from '@angular/forms';
 import {ProfileService} from '../../../../services/profile.service';
+import {LanguageSkillService} from '../../../../services/language-skill.service';
 
 @Component({
   selector: 'app-client-add-skill-form',
@@ -26,7 +27,7 @@ export class AddSkillFormComponent implements OnInit {
 
   errors = {};
 
-  constructor(private store: Store<State>, private service: ProfileService) { }
+  constructor(private store: Store<State>, private service: LanguageSkillService) { }
 
   ngOnInit() {
 
@@ -52,11 +53,11 @@ export class AddSkillFormComponent implements OnInit {
     skill.level = this.selectedLevel;
 
     try {
-      const newSkill = await this.service.addSkill(skill).toPromise();
+      const newSkill = await this.service.add(skill).toPromise();
       this.createEvent.emit(newSkill);
     }
-    catch ({ error }) {
-      this.errors = error;
+    catch ({ error: { errors } }) {
+      this.errors = errors;
     }
   }
 }

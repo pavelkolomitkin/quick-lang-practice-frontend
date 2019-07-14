@@ -39,16 +39,17 @@ import {environment} from '../../environments/environment';
       useDefaultLang: true
     })
   ],
-  exports:[
-    FormsModule,
-    InfiniteScrollModule,
-    MomentModule,
-    TranslateModule,
-    FormFieldErrorListComponent,
-    NotFoundPageComponent,
-    PaginatorComponent,
-    DateTimeViewComponent,
-  ]
+    exports: [
+        FormsModule,
+        InfiniteScrollModule,
+        MomentModule,
+        TranslateModule,
+        FormFieldErrorListComponent,
+        NotFoundPageComponent,
+        PaginatorComponent,
+        DateTimeViewComponent,
+        MultiLinePipe,
+    ]
 })
 export class SharedModule {
 

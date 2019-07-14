@@ -14,7 +14,15 @@ import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
 })
 export class AboutComponent implements OnInit {
 
-  @Input() user: User;
+  internalUser: any;
+  _user: User;
+
+  @Input('user')
+  set user(value: User)
+  {
+    this._user = value;
+    this.internalUser = {...value};
+  }
 
   @Input() isEditable: boolean;
 
@@ -30,8 +38,6 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userAbout = this.user.aboutYourSelf;
-
   }
 
   onEndEditing(event)
@@ -42,17 +48,17 @@ export class AboutComponent implements OnInit {
 
   saveValue()
   {
-    this.service.updateAbout(this.userAbout)
+    this.service.update(this.internalUser)
         .toPromise()
         .then(() => {
-          this.user.aboutYourSelf = this.userAbout;
+          this._user.aboutYourSelf = this.userAbout;
         })
         .catch((error) => {
           //console.log(error);
           //debugger
           const errorMessage = error.error['text'][0] ? error.error['text'][0].msg : 'Cannot edit this field!';
           this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage(errorMessage)));
-          this.userAbout = this.user.aboutYourSelf;
+          this.internalUser = {...this._user};
         });
   }
 
@@ -68,7 +74,7 @@ export class AboutComponent implements OnInit {
     if (this.isEditing)
     {
       this.isEditing = false;
-      this.userAbout = this.user.aboutYourSelf;
+      this.internalUser = { ...this._user };
     }
   }
 
@@ -82,7 +88,7 @@ export class AboutComponent implements OnInit {
     if (this.textField.nativeElement !== event.target)
     {
       this.isEditing = false;
-      if (this.userAbout != this.user.aboutYourSelf)
+      if (this.internalUser.aboutYourSelf != this._user.aboutYourSelf)
       {
         this.saveValue();
       }

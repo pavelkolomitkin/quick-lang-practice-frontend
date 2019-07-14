@@ -1,6 +1,5 @@
 import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {LanguageSkill} from '../../../../../core/data/model/language-skill.model';
-import {ProfileService} from '../../../../services/profile.service';
 import {State} from '../../../../../app.state';
 import {select, Store} from '@ngrx/store';
 import {GlobalNotifyErrorMessage} from '../../../../../core/data/actions';
@@ -9,6 +8,7 @@ import {ConfirmActionService} from '../../../../../core/services/confirm-action.
 import {ConfirmationActionOption} from '../../../../../core/data/model/confirmation-action-option.model';
 import {LanguageLevel} from '../../../../../core/data/model/language-level.model';
 import {Observable} from 'rxjs';
+import {LanguageSkillService} from '../../../../services/language-skill.service';
 
 @Component({
   selector: '[app-client-skill-item]',
@@ -33,7 +33,7 @@ export class SkillItemComponent implements OnInit {
 
   constructor(
       private store: Store<State>,
-      private service: ProfileService,
+      private service: LanguageSkillService,
       private confirmationService: ConfirmActionService
   ) { }
 
@@ -55,7 +55,7 @@ export class SkillItemComponent implements OnInit {
 
               try {
 
-                await this.service.removeSkill(this.skill).toPromise();
+                await this.service.remove(this.skill).toPromise();
 
                 this.deleteEvent.emit(this.skill);
 
@@ -71,17 +71,6 @@ export class SkillItemComponent implements OnInit {
         );
 
   }
-
-  // @HostListener('document:click', ['$event']) onDocumentClick(event: MouseEvent)
-  // {
-  //   if (
-  //       this.levelSelector &&
-  //       !this.levelSelector.nativeElement.contains(event.target)
-  //   )
-  //   {
-  //     this.isEditing = false;
-  //   }
-  // }
 
   onEditClickHandler(event)
   {
@@ -105,7 +94,7 @@ export class SkillItemComponent implements OnInit {
 
     this.skill.level = this.selectedLevel;
 
-    this.skill = await this.service.updateSkill(this.skill).toPromise();
+    this.skill = await this.service.update(this.skill).toPromise();
   }
 
   compareEntity(a: any, b: any)

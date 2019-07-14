@@ -8,6 +8,8 @@ import { AboutComponent } from './components/profile/about/about.component';
 import { SkillListComponent } from './components/profile/skill-list/skill-list.component';
 import { SkillItemComponent } from './components/profile/skill-list/skill-item/skill-item.component';
 import { AddSkillFormComponent } from './components/profile/skill-list/add-skill-form/add-skill-form.component';
+import {ProfileService} from './services/profile.service';
+import {LanguageSkillService} from './services/language-skill.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { AddSkillFormComponent } from './components/profile/skill-list/add-skill
     ClientRoutingModule
   ],
   providers: [
-
+      ProfileService,
+      LanguageSkillService,
   ]
 })
 export class ClientModule { }

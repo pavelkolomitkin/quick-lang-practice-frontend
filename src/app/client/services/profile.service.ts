@@ -14,39 +14,13 @@ export class ProfileService extends BaseService
         )
     }
 
-    updateAbout(text: string)
+    update(user: User)
     {
-        return this.http.put('/client/about-yourself', {
-            text: text
-        });
-    }
+        const body = {
+            aboutYourSelf: user.aboutYourSelf
+        };
 
-    addSkill(skill: LanguageSkill)
-    {
-        return this.http.post<{ skill: LanguageSkill }>('/client/skill', {
-            language: skill.language.id,
-            level: skill.level.id
-        }).pipe(
-            map(({ skill }) => {
-                return skill;
-            })
-        );
-    }
-
-    updateSkill(skill: LanguageSkill)
-    {
-        return this.http.put<{ skill: LanguageSkill }>('/client/skill/' + skill.id, {
-            level: skill.level.id
-        }).pipe(
-            map(({ skill }) => {
-                return skill;
-            })
-        );
-    }
-
-    removeSkill(skill: LanguageSkill)
-    {
-        return this.http.delete('/client/skill/' + skill.id);
+        return this.http.put('/client/profile', body);
     }
 
     setPracticeSkillStatus(skill: LanguageSkill = null)
