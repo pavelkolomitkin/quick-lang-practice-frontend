@@ -14,6 +14,8 @@ import {NgxPermissionsModule} from 'ngx-permissions';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslationLoaderService} from './services/translation-loader.service';
 import {environment} from '../../environments/environment';
+import {ModalModule} from 'ngx-bootstrap';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import {environment} from '../../environments/environment';
     FormsModule,
     InfiniteScrollModule,
     MomentModule,
+    ModalModule,
+      TooltipModule.forRoot(),
     NgxPermissionsModule.forChild(),
     TranslateModule.forRoot({
       loader: {
@@ -43,6 +47,8 @@ import {environment} from '../../environments/environment';
         FormsModule,
         InfiniteScrollModule,
         MomentModule,
+        ModalModule,
+        TooltipModule,
         TranslateModule,
         FormFieldErrorListComponent,
         NotFoundPageComponent,

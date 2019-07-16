@@ -1,0 +1,24 @@
+<div id="right-panel" class="right-panel client">
+
+  <app-client-header></app-client-header>
+
+  <div class="content pb-0">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="clearfix"></div>
+  <footer class="site-footer">
+    <div class="footer-inner bg-white">
+      <div class="row">
+        <div class="col-sm-6">
+          Copyright © 2018 Ela Admin
+        </div>
+        <div class="col-sm-6 text-right">
+          Designed by <a href="https://colorlib.com">Colorlib</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<app-client-add-skill-window [user]="user | async"></app-client-add-skill-window>
+

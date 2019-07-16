@@ -38,4 +38,18 @@ export default class User
 
         return result;
     }
+
+    removeSkill(skill: LanguageSkill)
+    {
+        if (this.readyToPracticeSkill && (this.readyToPracticeSkill.id === skill.id))
+        {
+            this.readyToPracticeSkill = null;
+        }
+
+        const index = this.skills.findIndex(item => item.id === skill.id);
+        if (index !== -1)
+        {
+            this.skills.splice(index, 1);
+        }
+    }
 }

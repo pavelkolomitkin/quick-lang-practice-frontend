@@ -1,9 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import User from '../../../../core/data/model/user.model';
 
-import { TemplateRef } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {LanguageSkill} from '../../../../core/data/model/language-skill.model';
+import {Store} from '@ngrx/store';
+import {State} from '../../../../app.state';
+import {ClientAddSkillWindowChangeState} from '../../../data/actions';
+import {UserUpdated} from '../../../../security/data/actions';
 
 @Component({
   selector: 'app-client-skill-list',
@@ -16,12 +18,7 @@ export class SkillListComponent implements OnInit {
 
   @Input() user: User;
 
-  modalRef: BsModalRef;
-
-  @ViewChild('addSkillModalTemplate')
-  addSkillModalTemplate: TemplateRef<any>;
-
-  constructor(private modalService: BsModalService) { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
 
@@ -29,15 +26,20 @@ export class SkillListComponent implements OnInit {
 
   onAddButtonClickHandler($event)
   {
-    this.modalRef = this.modalService.show(this.addSkillModalTemplate);
+    //this.modalRef = this.modalService.show(this.addSkillModalTemplate);
+    this.store.dispatch(new ClientAddSkillWindowChangeState(true));
+
   }
 
-  onSkillCreateHandler(skill: LanguageSkill)
-  {
-    this.user.skills.push(skill);
-  }
+
 
   onDeleteSkillHandler(skill: LanguageSkill)
+  {
+    this.user.removeSkill(skill);
+    this.store.dispatch(new UserUpdated(this.user));
+  }
+
+  onEditSkillHandler(skill: LanguageSkill)
   {
     const index = this.user.skills.findIndex((item) => {
       return (item.id === skill.id);
@@ -45,7 +47,8 @@ export class SkillListComponent implements OnInit {
 
     if (index !== -1)
     {
-      this.user.skills.splice(index, 1);
+      this.user.skills[index] = skill;
+      this.store.dispatch(new UserUpdated(this.user));
     }
   }
 

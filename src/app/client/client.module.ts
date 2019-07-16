@@ -7,9 +7,15 @@ import {ClientRoutingModule} from './client-routing.module';
 import { AboutComponent } from './components/profile/about/about.component';
 import { SkillListComponent } from './components/profile/skill-list/skill-list.component';
 import { SkillItemComponent } from './components/profile/skill-list/skill-item/skill-item.component';
-import { AddSkillFormComponent } from './components/profile/skill-list/add-skill-form/add-skill-form.component';
+import { AddSkillFormComponent } from './components/common/add-skill-window/add-skill-form/add-skill-form.component';
 import {ProfileService} from './services/profile.service';
 import {LanguageSkillService} from './services/language-skill.service';
+import { LayoutComponent } from './components/common/layout/layout.component';
+import { HeaderComponent } from './components/common/header/header.component';
+import {PracticeLanguageStatusComponent} from './components/common/header/practice-language-status/practice-language-status.component';
+import { AddSkillWindowComponent } from './components/common/add-skill-window/add-skill-window.component';
+import {StoreModule} from '@ngrx/store';
+import { reducer } from './data/reducer'
 
 @NgModule({
   declarations: [
@@ -18,12 +24,17 @@ import {LanguageSkillService} from './services/language-skill.service';
     AboutComponent,
     SkillListComponent,
     SkillItemComponent,
-    AddSkillFormComponent
+    AddSkillFormComponent,
+    LayoutComponent,
+    HeaderComponent,
+    PracticeLanguageStatusComponent,
+    AddSkillWindowComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    StoreModule.forFeature('client', reducer),
   ],
   providers: [
       ProfileService,

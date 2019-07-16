@@ -27,7 +27,7 @@ export class ProfileService extends BaseService
     {
         if (!skill)
         {
-            return this.http.put<{ skill: LanguageSkill }>('/client/practice-skill/off', {}).pipe(
+            return this.http.put<{ skill: LanguageSkill }>('/client/profile/practice-skill/off', {}).pipe(
                 map(({ skill }) => {
                     return skill;
                 })
@@ -35,7 +35,7 @@ export class ProfileService extends BaseService
         }
         else
         {
-            return this.http.put<{ skill: LanguageSkill }>('/client/practice-skill/on/' + skill.id, {}).pipe(
+            return this.http.put<{ skill: LanguageSkill }>('/client/profile/practice-skill/' + skill.id, {}).pipe(
                 map(({ skill }) => {
                     return skill;
                 })

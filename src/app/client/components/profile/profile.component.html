@@ -55,7 +55,7 @@
       <div class="card-body">
         <app-client-skill-list
                 [isEditable]="(authorizedUser | async).id === user.id"
-                [user]="user"
+                [user]="((authorizedUser | async).id === user.id) ? (authorizedUser | async) : user"
         ></app-client-skill-list>
       </div>
 

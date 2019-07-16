@@ -122,6 +122,13 @@ export function reducer(state = initialState, action: actions.SecurityActions): 
         authorizedToken: null
       };
 
+    case actions.USER_UPDATED:
+
+      return {
+        ...state,
+        authorizedUser: action.user
+      };
+
     default:
 
       return state;

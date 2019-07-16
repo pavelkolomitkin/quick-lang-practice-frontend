@@ -18,6 +18,7 @@ export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR';
 export const USER_INITIALIZE_START = 'USER_INITIALIZE_START';
 export const USER_INITIALIZE_SUCCESS = 'USER_INITIALIZE_SUCCESS';
 export const USER_INITIALIZE_ERROR = 'USER_INITIALIZE_ERROR';
+export const USER_UPDATED = 'USER_UPDATED';
 
 export const USER_LOGOUT = 'USER_LOGOUT';
 
@@ -107,6 +108,13 @@ export class UserInitializeError implements Action
   constructor(public errors: Object) {}
 }
 
+export class UserUpdated implements Action
+{
+  readonly type = USER_UPDATED;
+
+  constructor(public user: User) {}
+}
+
 export class UserLogout implements Action
 {
   readonly type = USER_LOGOUT;
@@ -128,6 +136,7 @@ export type SecurityActions =
           | UserInitializeStart
           | UserInitializeSuccess
           | UserInitializeError
+          | UserUpdated
 
           | UserLogout
   ;

@@ -10,6 +10,7 @@ import {environment} from '../environments/environment';
 import {AppSecurityLayoutComponent} from './components/app-security-layout/app-security-layout.component';
 import {AppLayoutComponent} from './components/app-layout/app-layout.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
           logOnly: !environment.production
         }
     ),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,7 +20,7 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
 
     // Menu Trigger
     $('#menuToggle').on('click', function(event) {
-      var windowWidth = $(window).width();
+      const windowWidth = $(window).width();
       if (windowWidth<1010) {
         $('body').removeClass('open');
         if (windowWidth<760){
@@ -41,7 +41,7 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
 
     $(".menu-item-has-children.dropdown").each(function() {
       $(this).on('click', function() {
-        var $temp_text = $(this).children('.dropdown-toggle').html();
+        const $temp_text = $(this).children('.dropdown-toggle').html();
         $(this).children('.sub-menu').prepend('<li class="subtitle">' + $temp_text + '</li>');
       });
     });
@@ -49,7 +49,7 @@ export class AppLayoutComponent implements OnInit, AfterViewInit {
 
     // Load Resize
     $(window).on("load resize", function(event) {
-      var windowWidth = $(window).width();
+      const windowWidth = $(window).width();
       if (windowWidth<1010) {
         $('body').addClass('small-device');
       } else {

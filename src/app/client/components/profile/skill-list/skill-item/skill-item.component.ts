@@ -18,6 +18,7 @@ import {LanguageSkillService} from '../../../../services/language-skill.service'
 export class SkillItemComponent implements OnInit {
 
   @Output('onDelete') deleteEvent: EventEmitter<LanguageSkill> = new EventEmitter();
+  @Output('onEdit') editEvent: EventEmitter<LanguageSkill> = new EventEmitter();
 
   @Input() isEditable: boolean = false;
 
@@ -95,6 +96,7 @@ export class SkillItemComponent implements OnInit {
     this.skill.level = this.selectedLevel;
 
     this.skill = await this.service.update(this.skill).toPromise();
+    this.editEvent.emit(this.skill);
   }
 
   compareEntity(a: any, b: any)
