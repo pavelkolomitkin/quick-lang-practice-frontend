@@ -1,0 +1,18 @@
+<div class="file-upload-container">
+    <span
+            class="btn btn-default btn-sm btn-outline-secondary upload-button mr-1"
+            (click)="onUploadButtonClickHandler($event)"> <i class="fa fa-upload"></i> Change avatar
+    </span>
+    <input #fileInput type="file"
+           id="file"
+           accept=".jpg, .png"
+           [multiple]="false"
+           name="imageFile"
+           (change)="onFilesSelectHandler($event.target.files)">
+
+    <span
+            class="btn btn-default btn-sm"
+            *ngIf="!!user.avatar"
+            (click)="onRemoveAvatarClickHandler($event)"
+    ><i class="fa fa-remove"></i> Remove avatar</span>
+</div>

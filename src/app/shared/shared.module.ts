@@ -16,6 +16,7 @@ import {TranslationLoaderService} from './services/translation-loader.service';
 import {environment} from '../../environments/environment';
 import {ModalModule} from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     FormFieldErrorListComponent,
     NotFoundPageComponent,
     PaginatorComponent,
-    DateTimeViewComponent
+    DateTimeViewComponent,
+    UserAvatarComponent
   ],
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
         PaginatorComponent,
         DateTimeViewComponent,
         MultiLinePipe,
+        UserAvatarComponent,
     ]
 })
 export class SharedModule {

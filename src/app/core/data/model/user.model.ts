@@ -1,4 +1,5 @@
 import {LanguageSkill} from './language-skill.model';
+import {UserAvatar} from './user-avatar.model';
 
 export default class User
 {
@@ -9,6 +10,10 @@ export default class User
     public fullName: string;
 
     public isActive?: boolean;
+
+    public avatar?: UserAvatar;
+
+    public avatarThumbs: any = {};
 
     public roles: Array<string> = [];
 

@@ -15,7 +15,8 @@ import { HeaderComponent } from './components/common/header/header.component';
 import {PracticeLanguageStatusComponent} from './components/common/header/practice-language-status/practice-language-status.component';
 import { AddSkillWindowComponent } from './components/common/add-skill-window/add-skill-window.component';
 import {StoreModule} from '@ngrx/store';
-import { reducer } from './data/reducer'
+import { reducer } from './data/reducer';
+import { AvatarManagerComponent } from './components/profile/avatar-manager/avatar-manager.component'
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { reducer } from './data/reducer'
     HeaderComponent,
     PracticeLanguageStatusComponent,
     AddSkillWindowComponent,
+    AvatarManagerComponent,
   ],
   imports: [
     CommonModule,
