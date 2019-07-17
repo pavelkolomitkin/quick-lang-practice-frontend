@@ -12,6 +12,7 @@ import {UserLogout} from '../../../security/data/actions';
 export class ErrorResponseHandlerInterceptor implements HttpInterceptor
 {
   static UNAUTHORIZE_ERROR_CODE = 401;
+  static PAYLOAD_TO_LARGE = 413;
 
   constructor(
     private store: Store<State>
@@ -32,6 +33,12 @@ export class ErrorResponseHandlerInterceptor implements HttpInterceptor
             {
               this.store.dispatch(new UserLogout());
 
+              return;
+            }
+
+            if (error.status === ErrorResponseHandlerInterceptor.PAYLOAD_TO_LARGE)
+            {
+              this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage('This file is too large!')));
               return;
             }
 
