@@ -1,0 +1,40 @@
+<form (ngSubmit)="onSubmitHandler(form)" #form="ngForm">
+  <div class="form-group">
+    <label for="selectedLanguage">Language</label>
+    <select
+            class="form-control"
+            [(ngModel)]="selectedLanguage"
+            [compareWith]="compareEntity"
+            [required]="true"
+            name="selectedLanguage"
+            id="selectedLanguage"
+    >
+      <option [value]="null" class="text-muted">-</option>
+      <option *ngFor="let language of (languages | async)" [ngValue]="language">{{ language.name }}</option>
+    </select>
+    <app-form-field-error-list [field]="'language'" [errors]="errors"></app-form-field-error-list>
+  </div>
+
+  <div class="form-group">
+    <label for="selectedLevel">Level</label>
+    <select
+            class="form-control"
+            [(ngModel)]="selectedLevel"
+            [compareWith]="compareEntity"
+            [required]="true"
+            name="selectedLevel"
+            id="selectedLevel"
+    >
+      <option [value]="null" class="text-muted">-</option>
+      <option *ngFor="let level of (languageLevels | async)" [ngValue]="level">{{ level.title }}</option>
+    </select>
+
+    <app-form-field-error-list [field]="'level'" [errors]="errors"></app-form-field-error-list>
+  </div>
+
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+  </div>
+
+</form>

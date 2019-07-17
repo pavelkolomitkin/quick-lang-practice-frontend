@@ -16,7 +16,7 @@ export class SecurityService extends BaseService
 
   registerConfirm(confirmationKey: string): Observable<any>
   {
-    return this.http.post('/security/register-confirm', {
+    return this.http.put('/security/register-confirm', {
       key: confirmationKey
     });
   }
@@ -33,9 +33,9 @@ export class SecurityService extends BaseService
 
   getAuthorizedUser()
   {
-    return this.http.get<{user: User}>('/profile').pipe(
+    return this.http.get<{user: User}>('/security/profile').pipe(
       map((result) => {
-        return User.createFromRawData(result.user);
+        return User.createFromRawData(result);
       })
     );
   }

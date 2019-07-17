@@ -1,6 +1,9 @@
+import {LanguageSkill} from './language-skill.model';
+import {UserAvatar} from './user-avatar.model';
+
 export default class User
 {
-    public id: number;
+    public id: string;
 
     public email: string;
 
@@ -8,11 +11,21 @@ export default class User
 
     public isActive?: boolean;
 
+    public avatar?: UserAvatar;
+
+    public avatarThumbs: any = {};
+
     public roles: Array<string> = [];
 
-    public createdAt: number;
+    public createdAt?: string;
 
-    public updatedAt: number;
+    public updatedAt?: string;
+
+    public aboutYourSelf?: string;
+
+    public readyToPracticeSkill?: LanguageSkill;
+
+    public skills: Array<LanguageSkill> = [];
 
     isAdmin()
     {
@@ -29,5 +42,19 @@ export default class User
         const result: User = Object.assign(new User(), data);
 
         return result;
+    }
+
+    removeSkill(skill: LanguageSkill)
+    {
+        if (this.readyToPracticeSkill && (this.readyToPracticeSkill.id === skill.id))
+        {
+            this.readyToPracticeSkill = null;
+        }
+
+        const index = this.skills.findIndex(item => item.id === skill.id);
+        if (index !== -1)
+        {
+            this.skills.splice(index, 1);
+        }
     }
 }

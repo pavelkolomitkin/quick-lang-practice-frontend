@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import {ActionConfirmation} from '../../data/model/action-confirmation.model';
 import {ConfirmationActionOption} from '../../data/model/confirmation-action-option.model';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-confirmation-window',
@@ -22,15 +23,26 @@ export class ConfirmationWindowComponent implements OnInit, AfterViewInit {
 
   @Input() confirmation: ActionConfirmation;
 
-  constructor() { }
+  @ViewChild('modalWindow')
+  templateWindow: TemplateRef<any>;
+
+  modalRef: BsModalRef;
+
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
+
 
 
   }
 
   ngAfterViewInit(): void {
 
+    setTimeout(() => {
+
+      this.modalRef = this.modalService.show(this.templateWindow);
+
+    }, 1);
 
   }
 
@@ -38,7 +50,8 @@ export class ConfirmationWindowComponent implements OnInit, AfterViewInit {
   {
     this.confirmation.userResponse = option;
 
-    this.confirm.emit(this.confirmation);
+    this.modalRef.hide();
 
+    this.confirm.emit(this.confirmation);
   }
 }

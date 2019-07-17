@@ -1,0 +1,61 @@
+<ng-container *ngIf="authorizedUser">
+
+  <ng-container *ngIf="authorizedUser.skills.length > 0">
+
+    <button
+            class="btn"
+            type="button" id="message"
+            data-toggle="dropdown"
+            aria-haspopup="false"
+            aria-expanded="false"
+            [ngClass]="authorizedUser.readyToPracticeSkill ? 'btn-success' : 'btn-outline-primary'"
+    >
+      <ng-container *ngIf="authorizedUser.readyToPracticeSkill">
+      <span tooltip="Other users will suggest you to practice it soon!" placement="bottom">
+        <i class="fa fa-check"></i> Practice <b>{{ authorizedUser.readyToPracticeSkill.language.name }}</b>
+      </span>
+      </ng-container>
+      <ng-container *ngIf="!authorizedUser.readyToPracticeSkill">
+        Practice
+      </ng-container>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="message" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-210px, 56px, 0px);">
+
+      <p class="red">Your skills</p>
+
+      <div
+              class="dropdown-item media text-muted pt-3 skill-item-container"
+              *ngFor="let skill of authorizedUser.skills"
+              (click)="onSkillClickHandler($event, skill)"
+      >
+
+        <p class="media-body pb-3 mb-0 small lh-125">
+          <i class="fa fa-check text-success" *ngIf="authorizedUser.readyToPracticeSkill && (authorizedUser.readyToPracticeSkill.id === skill.id)"></i>
+          <strong class="d-block text-info">{{ skill.language.name }}</strong>
+          <small class="text-muted">{{ skill.level.title }}</small>
+        </p>
+
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="authorizedUser.skills.length === 0">
+
+    <span
+            class="btn btn-primary"
+            (click)="onAddSkillClickHandler($event)"
+    >
+      <i class="fa fa-plus"></i> Add Skill
+
+    </span>
+
+  </ng-container>
+
+
+
+</ng-container>
+
+
+

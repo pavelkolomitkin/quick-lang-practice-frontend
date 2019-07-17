@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   lang: 'en',
   baseApiUrl: 'http://localhost:3000/api',
+  maxUploadFileSize: 7340032,
+  maxUploadFileSizeLabel: '7M'
 };
 
 /*

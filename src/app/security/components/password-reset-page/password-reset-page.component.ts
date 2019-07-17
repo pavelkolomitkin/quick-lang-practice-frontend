@@ -72,8 +72,8 @@ export class PasswordResetPageComponent implements OnInit, OnDestroy {
 
       this.currentState = PasswordResetPageComponent.SUCCESS_STATE;
     }
-    catch (errors) {
-      this.errors = errors.error;
+    catch ({ error: { errors } }) {
+      this.errors = errors;
     }
 
     this.isRequesting = false;

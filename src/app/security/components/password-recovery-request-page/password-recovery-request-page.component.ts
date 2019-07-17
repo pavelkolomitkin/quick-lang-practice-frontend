@@ -33,8 +33,8 @@ export class PasswordRecoveryRequestPageComponent implements OnInit {
 
       this.requestSuccess = true;
     }
-    catch (errors) {
-      this.errors = errors.error;
+    catch ({ error: { errors } }) {
+      this.errors = errors;
     }
 
     this.isRequesting = false;

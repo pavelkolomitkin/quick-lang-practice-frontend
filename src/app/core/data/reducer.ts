@@ -2,6 +2,8 @@ import * as actions from './actions';
 import {NotifyMessage} from "./model/notify-message.model";
 import {ActionConfirmation} from './model/action-confirmation.model';
 import {BreadCrumb} from './model/bread-crumb.model';
+import {Language} from './model/language.model';
+import {LanguageLevel} from './model/language-level.model';
 
 export interface State {
   globalProgressLoaders: number;
@@ -21,6 +23,9 @@ export interface State {
   leavePageConfirmation: boolean;
 
   isUserAgreementVisible: boolean;
+
+  languages: Array<Language>;
+  languageLevels: Array<LanguageLevel>;
 }
 
 const initialState: State = {
@@ -40,7 +45,10 @@ const initialState: State = {
 
   leavePageConfirmation: false,
 
-  isUserAgreementVisible: false
+  isUserAgreementVisible: false,
+
+  languages: [],
+  languageLevels: []
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -149,6 +157,20 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         isUserAgreementVisible: action.isVisible
+      };
+
+    case actions.GLOBAL_LANGUAGE_LIST_LOADED:
+
+      return {
+        ...state,
+        languages: action.list
+      };
+
+    case actions.GLOBAL_LANGUAGE_LEVEL_LIST_LOADED:
+
+      return {
+        ...state,
+        languageLevels: action.list
       };
 
     default:

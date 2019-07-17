@@ -17,3 +17,18 @@ a
 {
     text-decoration: none !important;
 }
+
+.nav-link
+{
+    cursor: pointer;
+}
+
+.toast {
+    opacity: 1 !important;
+}
+
+.right-panel.client
+{
+    margin-left: 0 !important;
+    float: none !important;
+}

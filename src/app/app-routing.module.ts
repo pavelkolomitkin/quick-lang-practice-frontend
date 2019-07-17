@@ -4,9 +4,11 @@ import {AppSecurityLayoutComponent} from './components/app-security-layout/app-s
 import {AppLayoutComponent} from './components/app-layout/app-layout.component';
 import {DefaultRedirectGuard} from './security/services/guards/default-redirect-guard.service';
 import {NotFoundPageComponent} from './shared/components/not-found-page/not-found-page.component';
+import {AuthUserGuardService} from './security/services/guards/auth-user-guard.service';
 
 const routes: Routes = [
   { path: 'security', component: AppSecurityLayoutComponent,  loadChildren: './security/security.module#SecurityModule' },
+  { path: 'client', component: AppLayoutComponent, loadChildren: './client/client.module#ClientModule', canActivate: [AuthUserGuardService] },
   { path: '', component: AppLayoutComponent, canActivate: [DefaultRedirectGuard], pathMatch: 'full', children: [] },
   { path: '404', component: NotFoundPageComponent },
   { path: '**', redirectTo: '404', pathMatch: 'full'}

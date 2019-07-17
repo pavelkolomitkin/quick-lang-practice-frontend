@@ -2,6 +2,8 @@ import { Action } from '@ngrx/store';
 import {NotifyMessage} from './model/notify-message.model';
 import { BreadCrumb } from './model/bread-crumb.model';
 import {ActionConfirmation} from './model/action-confirmation.model';
+import {Language} from './model/language.model';
+import {LanguageLevel} from './model/language-level.model';
 
 export const GLOBAL_PROGRESS_SHOW = 'GLOBAL_PROGRESS_SHOW';
 export const GLOBAL_PROGRESS_HIDE = 'GLOBAL_PROGRESS_HIDE';
@@ -21,6 +23,9 @@ export const GLOBAL_CONFIRM_LEAVE_PAGE_INIT = 'GLOBAL_CONFIRM_LEAVE_PAGE_INIT';
 export const GLOBAL_CONFIRM_LEAVE_PAGE_RESET = 'GLOBAL_CONFIRM_LEAVE_PAGE_RESET';
 
 export const GLOBAL_USER_AGREEMENT_VISIBILITY = 'GLOBAL_USER_AGREEMENT_VISIBILITY';
+
+export const GLOBAL_LANGUAGE_LIST_LOADED = 'GLOBAL_LANGUAGE_LIST_LOADED';
+export const GLOBAL_LANGUAGE_LEVEL_LIST_LOADED = 'GLOBAL_LANGUAGE_LEVEL_LIST_LOADED';
 
 
 export class GlobalPageTitle implements Action
@@ -107,6 +112,21 @@ export class GlobalUserAgreementVisibility implements Action
 }
 
 
+export class GlobalLanguageListLoaded implements Action
+{
+  readonly type = GLOBAL_LANGUAGE_LIST_LOADED;
+
+  constructor(public list: Array<Language>) {};
+}
+
+export class GlobalLanguageLevelListLoaded implements Action
+{
+  readonly type = GLOBAL_LANGUAGE_LEVEL_LIST_LOADED;
+
+  constructor(public list: Array<LanguageLevel>) {}
+}
+
+
 export type CoreActions =
     GlobalProgressShow
     | GlobalProgressHide
@@ -126,4 +146,7 @@ export type CoreActions =
     | GlobalConfirmLeavePageReset
 
     | GlobalUserAgreementVisibility
+
+    | GlobalLanguageListLoaded
+    | GlobalLanguageLevelListLoaded
   ;

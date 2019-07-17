@@ -1,0 +1,30 @@
+<ng-container *ngIf="user.skills.length > 0">
+  <table class="table table-borderless table-hover">
+    <thead>
+    <tr>
+      <th>Language</th>
+      <th>Level</th>
+      <th *ngIf="isEditable"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+            *ngFor="let skill of user.skills"
+            app-client-skill-item
+            [skill]="skill"
+            isEditable="isEditable"
+            (onDelete)="onDeleteSkillHandler($event)"
+            (onEdit)="onEditSkillHandler($event)"
+    ></tr>
+    </tbody>
+  </table>
+</ng-container>
+<ng-container *ngIf="user.skills.length === 0">
+  <p class="alert alert-info">No skills yet</p>
+</ng-container>
+<span
+        *ngIf="isEditable"
+        class="btn btn-success"
+      (click)="onAddButtonClickHandler($event)">
+  <i class="fa fa-plus"></i> Add Skill
+</span>

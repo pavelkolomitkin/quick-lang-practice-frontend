@@ -1,0 +1,19 @@
+.file-upload-container
+{
+    position: relative;
+}
+
+.file-upload-container .upload-button
+{
+    position: relative;
+    z-index: 2;
+}
+
+.file-upload-container input[type="file"]
+{
+    position: absolute;
+    display: none;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}

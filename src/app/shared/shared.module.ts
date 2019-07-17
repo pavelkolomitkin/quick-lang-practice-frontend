@@ -14,6 +14,9 @@ import {NgxPermissionsModule} from 'ngx-permissions';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslationLoaderService} from './services/translation-loader.service';
 import {environment} from '../../environments/environment';
+import {ModalModule} from 'ngx-bootstrap';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,8 @@ import {environment} from '../../environments/environment';
     FormFieldErrorListComponent,
     NotFoundPageComponent,
     PaginatorComponent,
-    DateTimeViewComponent
+    DateTimeViewComponent,
+    UserAvatarComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +34,8 @@ import {environment} from '../../environments/environment';
     FormsModule,
     InfiniteScrollModule,
     MomentModule,
+    ModalModule,
+      TooltipModule.forRoot(),
     NgxPermissionsModule.forChild(),
     TranslateModule.forRoot({
       loader: {
@@ -39,16 +45,20 @@ import {environment} from '../../environments/environment';
       useDefaultLang: true
     })
   ],
-  exports:[
-    FormsModule,
-    InfiniteScrollModule,
-    MomentModule,
-    TranslateModule,
-    FormFieldErrorListComponent,
-    NotFoundPageComponent,
-    PaginatorComponent,
-    DateTimeViewComponent,
-  ]
+    exports: [
+        FormsModule,
+        InfiniteScrollModule,
+        MomentModule,
+        ModalModule,
+        TooltipModule,
+        TranslateModule,
+        FormFieldErrorListComponent,
+        NotFoundPageComponent,
+        PaginatorComponent,
+        DateTimeViewComponent,
+        MultiLinePipe,
+        UserAvatarComponent,
+    ]
 })
 export class SharedModule {
 
