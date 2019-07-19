@@ -17,6 +17,7 @@ import {environment} from '../../environments/environment';
 import {ModalModule} from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
+import {SocketIoModule} from 'ngx-socket-io';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { UserAvatarComponent } from './components/user-avatar/user-avatar.compon
         useClass: TranslationLoaderService
       },
       useDefaultLang: true
-    })
+    }),
+    SocketIoModule,
   ],
     exports: [
         FormsModule,
@@ -58,6 +60,7 @@ import { UserAvatarComponent } from './components/user-avatar/user-avatar.compon
         DateTimeViewComponent,
         MultiLinePipe,
         UserAvatarComponent,
+        SocketIoModule,
     ]
 })
 export class SharedModule {

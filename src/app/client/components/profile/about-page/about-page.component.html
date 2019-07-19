@@ -1,0 +1,31 @@
+<ng-container *ngIf="!!user && !!(authorizedUser | async)">
+
+  <section class="card">
+    <div class="card-header">About</div>
+
+    <div class="card-body">
+
+      <app-client-about
+              [user]="user"
+              [isEditable]="(authorizedUser | async).id === user.id"
+      ></app-client-about>
+
+    </div>
+
+  </section>
+
+  <section class="card">
+    <div class="card-header">Language skills</div>
+
+    <div class="card-body">
+      <app-client-skill-list
+              [isEditable]="(authorizedUser | async).id === user.id"
+              [user]="((authorizedUser | async).id === user.id) ? (authorizedUser | async) : user"
+      ></app-client-skill-list>
+    </div>
+
+  </section>
+
+</ng-container>
+
+

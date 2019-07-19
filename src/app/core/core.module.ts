@@ -37,6 +37,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import {LanguageService} from './services/language.service';
 import {LanguageLevelService} from './services/language-level.service';
 import {ConfirmActionService} from './services/confirm-action.service';
+import {SocketIoModule} from 'ngx-socket-io';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -75,7 +76,7 @@ const httpInterceptorProviders = [
     }),
     EffectsModule.forRoot([
         AuthEffects
-    ])
+    ]),
   ],
 
   providers: [
@@ -114,7 +115,7 @@ const httpInterceptorProviders = [
     MainFooterComponent,
     MainMenuComponent,
     ConfirmationComponent,
-    MessageNotifierComponent
+    MessageNotifierComponent,
   ]
 })
 export class CoreModule { }

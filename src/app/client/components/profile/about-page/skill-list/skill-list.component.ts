@@ -1,11 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import User from '../../../../core/data/model/user.model';
+import User from '../../../../../core/data/model/user.model';
 
-import {LanguageSkill} from '../../../../core/data/model/language-skill.model';
+import {LanguageSkill} from '../../../../../core/data/model/language-skill.model';
 import {Store} from '@ngrx/store';
-import {State} from '../../../../app.state';
-import {ClientAddSkillWindowChangeState} from '../../../data/actions';
-import {UserUpdated} from '../../../../security/data/actions';
+import {State} from '../../../../../app.state';
+import {ClientAddSkillWindowChangeState} from '../../../../data/actions';
+import {UserUpdated} from '../../../../../security/data/actions';
 
 @Component({
   selector: 'app-client-skill-list',
