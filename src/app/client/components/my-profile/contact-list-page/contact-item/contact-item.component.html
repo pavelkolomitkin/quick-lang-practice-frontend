@@ -1,0 +1,20 @@
+<tr>
+  <app-user-avatar [user]="contact.addressee" [size]="'small'"></app-user-avatar>
+</tr>
+<td>{{ contact.addressee.fullName }}</td>
+<td>
+  <ng-container *ngIf="contact.lastMessage; else deletedMessage;">
+    {{ contact.lastMessage.text }} - <span class="text-muted small">{{ contact.lastMessage.author.fullName }}</span>
+  </ng-container>
+  <ng-template #deletedMessage>
+    <span class="text-muted">Message has been deleted</span>
+  </ng-template>
+</td>
+<td>
+  <ng-container *ngIf="contact.newMessages.length > 0">
+    <span class="badge-info">{{ contact.newMessages.length }}</span>
+  </ng-container>
+</td>
+<td>
+  <span app-date-time [value]="contact.updatedAt"></span>
+</td>

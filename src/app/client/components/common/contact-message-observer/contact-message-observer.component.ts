@@ -6,13 +6,15 @@ import {Socket} from 'ngx-socket-io';
 import {Subscription} from 'rxjs';
 import {GlobalNotifyErrorMessage, GlobalNotifySuccessMessage} from '../../../../core/data/actions';
 import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
+import {ClientContactMessageReceived} from '../../../data/contact-message.actions';
+import {ContactMessage} from '../../../../core/data/model/contact-message.model';
 
 @Component({
   selector: 'app-client-message-receiver',
-  templateUrl: './message-receiver.component.html',
-  styleUrls: ['./message-receiver.component.css']
+  templateUrl: './contact-message-observer.component.html',
+  styleUrls: ['./contact-message-observer.component.css']
 })
-export class MessageReceiverComponent implements OnInit, OnDestroy {
+export class ContactMessageObserverComponent implements OnInit, OnDestroy {
 
   private socket: Socket;
 
@@ -46,35 +48,19 @@ export class MessageReceiverComponent implements OnInit, OnDestroy {
             }
           });
 
-          this.socket.on('new_message', this.onNewMessageReceiveHandler.bind(this));
+          this.socket.on('message_new', this.onNewMessageReceiveHandler.bind(this));
 
         });
-
-    /**
-    this.service.once('connect', () => {
-      console.log('Message receive is connected!');
-
-
-      this.service.emit('test', 'hi');
-    });
-
-    // setInterval(() => {
-    //
-    //   this.service.emit('test', 'hi');
-    //
-    // }, 1000);
-
-    this.service.on('test_receive', (data) => {
-      console.log(data);
-    });
-  */
   }
 
   onNewMessageReceiveHandler(data: any)
   {
       //debugger
-      const message = data.fullDocument;
-      this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage(message.text)));
+      // const message = data.fullDocument;
+      // this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage(message.text)));
+      console.log(data);
+
+      this.store.dispatch(new ClientContactMessageReceived(<ContactMessage>data));
   }
 
   ngOnDestroy(): void {

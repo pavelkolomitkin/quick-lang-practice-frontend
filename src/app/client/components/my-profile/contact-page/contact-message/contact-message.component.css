@@ -1,0 +1,30 @@
+.msg-container
+{
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 70px;
+}
+
+.avatar
+{
+    position: absolute;
+    top: 0;
+    float: none !important;
+}
+
+.msg-sent .avatar
+{
+    right: 0;
+}
+
+.msg-box
+{
+    position: relative;
+    float: none !important;
+}
+
+.msg-sent .msg-box
+{
+    margin-right: 80px;
+}

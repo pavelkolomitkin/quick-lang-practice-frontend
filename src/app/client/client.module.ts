@@ -16,11 +16,20 @@ import {PracticeLanguageStatusComponent} from './components/common/header/practi
 import { AddSkillWindowComponent } from './components/common/add-skill-window/add-skill-window.component';
 import {StoreModule} from '@ngrx/store';
 import { reducer } from './data/reducer';
-import { AvatarManagerComponent } from './components/profile/avatar-manager/avatar-manager.component';
+import { reducer as contactMessageReducer } from './data/contact-message.reducer';
+import { AvatarManagerComponent } from './components/common/avatar-manager/avatar-manager.component';
 import { AboutPageComponent } from './components/profile/about-page/about-page.component';
-import { ContactListPageComponent } from './components/profile/contact-list-page/contact-list-page.component'
+import { ContactListPageComponent } from './components/my-profile/contact-list-page/contact-list-page.component'
 import {MessagesSocket} from './sockets/messages.socket';
-import { MessageReceiverComponent } from './components/common/message-receiver/message-receiver.component';
+import { ContactMessageObserverComponent } from './components/common/contact-message-observer/contact-message-observer.component';
+import { ContactItemComponent } from './components/my-profile/contact-list-page/contact-item/contact-item.component';
+import {UserContactService} from './services/user-contact.service';
+import {ContactMessageService} from './services/contact-message.service';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { MyMenuComponent } from './components/my-profile/my-menu/my-menu.component';
+import { ContactPageComponent } from './components/my-profile/contact-page/contact-page.component';
+import { ContactMessageComponent } from './components/my-profile/contact-page/contact-message/contact-message.component';
+import { MessageFormComponent } from './components/my-profile/contact-page/message-form/message-form.component';
 
 @NgModule({
   declarations: [
@@ -37,18 +46,26 @@ import { MessageReceiverComponent } from './components/common/message-receiver/m
     AvatarManagerComponent,
     AboutPageComponent,
     ContactListPageComponent,
-    MessageReceiverComponent,
+    ContactMessageObserverComponent,
+    ContactItemComponent,
+    MyProfileComponent,
+    MyMenuComponent,
+    ContactPageComponent,
+    ContactMessageComponent,
+    MessageFormComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     ClientRoutingModule,
     StoreModule.forFeature('client', reducer),
+    StoreModule.forFeature('clientContactMessage', contactMessageReducer),
   ],
   providers: [
       ProfileService,
       LanguageSkillService,
-
+      UserContactService,
+      ContactMessageService,
       MessagesSocket,
   ]
 })

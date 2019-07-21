@@ -12,7 +12,7 @@
             *ngFor="let skill of user.skills"
             app-client-skill-item
             [skill]="skill"
-            isEditable="isEditable"
+            [isEditable]="isEditable"
             (onDelete)="onDeleteSkillHandler($event)"
             (onEdit)="onEditSkillHandler($event)"
     ></tr>

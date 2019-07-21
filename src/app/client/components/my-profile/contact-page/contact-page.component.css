@@ -1,0 +1,12 @@
+.messenger-box
+{
+    max-height: 604px;
+    min-height: 604px;
+    overflow-y: scroll;
+
+    scrollbar-width: none;
+}
+.messenger-box::-webkit-scrollbar {
+
+    display: none;
+}
