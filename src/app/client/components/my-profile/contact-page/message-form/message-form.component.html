@@ -8,6 +8,8 @@
               ngModel
               name="text"
               placeholder="Message..."
+              (ngModelChange)="onTextChangeHandler($event)"
+              autocomplete="off"
       >
       <app-form-field-error-list [field]="'text'" [errors]="errors"></app-form-field-error-list>
     </div>

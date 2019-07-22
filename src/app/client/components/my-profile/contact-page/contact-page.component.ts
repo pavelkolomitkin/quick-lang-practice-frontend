@@ -10,6 +10,8 @@ import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {Observable, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
+import {MessagesSocketService} from '../../../sockets/messages-socket.service';
+import {AddresseeTypingComponent} from './addressee-typing/addressee-typing.component';
 
 @Component({
   selector: 'app-contact-page',
@@ -19,6 +21,7 @@ import {filter} from 'rxjs/operators';
 export class ContactPageComponent implements OnInit, OnDestroy {
 
   @ViewChild('messageContainer') messageContainer: ElementRef;
+  @ViewChild('typingIndicator') typingIndicator: AddresseeTypingComponent;
 
   currentUser: Observable<User>;
 
@@ -30,12 +33,14 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
   paramSubscription: Subscription;
   receivedMessageSubscription: Subscription;
+  addresseeIsTypingSubscription: Subscription;
 
   constructor(
       private store: Store<State>,
       private profileService: ProfileService,
       private contactService: UserContactService,
       private messageService: ContactMessageService,
+      private messageSocket: MessagesSocketService,
       private router: Router,
       private route: ActivatedRoute
   ) { }
@@ -86,6 +91,18 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
 
       this.scrollDownList();
+
+      if (this.addresseeIsTypingSubscription)
+      {
+        this.addresseeIsTypingSubscription.unsubscribe();
+      }
+      this.addresseeIsTypingSubscription = this.messageSocket.getTypingActivity().subscribe((writingUser: User) => {
+        //debugger
+        if (writingUser.id === this.addressee.id)
+        {
+            this.typingIndicator.setVisible();
+        }
+      });
     });
 
 
@@ -98,6 +115,12 @@ export class ContactPageComponent implements OnInit, OnDestroy {
     {
       this.receivedMessageSubscription.unsubscribe();
       this.receivedMessageSubscription = null;
+    }
+
+    if (this.addresseeIsTypingSubscription)
+    {
+      this.addresseeIsTypingSubscription.unsubscribe();
+      this.addresseeIsTypingSubscription = null;
     }
   }
 

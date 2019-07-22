@@ -20,7 +20,6 @@ import { reducer as contactMessageReducer } from './data/contact-message.reducer
 import { AvatarManagerComponent } from './components/common/avatar-manager/avatar-manager.component';
 import { AboutPageComponent } from './components/profile/about-page/about-page.component';
 import { ContactListPageComponent } from './components/my-profile/contact-list-page/contact-list-page.component'
-import {MessagesSocket} from './sockets/messages.socket';
 import { ContactMessageObserverComponent } from './components/common/contact-message-observer/contact-message-observer.component';
 import { ContactItemComponent } from './components/my-profile/contact-list-page/contact-item/contact-item.component';
 import {UserContactService} from './services/user-contact.service';
@@ -30,6 +29,8 @@ import { MyMenuComponent } from './components/my-profile/my-menu/my-menu.compone
 import { ContactPageComponent } from './components/my-profile/contact-page/contact-page.component';
 import { ContactMessageComponent } from './components/my-profile/contact-page/contact-message/contact-message.component';
 import { MessageFormComponent } from './components/my-profile/contact-page/message-form/message-form.component';
+import {MessagesSocketService} from './sockets/messages-socket.service';
+import { AddresseeTypingComponent } from './components/my-profile/contact-page/addressee-typing/addressee-typing.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MessageFormComponent } from './components/my-profile/contact-page/messa
     ContactPageComponent,
     ContactMessageComponent,
     MessageFormComponent,
+    AddresseeTypingComponent,
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,7 @@ import { MessageFormComponent } from './components/my-profile/contact-page/messa
       LanguageSkillService,
       UserContactService,
       ContactMessageService,
-      MessagesSocket,
+      MessagesSocketService
   ]
 })
 export class ClientModule { }
