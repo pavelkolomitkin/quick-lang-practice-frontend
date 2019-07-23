@@ -3,7 +3,7 @@ import {MessagesSocketService} from '../../../sockets/messages-socket.service';
 import {Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {Subscription} from 'rxjs';
-import {ClientContactMessageReceived} from '../../../data/contact-message.actions';
+import {ClientContactMessageReceived, ClientContactMessageRemoved} from '../../../data/contact-message.actions';
 import {ContactMessage} from '../../../../core/data/model/contact-message.model';
 
 @Component({
@@ -14,6 +14,7 @@ import {ContactMessage} from '../../../../core/data/model/contact-message.model'
 export class ContactMessageObserverComponent implements OnInit, OnDestroy {
 
   newMessageSubscription: Subscription;
+  messageRemovedSubscription: Subscription;
 
   constructor(
       private store: Store<State>,
@@ -23,21 +24,27 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
       this.newMessageSubscription = this.socket.getNewMessage().subscribe(this.onNewMessageReceiveHandler);
+      this.messageRemovedSubscription = this.socket.getRemovedMessage().subscribe(this.onMessageRemoved);
   }
 
-  onNewMessageReceiveHandler = (data: ContactMessage) =>
+  onNewMessageReceiveHandler = (message: ContactMessage) =>
   {
       //debugger
       // const message = data.fullDocument;
       // this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage(message.text)));
       //console.log(data);
 
-      this.store.dispatch(new ClientContactMessageReceived(data));
-  }
+      this.store.dispatch(new ClientContactMessageReceived(message));
+  };
+
+  onMessageRemoved = (message: ContactMessage) => {
+    this.store.dispatch(new ClientContactMessageRemoved(message));
+  };
 
   ngOnDestroy(): void {
 
     this.newMessageSubscription.unsubscribe();
+    this.messageRemovedSubscription.unsubscribe();
 
   }
 

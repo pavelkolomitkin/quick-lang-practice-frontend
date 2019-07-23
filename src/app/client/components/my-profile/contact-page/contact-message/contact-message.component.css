@@ -28,3 +28,49 @@
 {
     margin-right: 80px;
 }
+
+.msg-sent .inner-box
+{
+    position: relative;
+}
+
+.msg-sent .controls {
+
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    padding: 5px;
+    display: none;
+
+}
+
+.msg-sent:hover .controls
+{
+    display: block;
+}
+
+.msg-sent .controls .control {
+    cursor: pointer;
+}
+
+/*beige*/
+.msg-container .removed {}
+
+.msg-container .removed .inner-box {
+    background: beige;
+}
+
+.msg-container.msg-sent .removed .inner-box::after
+{
+    border-left-color: beige;
+}
+
+.msg-container.msg-received .removed .inner-box::after
+{
+    border-right-color: beige;
+}
+
+.msg-container .removed .inner-box .meg
+{
+    font-style: italic;
+}

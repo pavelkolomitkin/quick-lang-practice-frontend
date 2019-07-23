@@ -5,14 +5,29 @@
       <app-user-avatar [user]="message.author" [size]="'small'"></app-user-avatar>
       <div class="send-time" app-date-time [value]="message.createdAt"></div>
     </div>
-    <div class="msg-box">
-      <div class="inner-box pull-right">
+    <div class="msg-box" [ngClass]="isDeleted ? 'removed' : ''">
+      <div class="inner-box pull-right" >
+
+        <div class="controls" *ngIf="!isDeleted">
+          <span class="control mr-2">
+            <i class="fa fa-pencil"></i>
+          </span>
+          <span class="control mr-2" (click)="onDeleteClickHandler($event)">
+            <i class="fa fa-times"></i>
+          </span>
+        </div>
+
         <div class="pull-right">
           <div class="name text-right">
             {{ message.author.fullName }}
           </div>
           <div class="meg">
-            {{ message.text }}
+            <ng-container *ngIf="isDeleted">
+              Message has been removed...
+            </ng-container>
+            <ng-container *ngIf="!isDeleted">
+              {{ message.text }}
+            </ng-container>
           </div>
         </div>
       </div>
@@ -30,14 +45,19 @@
       <app-user-avatar [user]="message.author" [size]="'small'"></app-user-avatar>
       <div class="send-time" app-date-time [value]="message.createdAt"></div>
     </div>
-    <div class="msg-box">
-      <div class="inner-box pull-left">
+    <div class="msg-box" [ngClass]="isDeleted ? 'removed' : ''">
+      <div class="inner-box pull-left" >
         <div class="pull-right">
           <div class="name text-left">
             {{ message.author.fullName }}
           </div>
           <div class="meg">
-            {{ message.text }}
+            <ng-container *ngIf="isDeleted">
+              Message has been removed...
+            </ng-container>
+            <ng-container *ngIf="!isDeleted">
+              {{ message.text }}
+            </ng-container>
           </div>
         </div>
       </div>
