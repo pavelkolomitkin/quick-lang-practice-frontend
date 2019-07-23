@@ -3,7 +3,7 @@ import {MessagesSocketService} from '../../../sockets/messages-socket.service';
 import {Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {Subscription} from 'rxjs';
-import {ClientContactMessageReceived, ClientContactMessageRemoved} from '../../../data/contact-message.actions';
+import {ClientContactMessageEdited, ClientContactMessageReceived, ClientContactMessageRemoved} from '../../../data/contact-message.actions';
 import {ContactMessage} from '../../../../core/data/model/contact-message.model';
 
 @Component({
@@ -14,6 +14,7 @@ import {ContactMessage} from '../../../../core/data/model/contact-message.model'
 export class ContactMessageObserverComponent implements OnInit, OnDestroy {
 
   newMessageSubscription: Subscription;
+  messageEditedSubscription: Subscription;
   messageRemovedSubscription: Subscription;
 
   constructor(
@@ -24,17 +25,17 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
       this.newMessageSubscription = this.socket.getNewMessage().subscribe(this.onNewMessageReceiveHandler);
+      this.messageEditedSubscription = this.socket.getEditedMessage().subscribe(this.onMessageEditHandler)
       this.messageRemovedSubscription = this.socket.getRemovedMessage().subscribe(this.onMessageRemoved);
   }
 
   onNewMessageReceiveHandler = (message: ContactMessage) =>
   {
-      //debugger
-      // const message = data.fullDocument;
-      // this.store.dispatch(new GlobalNotifySuccessMessage(new NotifyMessage(message.text)));
-      //console.log(data);
-
       this.store.dispatch(new ClientContactMessageReceived(message));
+  };
+
+  onMessageEditHandler = (message: ContactMessage) => {
+    this.store.dispatch(new ClientContactMessageEdited(message));
   };
 
   onMessageRemoved = (message: ContactMessage) => {
@@ -44,6 +45,7 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.newMessageSubscription.unsubscribe();
+    this.messageEditedSubscription.unsubscribe();
     this.messageRemovedSubscription.unsubscribe();
 
   }

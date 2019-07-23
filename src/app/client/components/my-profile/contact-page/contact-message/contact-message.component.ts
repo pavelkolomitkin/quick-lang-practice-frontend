@@ -15,16 +15,17 @@ import {Subscription} from 'rxjs';
 })
 export class ContactMessageComponent implements OnInit, OnDestroy {
 
-
   @Output('onDelete') deleteEvent: EventEmitter<ContactMessage> = new EventEmitter();
 
   @Input() message: ContactMessage;
 
   @Input() isMine: boolean = false;
 
+  isEditing: boolean = false;
   isDeleted: boolean = false;
 
   deleteMessageSubscription: Subscription;
+  editMessageSubscription: Subscription;
 
   constructor(
       private service: ContactMessageService,
@@ -43,14 +44,27 @@ export class ContactMessageComponent implements OnInit, OnDestroy {
 
     });
 
+    this.editMessageSubscription = this.store.pipe(
+        select(state => state.clientContactMessage.lastEditedMessage),
+        filter(result => !!result),
+        filter(result => result.id === this.message.id)
+    ).subscribe((editedMessage: ContactMessage) => {
+      this.message = editedMessage;
+    });
+
   }
 
   ngOnDestroy(): void {
 
+    this.editMessageSubscription.unsubscribe();
     this.deleteMessageSubscription.unsubscribe();
 
   }
 
+  onEditClickHandler(event)
+  {
+    this.isEditing = true;
+  }
 
   async onDeleteClickHandler(event)
   {
@@ -63,4 +77,16 @@ export class ContactMessageComponent implements OnInit, OnDestroy {
       this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage('Can not delete this message!')));
     }
   }
+
+  onMessageEditHandler(message: ContactMessage)
+  {
+    this.message = message;
+    this.isEditing = false;
+  }
+
+  onMessageEditCancelHandler(message: ContactMessage)
+  {
+    this.isEditing = false;
+  }
+
 }

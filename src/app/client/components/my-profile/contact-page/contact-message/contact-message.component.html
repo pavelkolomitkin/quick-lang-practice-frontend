@@ -9,7 +9,7 @@
       <div class="inner-box pull-right" >
 
         <div class="controls" *ngIf="!isDeleted">
-          <span class="control mr-2">
+          <span class="control mr-2" (click)="onEditClickHandler($event)">
             <i class="fa fa-pencil"></i>
           </span>
           <span class="control mr-2" (click)="onDeleteClickHandler($event)">
@@ -21,12 +21,20 @@
           <div class="name text-right">
             {{ message.author.fullName }}
           </div>
-          <div class="meg">
+          <ng-container *ngIf="isEditing">
+            <app-client-contact-message-edit-form
+                    [message]="message"
+                    (onEdit)="onMessageEditHandler($event)"
+                    (onCancel)="onMessageEditCancelHandler($event)"
+            ></app-client-contact-message-edit-form>
+          </ng-container>
+          <div class="meg" *ngIf="!isEditing">
             <ng-container *ngIf="isDeleted">
               Message has been removed...
             </ng-container>
             <ng-container *ngIf="!isDeleted">
               {{ message.text }}
+              <small class="text-muted inline-block font-italic" *ngIf="message.createdAt !== message.updatedAt">(edited)</small>
             </ng-container>
           </div>
         </div>
@@ -57,6 +65,7 @@
             </ng-container>
             <ng-container *ngIf="!isDeleted">
               {{ message.text }}
+              <small class="text-muted inline-block font-italic" *ngIf="message.createdAt !== message.updatedAt">(edited)</small>
             </ng-container>
           </div>
         </div>

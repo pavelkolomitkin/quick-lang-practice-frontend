@@ -31,6 +31,7 @@ import { ContactMessageComponent } from './components/my-profile/contact-page/co
 import { MessageFormComponent } from './components/my-profile/contact-page/message-form/message-form.component';
 import {MessagesSocketService} from './sockets/messages-socket.service';
 import { AddresseeTypingComponent } from './components/my-profile/contact-page/addressee-typing/addressee-typing.component';
+import { EditFormComponent } from './components/my-profile/contact-page/contact-message/edit-form/edit-form.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AddresseeTypingComponent } from './components/my-profile/contact-page/a
     ContactMessageComponent,
     MessageFormComponent,
     AddresseeTypingComponent,
+    EditFormComponent,
   ],
   imports: [
     CommonModule,
