@@ -1,18 +1,27 @@
 <div class="card">
   <div class="card-body">
+    <div class="addressee-avatar">
+      <app-user-avatar [user]="addressee" [size]="'small'"></app-user-avatar>
+    </div>
     <h4 class="card-title box-title" *ngIf="!!addressee">{{ addressee.fullName }}</h4>
     <hr/>
     <div class="card-content">
-      <div #messageContainer class="messenger-box">
-        <ul>
+      <div #messageContainer class="messenger-box"
+           infiniteScroll
+           [infiniteScrollUpDistance]="20"
+           [infiniteScrollThrottle]="50"
+           [infiniteScrollDisabled]="infinityScrollDisabled"
+           [scrollWindow]="false"
+           (scrolledUp)="onScroll()">
+        <ul
+        >
 
-          <ng-container *ngIf="!!messages">
             <li *ngFor="let message of messages"
                 app-client-contact-message
                 [message]="message"
                 [isMine]="message.author.id === (currentUser | async).id"
             ></li>
-          </ng-container>
+
 
         </ul>
 

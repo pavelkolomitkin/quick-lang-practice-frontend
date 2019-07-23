@@ -22,3 +22,15 @@
     top: -15px;
     left: 0;
 }
+
+.card-body
+{
+    position: relative;
+}
+
+.card-body .addressee-avatar
+{
+    position: absolute;
+    top: 10px;
+    right: 18px;
+}

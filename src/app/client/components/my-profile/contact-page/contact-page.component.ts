@@ -27,9 +27,11 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
   currentMessagePage: number = 1;
   messages: ContactMessage[] = [];
+  earliestMessage: ContactMessage = null;
 
   addressee: User;
   addresseeContact: UserContact = null;
+  infinityScrollDisabled: boolean = false;
 
   paramSubscription: Subscription;
   receivedMessageSubscription: Subscription;
@@ -127,11 +129,30 @@ export class ContactPageComponent implements OnInit, OnDestroy {
   async loadMessages()
   {
 
-    const list: ContactMessage[] = await this.messageService.getList(this.addresseeContact, this.currentMessagePage).toPromise();
+    this.infinityScrollDisabled = true;
 
-    this.messages = this.messages.concat(list);
+    const list: ContactMessage[] = await this
+        .messageService
+        .getList(this.addresseeContact, this.earliestMessage ? this.earliestMessage.createdAt : null)
+        .toPromise();
 
+    if (list.length > 0)
+    {
+      this.earliestMessage = list[list.length - 1];
+    }
+    else {
+      this.earliestMessage = null;
+    }
+
+    this.messages = list.reverse().concat(this.messages);
+
+    this.infinityScrollDisabled = list.length === 0;
   }
+
+  onScroll = async () => {
+
+    await this.loadMessages();
+  };
 
   onMessageCreateHandler(message: ContactMessage)
   {

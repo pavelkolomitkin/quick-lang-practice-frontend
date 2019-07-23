@@ -9,13 +9,13 @@ import User from '../../core/data/model/user.model';
 @Injectable()
 export class ContactMessageService extends BaseService
 {
-    getList(contact: UserContact, page: number = 1)
+    getList(contact: UserContact, lastDate: string)
     {
-        const params: HttpParams = this.getHttpParamsFromObject({
-            page,
-        });
+        const params: HttpParams = lastDate ? this.getHttpParamsFromObject({
+            lastDate: lastDate
+        }) : this.getHttpParamsFromObject({});
 
-        return this.http.get<{ messages: ContactMessage[] }>('/client/message/' + contact.id + '/list')
+        return this.http.get<{ messages: ContactMessage[] }>('/client/message/' + contact.id + '/list', { params })
             .pipe(
                 map(({ messages }) => {
                     return messages;
