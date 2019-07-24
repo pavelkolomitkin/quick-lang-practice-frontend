@@ -42,6 +42,6 @@ export class UserContactService extends BaseService
 
     readLastMessages(contact: UserContact)
     {
-        return this.http.put('/client/contact/' + contact.id, {});
+        return this.http.put('/client/contact/' + contact.id + '/read', {});
     }
 }

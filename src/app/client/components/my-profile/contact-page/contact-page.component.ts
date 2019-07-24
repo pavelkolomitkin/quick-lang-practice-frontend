@@ -100,6 +100,8 @@ export class ContactPageComponent implements OnInit, OnDestroy {
       this.currentMessagePage = 1;
       await this.loadMessages();
 
+      await this.contactService.readLastMessages(this.addresseeContact).toPromise();
+
       if (this.receivedMessageSubscription)
       {
         this.receivedMessageSubscription.unsubscribe();
