@@ -26,7 +26,6 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
   currentUser: User;
 
-  currentMessagePage: number = 1;
   messages: ContactMessage[] = [];
   earliestMessage: ContactMessage = null;
 
@@ -75,8 +74,8 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         this.addresseeContact = await this.contactService.getContact(this.addressee).toPromise();
       }
       catch (error) {
-        console.log(error);
-        return
+        // console.log(error);
+        // return
       }
 
 
@@ -96,11 +95,8 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         return
       }
 
-      this.currentMessagePage = 1;
       await this.loadMessages();
-
-
-      await this.contactService.readLastMessages(this.addresseeContact).toPromise();
+      await this.readLastContactMessages();
 
 
       const lastMessage = await this.store.pipe(select(state => state.clientContactMessage.lastReceivedMessage), first()).toPromise();
@@ -124,9 +120,14 @@ export class ContactPageComponent implements OnInit, OnDestroy {
           .subscribe(async (message: ContactMessage) => {
 
             this.messages.push(message);
+            if (!this.addresseeContact)
+            {
+              this.addresseeContact = await this.contactService.getContact(message.author).toPromise();
+            }
+
             this.scrollDownList();
 
-            await this.contactService.readLastMessages(this.addresseeContact).toPromise();
+            await this.readLastContactMessages();
 
             if (message.author.id === this.addressee.id)
             {
@@ -199,8 +200,20 @@ export class ContactPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ClientUserClosedChat());
   }
 
+  async readLastContactMessages()
+  {
+    if (this.addresseeContact)
+    {
+      await this.contactService.readLastMessages(this.addresseeContact).toPromise();
+    }
+  }
+
   async loadMessages()
   {
+    if (!this.addresseeContact)
+    {
+      return;
+    }
 
     this.infinityScrollDisabled = true;
 
@@ -227,9 +240,14 @@ export class ContactPageComponent implements OnInit, OnDestroy {
     await this.loadMessages();
   };
 
-  onMessageCreateHandler(message: ContactMessage)
+  async onMessageCreateHandler(message: ContactMessage)
   {
     this.messages.push(message);
+    if (!this.addresseeContact)
+    {
+      this.addresseeContact = await this.contactService.getContact(this.addressee).toPromise();
+    }
+
     this.scrollDownList();
   }
 
