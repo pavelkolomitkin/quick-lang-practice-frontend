@@ -79,6 +79,10 @@ import { ProfileStateObserverComponent } from './components/common/profile-state
       ContactMessageService,
       UsersSocketService,
       MessagesSocketService,
+  ],
+  entryComponents: [
+  ],
+  exports: [
   ]
 })
 export class ClientModule { }

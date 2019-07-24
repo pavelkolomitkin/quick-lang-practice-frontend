@@ -32,3 +32,10 @@ a
     margin-left: 0 !important;
     float: none !important;
 }
+
+.client-new-message-toast
+{
+    padding: 0 !important;;
+    background-color: #fff;
+    box-shadow: 0 0 5px #99999957 !important;
+}

@@ -1,0 +1,54 @@
+<div class="message-container">
+
+  <a class="action-link" [routerLink]="'/client/profile/contacts/' + contactMessage.author.id">
+
+    <div class="row" [style.display]="state.value === 'inactive' ? 'none' : ''">
+      <div class="col-4">
+        <app-user-avatar [user]="contactMessage.author" [size]="'small'"></app-user-avatar>
+      </div>
+
+      <div class="col-8">
+        <h5>{{ contactMessage.author.fullName }}</h5>
+        <div class="text-muted font-italic">
+          {{ contactMessage.text.length > 17 ? (contactMessage.text | slice:0:17) + '...' : contactMessage.text }}
+        </div>
+      </div>
+
+      <!--  <div class="col-9">-->
+      <!--    <div *ngIf="title" [class]="options.titleClass" [attr.aria-label]="title">-->
+      <!--      {{ title }}-->
+      <!--    </div>-->
+      <!--    <div *ngIf="message && options.enableHtml" role="alert" aria-live="polite"-->
+      <!--         [class]="options.messageClass" [innerHTML]="message">-->
+      <!--    </div>-->
+      <!--    <div *ngIf="message && !options.enableHtml" role="alert" aria-live="polite"-->
+      <!--         [class]="options.messageClass" [attr.aria-label]="message">-->
+      <!--      {{ message }}-->
+      <!--    </div>-->
+      <!--  </div>-->
+      <!--  <div class="col-3 text-right" *ngIf="!!contactMessage">-->
+      <!--    <a *ngIf="!options.closeButton" class="btn btn-pink btn-sm" (click)="action($event)">-->
+      <!--    </a>-->
+      <!--    <a *ngIf="options.closeButton" (click)="remove()" class="btn btn-pink btn-sm">-->
+      <!--      close-->
+      <!--    </a>-->
+      <!--  </div>-->
+      <!--  -->
+
+    </div>
+    <div *ngIf="options.progressBar">
+      <div class="toast-progress" [style.width]="width + '%'"></div>
+    </div>
+  </a>
+
+  <div class="controls color-gray">
+    <div (click)="remove(); $event.stopPropagation();">
+      <i class="fa fa-times"></i>
+    </div>
+  </div>
+
+
+
+</div>
+
+
