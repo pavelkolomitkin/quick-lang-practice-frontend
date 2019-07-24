@@ -1,7 +1,12 @@
 <div class="card">
-  <div class="card-body">
-    <div class="addressee-avatar">
-      <app-user-avatar [user]="addressee" [size]="'small'"></app-user-avatar>
+  <div class="card-body" *ngIf="pageReady">
+    <div class="addressee-contact">
+      <app-client-addressee-control
+              [addressee]="addressee"
+              [amIBlocked]="iAmBlocked"
+              [(isBlockedByMe)]="iBlockedAddressee"
+      ></app-client-addressee-control>
+
     </div>
     <h4 class="card-title box-title" *ngIf="!!addressee">{{ addressee.fullName }}</h4>
     <hr/>
@@ -19,26 +24,46 @@
             <li *ngFor="let message of messages"
                 app-client-contact-message
                 [message]="message"
-                [isMine]="message.author.id === (currentUser | async).id"
+                [isMine]="message.author.id === currentUser.id"
             ></li>
 
 
         </ul>
 
       </div>
-      <div class="user-typing-container">
-        <app-client-addressee-typing
-                #typingIndicator
+
+      <ng-container *ngIf="!iBlockedAddressee && !iAmBlocked">
+        <div class="user-typing-container">
+          <app-client-addressee-typing
+                  #typingIndicator
+                  [addressee]="addressee"
+                  [displayDelay]="500"
+                  class="label"
+          ></app-client-addressee-typing>
+        </div>
+        <app-client-message-form
                 [addressee]="addressee"
-                [displayDelay]="500"
-                class="label"
-        ></app-client-addressee-typing>
-      </div>
-      <app-client-message-form
-              [addressee]="addressee"
-              (onMessageCreate)="onMessageCreateHandler($event)"
-              [user]="(currentUser | async)"
-      ></app-client-message-form>
+                (onMessageCreate)="onMessageCreateHandler($event)"
+                [user]="currentUser"
+        ></app-client-message-form>
+      </ng-container>
+
+      <ng-container *ngIf="iBlockedAddressee && !iAmBlocked">
+        <p class="alert alert-danger">You have blocked <b>{{ addressee.fullName }}</b></p>
+      </ng-container>
+
+      <ng-container *ngIf="!iBlockedAddressee && iAmBlocked">
+        <p class="alert alert-danger"><b>{{ addressee.fullName }}</b> has blocked you</p>
+      </ng-container>
+
+      <ng-container *ngIf="iBlockedAddressee && iAmBlocked">
+        <p class="alert alert-danger">You and <b>{{ addressee.fullName }}</b> have blocked each other</p>
+      </ng-container>
+
+
+
+
+
     </div>
   </div>
 </div>

@@ -40,11 +40,6 @@ export class UserContactService extends BaseService
             );
     }
 
-    changeBlockStatus(contact: UserContact, block: boolean)
-    {
-        return this.http.put('/client/contact/' + contact.id + '/' + (block ? 1 : 0), {});
-    }
-
     readLastMessages(contact: UserContact)
     {
         return this.http.put('/client/contact/' + contact.id, {});

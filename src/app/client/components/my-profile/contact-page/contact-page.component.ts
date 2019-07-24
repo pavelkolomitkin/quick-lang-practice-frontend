@@ -9,7 +9,7 @@ import User from '../../../../core/data/model/user.model';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {Observable, Subscription} from 'rxjs';
-import {filter} from 'rxjs/operators';
+import {filter, first} from 'rxjs/operators';
 import {MessagesSocketService} from '../../../sockets/messages-socket.service';
 import {AddresseeTypingComponent} from './addressee-typing/addressee-typing.component';
 
@@ -23,7 +23,7 @@ export class ContactPageComponent implements OnInit, OnDestroy {
   @ViewChild('messageContainer') messageContainer: ElementRef;
   @ViewChild('typingIndicator') typingIndicator: AddresseeTypingComponent;
 
-  currentUser: Observable<User>;
+  currentUser: User;
 
   currentMessagePage: number = 1;
   messages: ContactMessage[] = [];
@@ -36,6 +36,13 @@ export class ContactPageComponent implements OnInit, OnDestroy {
   paramSubscription: Subscription;
   receivedMessageSubscription: Subscription;
   addresseeIsTypingSubscription: Subscription;
+  iAmBlockedSubscription: Subscription;
+  iAmUnblockedSubscription: Subscription;
+
+  iAmBlocked: Boolean;
+  iBlockedAddressee: Boolean;
+
+  pageReady: boolean = false;
 
   constructor(
       private store: Store<State>,
@@ -47,9 +54,10 @@ export class ContactPageComponent implements OnInit, OnDestroy {
       private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.currentUser = this.store.pipe(select(state => state.security.authorizedUser));
+    // @ts-ignore
+    this.currentUser = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
 
     this.paramSubscription = this.route.params.subscribe(async (params) => {
 
@@ -70,6 +78,24 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         return
       }
 
+
+      try {
+        this.iAmBlocked = await this.profileService.amIBlockedBy(this.addressee).toPromise();
+      }
+      catch (error) {
+        console.log(error);
+        return
+      }
+
+      try {
+        this.iBlockedAddressee = await this.profileService.isUserBlockedByMe(this.addressee).toPromise();
+      }
+      catch (error) {
+        console.log(error);
+        return
+      }
+
+      this.pageReady = true;
 
       this.currentMessagePage = 1;
       await this.loadMessages();
@@ -108,6 +134,25 @@ export class ContactPageComponent implements OnInit, OnDestroy {
     });
 
 
+    this.iAmBlockedSubscription = this.store.pipe(
+        select(state => state.clientProfile.lastUserBlockedMe),
+        filter(result => !!result),
+        filter(result => (result.id === this.addressee.id))
+        )
+        .subscribe((addressee: User) => {
+          this.iAmBlocked = true;
+        });
+
+    this.iAmUnblockedSubscription = this.store.pipe(
+        select(state => state.clientProfile.lastUserUnBlockedMe),
+        filter(result => !!result),
+        filter(result => (result.id === this.addressee.id))
+    )
+        .subscribe((addressee: User) => {
+          this.iAmBlocked = false;
+        }
+        );
+
   }
 
   ngOnDestroy() {
@@ -124,6 +169,9 @@ export class ContactPageComponent implements OnInit, OnDestroy {
       this.addresseeIsTypingSubscription.unsubscribe();
       this.addresseeIsTypingSubscription = null;
     }
+
+    this.iAmBlockedSubscription.unsubscribe();
+    this.iAmUnblockedSubscription.unsubscribe();
   }
 
   async loadMessages()

@@ -1,0 +1,34 @@
+<div>
+
+  <div class="pull-right">
+    <app-user-avatar [user]="addressee" [size]="'small'"></app-user-avatar>
+  </div>
+
+  <div class="pull-right buttons">
+
+    <ng-container *ngIf="!isLoading">
+
+      <button class="btn btn-outline-danger btn-sm"
+              type="button" [disabled]="isLoading"
+              *ngIf="!isBlockedByMe"
+              (click)="onBlockClickHandler($event)"
+      >
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+        Block
+      </button>
+
+      <button class="btn btn-outline-secondary btn-sm"
+              type="button" [disabled]="isLoading"
+              *ngIf="isBlockedByMe"
+              (click)="onUnBlockClickHandler($event)"
+      >
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+        UnBlock
+      </button>
+
+    </ng-container>
+
+  </div>
+
+
+</div>

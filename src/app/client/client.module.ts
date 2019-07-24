@@ -17,6 +17,7 @@ import { AddSkillWindowComponent } from './components/common/add-skill-window/ad
 import {StoreModule} from '@ngrx/store';
 import { reducer } from './data/reducer';
 import { reducer as contactMessageReducer } from './data/contact-message.reducer';
+import { reducer as profileReducer } from './data/profile.reducer';
 import { AvatarManagerComponent } from './components/common/avatar-manager/avatar-manager.component';
 import { AboutPageComponent } from './components/profile/about-page/about-page.component';
 import { ContactListPageComponent } from './components/my-profile/contact-list-page/contact-list-page.component'
@@ -32,6 +33,9 @@ import { MessageFormComponent } from './components/my-profile/contact-page/messa
 import {MessagesSocketService} from './sockets/messages-socket.service';
 import { AddresseeTypingComponent } from './components/my-profile/contact-page/addressee-typing/addressee-typing.component';
 import { EditFormComponent } from './components/my-profile/contact-page/contact-message/edit-form/edit-form.component';
+import { AddresseeControlComponent } from './components/my-profile/contact-page/addressee-control/addressee-control.component';
+import {UsersSocketService} from './sockets/users-socket.service';
+import { ProfileStateObserverComponent } from './components/common/profile-state-observer/profile-state-observer.component';
 
 @NgModule({
   declarations: [
@@ -57,12 +61,15 @@ import { EditFormComponent } from './components/my-profile/contact-page/contact-
     MessageFormComponent,
     AddresseeTypingComponent,
     EditFormComponent,
+    AddresseeControlComponent,
+    ProfileStateObserverComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     ClientRoutingModule,
     StoreModule.forFeature('client', reducer),
+    StoreModule.forFeature('clientProfile', profileReducer),
     StoreModule.forFeature('clientContactMessage', contactMessageReducer),
   ],
   providers: [
@@ -70,7 +77,8 @@ import { EditFormComponent } from './components/my-profile/contact-page/contact-
       LanguageSkillService,
       UserContactService,
       ContactMessageService,
-      MessagesSocketService
+      UsersSocketService,
+      MessagesSocketService,
   ]
 })
 export class ClientModule { }
