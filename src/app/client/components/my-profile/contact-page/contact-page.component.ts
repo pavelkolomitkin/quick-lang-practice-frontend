@@ -12,6 +12,7 @@ import {Observable, Subscription} from 'rxjs';
 import {filter, first} from 'rxjs/operators';
 import {MessagesSocketService} from '../../../sockets/messages-socket.service';
 import {AddresseeTypingComponent} from './addressee-typing/addressee-typing.component';
+import {ClientContactMessageReceivedReset, ClientUserClosedChat, ClientUserWatchingChat} from '../../../data/contact-message.actions';
 
 @Component({
   selector: 'app-contact-page',
@@ -95,12 +96,20 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         return
       }
 
-      this.pageReady = true;
-
       this.currentMessagePage = 1;
       await this.loadMessages();
 
+
       await this.contactService.readLastMessages(this.addresseeContact).toPromise();
+
+
+      const lastMessage = await this.store.pipe(select(state => state.clientContactMessage.lastReceivedMessage), first()).toPromise();
+      if (lastMessage && (lastMessage.author.id === this.addressee.id))
+      {
+        this.store.dispatch(new ClientContactMessageReceivedReset());
+      }
+
+
 
       if (this.receivedMessageSubscription)
       {
@@ -112,15 +121,24 @@ export class ContactPageComponent implements OnInit, OnDestroy {
           filter(result => !!result),
           filter(result => result.author.id === this.addressee.id)
           )
-          .subscribe((message: ContactMessage) => {
+          .subscribe(async (message: ContactMessage) => {
 
             this.messages.push(message);
             this.scrollDownList();
 
+            await this.contactService.readLastMessages(this.addresseeContact).toPromise();
+
+            if (message.author.id === this.addressee.id)
+            {
+              this.store.dispatch(new ClientContactMessageReceivedReset());
+            }
           });
 
 
+
       this.scrollDownList();
+
+
 
       if (this.addresseeIsTypingSubscription)
       {
@@ -133,6 +151,9 @@ export class ContactPageComponent implements OnInit, OnDestroy {
             this.typingIndicator.setVisible();
         }
       });
+
+      this.pageReady = true;
+      this.store.dispatch(new ClientUserWatchingChat(this.addressee));
     });
 
 
@@ -174,6 +195,8 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
     this.iAmBlockedSubscription.unsubscribe();
     this.iAmUnblockedSubscription.unsubscribe();
+
+    this.store.dispatch(new ClientUserClosedChat());
   }
 
   async loadMessages()

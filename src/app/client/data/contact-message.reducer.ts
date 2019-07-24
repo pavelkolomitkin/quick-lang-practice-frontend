@@ -1,5 +1,6 @@
 import * as actions from './contact-message.actions';
 import {ContactMessage} from '../../core/data/model/contact-message.model';
+import User from '../../core/data/model/user.model';
 
 export interface State {
 
@@ -9,6 +10,8 @@ export interface State {
 
     lastRemovedMessage: ContactMessage;
 
+    currentContactChatAddressee: User;
+
 }
 
 const initialState: State = {
@@ -17,7 +20,9 @@ const initialState: State = {
 
     lastEditedMessage: null,
 
-    lastRemovedMessage: null
+    lastRemovedMessage: null,
+
+    currentContactChatAddressee: null,
 
 };
 
@@ -32,6 +37,13 @@ export function reducer(state = initialState, action: actions.ContactMessageActi
                 lastReceivedMessage: action.message
             };
 
+        case actions.CLIENT_CONTACT_MESSAGE_RECEIVED_RESET:
+
+            return {
+                ...state,
+                lastReceivedMessage: null
+            };
+
         case actions.CLIENT_CONTACT_MESSAGE_EDITED:
 
             return {
@@ -44,6 +56,20 @@ export function reducer(state = initialState, action: actions.ContactMessageActi
             return {
                 ...state,
                 lastRemovedMessage: action.message
+            };
+
+        case actions.CLIENT_CONTACT_USER_WATCHING_CHAT:
+
+            return {
+                ...state,
+                currentContactChatAddressee: action.addressee
+            };
+
+        case actions.CLIENT_CONTACT_USER_CLOSED_CHAT:
+
+            return {
+                ...state,
+                currentContactChatAddressee: null
             };
 
 
