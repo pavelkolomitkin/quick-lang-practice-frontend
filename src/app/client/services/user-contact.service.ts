@@ -44,4 +44,11 @@ export class UserContactService extends BaseService
     {
         return this.http.put('/client/contact/' + contact.id + '/read', {});
     }
+
+    getNewMessageNumber()
+    {
+        return this.http.get<{ number: number }>('/client/contact/new-message-number').pipe(
+            map(({ number }) => number)
+        );
+    }
 }

@@ -14,7 +14,7 @@ import { LayoutComponent } from './components/common/layout/layout.component';
 import { HeaderComponent } from './components/common/header/header.component';
 import {PracticeLanguageStatusComponent} from './components/common/header/practice-language-status/practice-language-status.component';
 import { AddSkillWindowComponent } from './components/common/add-skill-window/add-skill-window.component';
-import {StoreModule} from '@ngrx/store';
+import {Store, StoreModule} from '@ngrx/store';
 import { reducer } from './data/reducer';
 import { reducer as contactMessageReducer } from './data/contact-message.reducer';
 import { reducer as profileReducer } from './data/profile.reducer';
@@ -36,6 +36,8 @@ import { EditFormComponent } from './components/my-profile/contact-page/contact-
 import { AddresseeControlComponent } from './components/my-profile/contact-page/addressee-control/addressee-control.component';
 import {UsersSocketService} from './sockets/users-socket.service';
 import { ProfileStateObserverComponent } from './components/common/profile-state-observer/profile-state-observer.component';
+import {State} from '../app.state';
+import {ClientNewMessageNumberChanged} from './data/profile.actions';
 
 @NgModule({
   declarations: [
@@ -85,4 +87,22 @@ import { ProfileStateObserverComponent } from './components/common/profile-state
   exports: [
   ]
 })
-export class ClientModule { }
+export class ClientModule {
+
+  constructor(
+      private contactService: UserContactService,
+      private store: Store<State>
+      ) {
+
+    this
+        .contactService
+        .getNewMessageNumber()
+        .toPromise()
+        .then((value: number) => {
+
+          this.store.dispatch(new ClientNewMessageNumberChanged(value));
+    });
+
+  }
+
+}

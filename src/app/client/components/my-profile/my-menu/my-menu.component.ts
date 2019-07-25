@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import User from '../../../../core/data/model/user.model';
+import {select, Store} from '@ngrx/store';
+import {State} from '../../../../app.state';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-client-my-menu',
@@ -8,11 +11,17 @@ import User from '../../../../core/data/model/user.model';
 })
 export class MyMenuComponent implements OnInit {
 
-  @Input() user: User;
+  user: Observable<User>;
+  newMessageNumber: Observable<number>;
 
-  constructor() { }
+  constructor(
+      private store: Store<State>
+  ) { }
 
   ngOnInit() {
+
+    this.user = this.store.pipe(select(state => state.security.authorizedUser));
+    this.newMessageNumber = this.store.pipe(select(state => state.clientProfile.newMessageNumber));
   }
 
 }

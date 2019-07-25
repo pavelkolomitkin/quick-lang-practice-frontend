@@ -27,6 +27,11 @@ export class MessagesSocketService extends BaseSocketService
         return this.getMessageEvent('message_new');
     }
 
+    getNewMessageNumber(): Observable<number>
+    {
+        return this.fromEvent('new_message_number');
+    }
+
     getEditedMessage()
     {
         return this.getMessageEvent('message_edited');

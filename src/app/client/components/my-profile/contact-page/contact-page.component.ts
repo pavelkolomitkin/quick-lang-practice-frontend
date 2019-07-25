@@ -61,6 +61,16 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
     this.paramSubscription = this.route.params.subscribe(async (params) => {
 
+      if (this.currentUser.id === params['id'])
+      {
+        this.router.navigateByUrl('/client/profile/' + params['id']);
+        return;
+      }
+
+      this.pageReady = false;
+      this.messages = [];
+      this.earliestMessage = null;
+
       try {
         this.addressee = await this.profileService.get(params['id']).toPromise();
       }

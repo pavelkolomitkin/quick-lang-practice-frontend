@@ -22,7 +22,7 @@
 
 
         <ng-container *ngIf="user.id === (authorizedUser | async).id">
-          <app-client-my-menu [user]="authorizedUser | async"></app-client-my-menu>
+          <app-client-my-menu></app-client-my-menu>
         </ng-container>
 
         <ng-container *ngIf="user.id !== (authorizedUser | async).id">

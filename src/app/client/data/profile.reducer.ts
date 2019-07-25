@@ -7,13 +7,17 @@ export interface State {
 
     lastUserUnBlockedMe: User;
 
+    newMessageNumber: number;
+
 }
 
 const initialState: State = {
 
     lastUserBlockedMe: null,
 
-    lastUserUnBlockedMe: null
+    lastUserUnBlockedMe: null,
+
+    newMessageNumber: 0,
 
 };
 
@@ -28,8 +32,6 @@ export function reducer(state = initialState, action: actions.ProfileActions): S
                 lastUserBlockedMe: action.user
             };
 
-            break;
-
         case actions.CLIENT_PROFILE_USER_UNBLOCKED_ME:
 
             return {
@@ -37,8 +39,12 @@ export function reducer(state = initialState, action: actions.ProfileActions): S
                 lastUserUnBlockedMe: action.user
             };
 
+        case actions.CLIENT_NEW_MESSAGE_NUMBER_CHANGED:
 
-            break;
+            return {
+                ...state,
+                newMessageNumber: action.value
+            };
 
         default:
 

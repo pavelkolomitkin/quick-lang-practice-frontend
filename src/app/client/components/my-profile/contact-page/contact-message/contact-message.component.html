@@ -50,7 +50,9 @@
 
   <div class="msg-container msg-received">
     <div class="avatar">
-      <app-user-avatar [user]="message.author" [size]="'small'"></app-user-avatar>
+      <a [routerLink]="'/client/profile/' + message.author.id">
+        <app-user-avatar [user]="message.author" [size]="'small'"></app-user-avatar>
+      </a>
       <div class="send-time" app-date-time [value]="message.createdAt"></div>
     </div>
     <div class="msg-box" [ngClass]="isDeleted ? 'removed' : ''">

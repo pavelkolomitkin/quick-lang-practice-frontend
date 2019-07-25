@@ -12,6 +12,7 @@ import User from '../../../core/data/model/user.model';
 export class MyProfileComponent implements OnInit {
 
   user: Observable<User>;
+  newMessageNumber: Observable<number>;
 
 
   constructor(
@@ -21,7 +22,7 @@ export class MyProfileComponent implements OnInit {
   ngOnInit() {
 
     this.user = this.store.pipe(select(state => state.security.authorizedUser));
-
+    this.newMessageNumber = this.store.pipe(select(state => state.clientProfile.newMessageNumber));
   }
 
 }
