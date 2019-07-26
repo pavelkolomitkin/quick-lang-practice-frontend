@@ -1,0 +1,34 @@
+<ul class="list-group list-group-flush" *ngIf="ready">
+
+  <li class="list-group-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="'/client/profile/' + user.id"> <i class="fa fa-user"></i> Profile</a>
+  </li>
+
+  <ng-container *ngIf="!iBlockUser && !userBlockedMe">
+    <li class="list-group-item" [routerLinkActive]="'active'">
+      <a [routerLink]="'/client/profile/contacts/' + user.id"> <i class="fa fa-envelope"></i> Send Message</a>
+    </li>
+  </ng-container>
+
+  <ng-container *ngIf="iBlockUser">
+    <li class="list-group-item">
+      <span class="btn btn-outline-danger" (click)="onUnBlockClickHandler($event)"> <i class="fa fa-tasks"></i> Unblock User</span>
+    </li>
+  </ng-container>
+  <ng-container *ngIf="!iBlockUser">
+    <li class="list-group-item">
+      <span class="btn btn-outline-danger" (click)="onBlockClickHandler($event)" > <i class="fa fa-tasks"></i> Block User</span>
+    </li>
+  </ng-container>
+
+  <ng-container *ngIf="userBlockedMe">
+    <li class="list-group-item">
+       <p class="alert alert-danger">User has blocked you!</p>
+    </li>
+  </ng-container>
+
+
+<!--  <li class="list-group-item">-->
+<!--    <span class="btn btn-outline-danger" > <i class="fa fa-tasks"></i> Block User</span>-->
+<!--  </li>-->
+</ul>

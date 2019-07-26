@@ -1,0 +1,19 @@
+<form #form="ngForm">
+  <div class="form-group">
+    <textarea
+            class="form-control"
+            [(ngModel)]="_message.text"
+            name="messageText"
+            required
+            [placeholder]="'Your message...'"
+    ></textarea>
+    <app-form-field-error-list [errors]="errors" [field]="'text'"></app-form-field-error-list>
+  </div>
+  <div class="form-group">
+    <div class="pull-right">
+      <span class="btn btn-primary mr-1" [ngClass]="form.invalid ? 'disabled' : ''" (click)="onSaveClickHandler($event)">Save</span>
+      <span class="btn btn-default" (click)="onCancelClickHandler($event)">Cancel</span>
+    </div>
+  </div>
+
+</form>

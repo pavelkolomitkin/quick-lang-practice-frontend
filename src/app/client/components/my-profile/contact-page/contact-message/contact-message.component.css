@@ -1,0 +1,81 @@
+.msg-container
+{
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 70px;
+}
+
+.avatar
+{
+    position: absolute;
+    top: 0;
+    float: none !important;
+}
+
+.msg-sent .avatar
+{
+    right: 0;
+}
+
+.msg-box
+{
+    position: relative;
+    float: none !important;
+}
+
+.msg-sent .msg-box
+{
+    margin-right: 80px;
+}
+
+.msg-sent .inner-box
+{
+    position: relative;
+}
+
+.msg-sent .controls {
+
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    padding: 5px;
+    display: none;
+
+}
+
+.msg-sent:hover .controls
+{
+    display: block;
+}
+
+.msg-sent .controls .control {
+    cursor: pointer;
+}
+
+/*beige*/
+.msg-container .removed {}
+
+.msg-container .removed .inner-box {
+    background: beige;
+}
+
+.msg-container.msg-sent .removed .inner-box::after
+{
+    border-left-color: beige;
+}
+
+.msg-container.msg-received .removed .inner-box::after
+{
+    border-right-color: beige;
+}
+
+.msg-container .removed .inner-box .meg
+{
+    font-style: italic;
+}
+
+.meg
+{
+  word-break: break-word;
+}

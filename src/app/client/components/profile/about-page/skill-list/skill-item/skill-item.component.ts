@@ -1,14 +1,14 @@
 import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {LanguageSkill} from '../../../../../core/data/model/language-skill.model';
-import {State} from '../../../../../app.state';
+import {LanguageSkill} from '../../../../../../core/data/model/language-skill.model';
+import {State} from '../../../../../../app.state';
 import {select, Store} from '@ngrx/store';
-import {GlobalNotifyErrorMessage} from '../../../../../core/data/actions';
-import {NotifyMessage} from '../../../../../core/data/model/notify-message.model';
-import {ConfirmActionService} from '../../../../../core/services/confirm-action.service';
-import {ConfirmationActionOption} from '../../../../../core/data/model/confirmation-action-option.model';
-import {LanguageLevel} from '../../../../../core/data/model/language-level.model';
+import {GlobalNotifyErrorMessage} from '../../../../../../core/data/actions';
+import {NotifyMessage} from '../../../../../../core/data/model/notify-message.model';
+import {ConfirmActionService} from '../../../../../../core/services/confirm-action.service';
+import {ConfirmationActionOption} from '../../../../../../core/data/model/confirmation-action-option.model';
+import {LanguageLevel} from '../../../../../../core/data/model/language-level.model';
 import {Observable} from 'rxjs';
-import {LanguageSkillService} from '../../../../services/language-skill.service';
+import {LanguageSkillService} from '../../../../../services/language-skill.service';
 
 @Component({
   selector: '[app-client-skill-item]',

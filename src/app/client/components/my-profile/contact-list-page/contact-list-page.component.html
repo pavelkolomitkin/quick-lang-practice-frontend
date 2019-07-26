@@ -1,0 +1,40 @@
+<section class="card">
+  <div class="card-header">Contacts</div>
+  <div class="card-body" *ngIf="pageReady">
+
+    <div infiniteScroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="50"
+         [infiniteScrollDisabled]="infinityScrollDisabled"
+         (scrolled)="onScroll()"
+    >
+      <ng-container *ngIf="contacts.length > 0; else noMessages;">
+        <table class="table table-borderless table-hover">
+
+          <tbody>
+          <tr
+            *ngFor="let contact of contacts"
+            app-client-contact-item
+            [contact]="contact"
+            class="contact"
+            [ngClass]="contact.newMessages.length > 0 ? 'with-new-messages' : ''"
+            (click)="onContactClickHandler(contact)"
+            (onDelete)="onContactDeleteHandler($event)"
+          >
+          </tr>
+          </tbody>
+
+        </table>
+
+      </ng-container>
+      <ng-template #noMessages>
+        <p class="alert alert-info">You have no contacts yet</p>
+      </ng-template>
+
+
+    </div>
+  </div>
+</section>
+
+
+

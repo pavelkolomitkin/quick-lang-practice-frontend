@@ -1,4 +1,5 @@
 <img
         class="user-avatar rounded-circle"
         [src]="_avatarUrl"
-        alt="User Avatar">
+        [ngStyle]="{ width: '100%' }"
+        title="{{ _user.fullName }}">

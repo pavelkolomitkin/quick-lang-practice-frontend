@@ -8,12 +8,29 @@
   </div>
   <div class="top-right">
     <div class="header-menu">
+
+
+
       <div class="header-left">
-        <div class="dropdown for-message" app-client-practice-language-status [authorizedUser]="user | async"></div>
+
+
+        <div class="dropdown for-message mr-2" app-client-practice-language-status [authorizedUser]="user | async"></div>
+
+        <div class="dropdown for-message ">
+          <button class="btn btn-secondary dropdown-toggle">
+            <a [routerLink]="'/client/profile/contacts'">
+              <i class="fa fa-envelope"></i>
+              <ng-container *ngIf="(newMessages | async) > 0">
+                <span class="count bg-danger">{{ (newMessages | async) }}</span>
+              </ng-container>
+            </a>
+          </button>
+        </div>
+
       </div>
 
       <div class="user-area dropdown float-right">
-        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 50px; height: 50px;">
           <app-user-avatar [user]="(user | async)" [size]="'small'"></app-user-avatar>
         </a>
 

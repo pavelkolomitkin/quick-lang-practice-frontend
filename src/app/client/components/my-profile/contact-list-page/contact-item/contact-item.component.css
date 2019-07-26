@@ -1,0 +1,17 @@
+td
+{
+  position: relative;
+}
+
+.controls
+{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.controls .control
+{
+  padding: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,72 @@
+<div class="card">
+  <div class="card-body" *ngIf="pageReady">
+    <div class="addressee-contact">
+      <app-client-addressee-control
+              [addressee]="addressee"
+              [amIBlocked]="iAmBlocked"
+              [(isBlockedByMe)]="iBlockedAddressee"
+      ></app-client-addressee-control>
+
+    </div>
+    <h4 class="card-title box-title" *ngIf="!!addressee">{{ addressee.fullName }}</h4>
+    <hr/>
+    <div class="card-content">
+      <div #messageContainer class="messenger-box"
+           infiniteScroll
+           [infiniteScrollUpDistance]="20"
+           [infiniteScrollThrottle]="50"
+           [infiniteScrollDisabled]="infinityScrollDisabled"
+           [scrollWindow]="false"
+           (scrolledUp)="onScroll()">
+        <ul
+        >
+
+            <li *ngFor="let message of messages"
+                app-client-contact-message
+                [message]="message"
+                [isMine]="message.author.id === currentUser.id"
+            ></li>
+
+
+          <li *ngIf="messages.length === 0">
+            <p class="alert alert-info">No messages yet</p>
+          </li>
+        </ul>
+
+      </div>
+
+      <ng-container *ngIf="!iBlockedAddressee && !iAmBlocked">
+        <div class="user-typing-container">
+          <app-client-addressee-typing
+                  #typingIndicator
+                  [addressee]="addressee"
+                  [displayDelay]="500"
+                  class="label"
+          ></app-client-addressee-typing>
+        </div>
+        <app-client-message-form
+                [addressee]="addressee"
+                (onMessageCreate)="onMessageCreateHandler($event)"
+                [user]="currentUser"
+        ></app-client-message-form>
+      </ng-container>
+
+      <ng-container *ngIf="iBlockedAddressee && !iAmBlocked">
+        <p class="alert alert-danger">You have blocked <b>{{ addressee.fullName }}</b></p>
+      </ng-container>
+
+      <ng-container *ngIf="!iBlockedAddressee && iAmBlocked">
+        <p class="alert alert-danger"><b>{{ addressee.fullName }}</b> has blocked you</p>
+      </ng-container>
+
+      <ng-container *ngIf="iBlockedAddressee && iAmBlocked">
+        <p class="alert alert-danger">You and <b>{{ addressee.fullName }}</b> have blocked each other</p>
+      </ng-container>
+
+
+
+
+
+    </div>
+  </div>
+</div>

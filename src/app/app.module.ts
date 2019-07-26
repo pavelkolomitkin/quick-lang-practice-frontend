@@ -29,8 +29,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
           logOnly: !environment.production
         }
     ),
-    ModalModule.forRoot(),
-    TooltipModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

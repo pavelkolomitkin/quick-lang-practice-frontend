@@ -1,11 +1,11 @@
 import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import User from '../../../../core/data/model/user.model';
-import {ProfileService} from '../../../services/profile.service';
+import User from '../../../../../core/data/model/user.model';
+import {ProfileService} from '../../../../services/profile.service';
 import {NgForm} from '@angular/forms';
-import {State} from '../../../../app.state';
+import {State} from '../../../../../app.state';
 import {Store} from '@ngrx/store';
-import {GlobalNotifyErrorMessage} from '../../../../core/data/actions';
-import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
+import {GlobalNotifyErrorMessage} from '../../../../../core/data/actions';
+import {NotifyMessage} from '../../../../../core/data/model/notify-message.model';
 
 @Component({
   selector: 'app-client-about',

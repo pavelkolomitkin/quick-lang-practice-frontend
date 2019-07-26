@@ -1,0 +1,30 @@
+.action-link
+{
+    display: block !important;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.message-container
+{
+    position: relative;
+
+}
+
+.message-container .controls
+{
+    position: absolute;
+    z-index: 2;
+    top: 5px;
+    right: 5px;
+}
+
+.message-container .controls
+{
+    margin-right: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+

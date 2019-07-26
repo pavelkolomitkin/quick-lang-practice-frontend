@@ -37,6 +37,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import {LanguageService} from './services/language.service';
 import {LanguageLevelService} from './services/language-level.service';
 import {ConfirmActionService} from './services/confirm-action.service';
+import {ClientNewMessageToastComponent} from '../client/components/common/client-new-message-toast/client-new-message-toast.component';
+import {TooltipModule} from 'ngx-bootstrap';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -59,7 +61,7 @@ const httpInterceptorProviders = [
     ConfirmationWindowComponent,
     MessageNotifierComponent,
     ConfirmationComponent,
-
+    ClientNewMessageToastComponent,
   ],
   imports: [
     CommonModule,
@@ -69,13 +71,14 @@ const httpInterceptorProviders = [
     SharedModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
+    TooltipModule.forRoot(),
     StoreModule.forRoot({
       core: coreReducer,
       security: securityReducer,
     }),
     EffectsModule.forRoot([
         AuthEffects
-    ])
+    ]),
   ],
 
   providers: [
@@ -114,7 +117,10 @@ const httpInterceptorProviders = [
     MainFooterComponent,
     MainMenuComponent,
     ConfirmationComponent,
-    MessageNotifierComponent
+    MessageNotifierComponent,
+  ],
+  entryComponents: [
+    ClientNewMessageToastComponent
   ]
 })
 export class CoreModule { }

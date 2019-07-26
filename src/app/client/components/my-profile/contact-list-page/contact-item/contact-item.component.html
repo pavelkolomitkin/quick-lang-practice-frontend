@@ -1,0 +1,54 @@
+<td style="width: 60px">
+  <div style="width: 60px; height: 60px;">
+    <app-user-avatar [user]="contact.addressee" [size]="'small'"></app-user-avatar>
+  </div>
+</td>
+<td>{{ contact.addressee.fullName }}</td>
+<td [ngStyle]="{width: '50%'}">
+  <span>
+    <app-client-addressee-typing
+        #typingComponent
+        [addressee]="contact.addressee"
+        [displayDelay]="500"
+        [customMessage]="'typing...'"
+        [customClass]="'text-info'"
+    ></app-client-addressee-typing>
+  </span>
+
+  <ng-container *ngIf="!typingComponent.isVisible">
+
+    <ng-container *ngIf="contact.lastMessage; else deletedMessage;">
+      <div *ngIf="authorizedUser && (authorizedUser.id == contact.lastMessage.author.toString())"
+        style="width: 30px; height: 30px; display: inline-block; margin-right: 5px;"
+      >
+        <app-user-avatar
+          [user]="authorizedUser"
+          [size]="'small'"
+        ></app-user-avatar>
+      </div>
+
+      <span style="font-size: 14px; word-break: break-word;">
+        {{ contact.lastMessage.text.length > 100 ?
+          (contact.lastMessage.text | slice:0:100) + '...' : contact.lastMessage.text }}</span>
+    </ng-container>
+
+    <ng-template #deletedMessage>
+      <span class="text-muted font-italic">Message has been deleted</span>
+    </ng-template>
+  </ng-container>
+</td>
+<td>
+  <ng-container *ngIf="contact.newMessages.length > 0">
+    <span class="badge badge-success">{{ contact.newMessages.length }}</span>
+  </ng-container>
+</td>
+<td>
+  <ng-container *ngIf="contact.lastMessage">
+    <small class="text-muted font-italic" app-date-time [value]="contact.lastMessage.createdAt"></small>
+  </ng-container>
+  <div class="controls text-muted">
+    <span class="control" (click)="onRemoveClickHandler($event);" title="Remove the contact">
+      <i class="fa fa-times"></i>
+    </span>
+  </div>
+</td>

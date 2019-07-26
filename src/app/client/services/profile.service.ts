@@ -6,6 +6,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FileUploadService} from '../../core/services/file-upload.service';
 import {UploadItem} from '../../core/data/model/upload-item.model';
+import {add} from 'ngx-bootstrap/chronos';
 
 @Injectable()
 export class ProfileService extends BaseService
@@ -77,5 +78,33 @@ export class ProfileService extends BaseService
     removeAvatar()
     {
         return this.http.put<User>('/client/profile/avatar/remove', {});
+    }
+
+    blockProfile(addressee: User)
+    {
+        return this.http.post('/client/profile/' + addressee.id + '/block', {});
+    }
+
+    unBlockProfile(addressee: User)
+    {
+        return this.http.post('/client/profile/' + addressee.id + '/unblock', {});
+    }
+
+    amIBlockedBy(user: User)
+    {
+        return this.http.get<{ result: boolean }>('/client/profile/am-i-blocked-by/' + user.id).pipe(
+            map(({ result }) => {
+                return result;
+            })
+        );
+    }
+
+    isUserBlockedByMe(user: User)
+    {
+        return this.http.get<{ result: boolean }>('/client/profile/is-user-blocked/' + user.id).pipe(
+            map(({ result }) => {
+                return result;
+            })
+        );
     }
 }

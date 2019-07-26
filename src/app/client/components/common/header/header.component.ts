@@ -13,12 +13,14 @@ import {UserLogout} from '../../../../security/data/actions';
 export class HeaderComponent implements OnInit {
 
   user: Observable<User>;
+  newMessages: Observable<number>;
 
   constructor(private store: Store<State>) { }
 
   ngOnInit() {
 
     this.user = this.store.pipe(select(state => state.security.authorizedUser));
+    this.newMessages = this.store.pipe(select(state => state.clientProfile.newMessageNumber));
 
   }
 

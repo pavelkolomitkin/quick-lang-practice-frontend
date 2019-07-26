@@ -1,0 +1,17 @@
+<div class="send-mgs">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <div class="yourmsg">
+      <input
+              class="form-control"
+              type="text"
+              required
+              ngModel
+              name="text"
+              placeholder="Message..."
+              (ngModelChange)="onTextChangeHandler($event)"
+              autocomplete="off"
+      >
+      <app-form-field-error-list [field]="'text'" [errors]="errors"></app-form-field-error-list>
+    </div>
+  </form>
+</div>

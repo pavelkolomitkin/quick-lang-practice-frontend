@@ -1,0 +1,34 @@
+<div class="row" *ngIf="!!(user | async)">
+
+  <div class="col-md-4">
+
+    <section class="card">
+      <div class="card-header user-header alt bg-info">
+        <div class="media">
+          <span style="width: 85px; height: 85px;">
+
+            <app-user-avatar
+                    [user]="user | async"
+                    [size]="'medium'"
+            ></app-user-avatar>
+
+          </span>
+          <div class="media-body">
+            <h2 class="text-light display-6">{{ (user | async).fullName }}</h2>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <app-client-my-menu></app-client-my-menu>
+    </section>
+
+  </div>
+
+
+  <div class="col-md-8">
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+</div>
