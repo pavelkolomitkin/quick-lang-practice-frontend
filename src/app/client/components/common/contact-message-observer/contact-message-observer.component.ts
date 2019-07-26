@@ -10,6 +10,13 @@ import {first} from 'rxjs/operators';
 import {ClientNewMessageToastComponent} from '../client-new-message-toast/client-new-message-toast.component';
 import {ClientNewMessageNumberChanged} from '../../../data/profile.actions';
 import User from '../../../../core/data/model/user.model';
+import {UserContact} from '../../../../core/data/model/user-contact.model';
+import {
+  ClientUserContactCreated,
+  ClientUserContactMessageEdited,
+  ClientUserContactMessageRemoved,
+  ClientUserContactNewMessage
+} from '../../../data/user-contact.actions';
 
 @Component({
   selector: 'app-client-message-receiver',
@@ -23,6 +30,11 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
   messageEditedSubscription: Subscription;
   messageRemovedSubscription: Subscription;
   openedChatSubscription: Subscription;
+
+  contactCreatedSubscription: Subscription;
+  contactNewMessageSubscription: Subscription;
+  contactEditedMessageSubscription: Subscription;
+  contactDeletedMessageSubscription: Subscription;
 
   newMessageNumberTimeoutId: number = null;
 
@@ -44,6 +56,11 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
       this.newMessageNumberSubscription = this.socket.getNewMessageNumber().subscribe(this.onNewMessageNumberHandler);
       this.messageEditedSubscription = this.socket.getEditedMessage().subscribe(this.onMessageEditHandler);
       this.messageRemovedSubscription = this.socket.getRemovedMessage().subscribe(this.onMessageRemoved);
+
+      this.contactCreatedSubscription = this.socket.getCreatedContact().subscribe(this.onNewContactCreatedHandler);
+      this.contactNewMessageSubscription = this.socket.getContactNewMessage().subscribe(this.onContactNewMessageHandler);
+      this.contactEditedMessageSubscription = this.socket.getContactWithEditedMessage().subscribe(this.onContactEditMessageHandler);
+      this.contactDeletedMessageSubscription = this.socket.getContactWithDeletedMessage().subscribe(this.onContactDeleteMessageHandler);
   }
 
   onNewMessageReceiveHandler = async (message: ContactMessage) =>
@@ -98,6 +115,25 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ClientContactMessageRemoved(message));
   };
 
+
+  onNewContactCreatedHandler = (contact: UserContact) =>
+  {
+    this.store.dispatch(new ClientUserContactCreated(contact));
+  };
+
+  onContactNewMessageHandler = (contact: UserContact) => {
+    this.store.dispatch(new ClientUserContactNewMessage(contact))
+  };
+
+  onContactEditMessageHandler = (contact: UserContact) => {
+    this.store.dispatch(new ClientUserContactMessageEdited(contact));
+  };
+
+  onContactDeleteMessageHandler = (contact: UserContact) => {
+    this.store.dispatch(new ClientUserContactMessageRemoved(contact));
+  };
+
+
   ngOnDestroy(): void {
 
     this.openedChatSubscription.unsubscribe();
@@ -105,6 +141,11 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
     this.newMessageNumberSubscription.unsubscribe();
     this.messageEditedSubscription.unsubscribe();
     this.messageRemovedSubscription.unsubscribe();
+
+    this.contactCreatedSubscription.unsubscribe();
+    this.contactNewMessageSubscription.unsubscribe();
+    this.contactEditedMessageSubscription.unsubscribe();
+    this.contactDeletedMessageSubscription.unsubscribe();
 
   }
 

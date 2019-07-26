@@ -8,10 +8,10 @@ import User from '../../core/data/model/user.model';
 @Injectable()
 export class UserContactService extends BaseService
 {
-    getList(page: Number = 1)
+    getList(lastDate: string)
     {
         const params: HttpParams = this.getHttpParamsFromObject({
-            page
+          lastDate
         });
 
         return this.http.get<{ contacts: UserContact[] }>('/client/contact/list', { params })

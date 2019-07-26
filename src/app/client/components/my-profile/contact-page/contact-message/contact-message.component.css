@@ -74,3 +74,8 @@
 {
     font-style: italic;
 }
+
+.meg
+{
+  word-break: break-word;
+}

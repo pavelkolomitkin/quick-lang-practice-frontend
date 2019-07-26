@@ -13,6 +13,8 @@ export class UserContact
 
     lastMessage?: ContactMessage;
 
+    lastMessageAddedAt: string;
+
     createdAt: string;
 
     updatedAt: string;

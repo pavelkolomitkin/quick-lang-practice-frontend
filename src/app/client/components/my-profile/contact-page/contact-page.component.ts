@@ -11,7 +11,7 @@ import {State} from '../../../../app.state';
 import {Observable, Subscription} from 'rxjs';
 import {filter, first} from 'rxjs/operators';
 import {MessagesSocketService} from '../../../sockets/messages-socket.service';
-import {AddresseeTypingComponent} from './addressee-typing/addressee-typing.component';
+import {AddresseeTypingComponent} from '../../common/addressee-typing/addressee-typing.component';
 import {ClientContactMessageReceivedReset, ClientUserClosedChat, ClientUserWatchingChat} from '../../../data/contact-message.actions';
 
 @Component({

@@ -1,0 +1,9 @@
+.contact
+{
+  cursor: pointer;
+}
+
+.contact.with-new-messages
+{
+  background: rgba(0, 185, 254, 0.14);
+}

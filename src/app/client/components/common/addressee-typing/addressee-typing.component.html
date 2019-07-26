@@ -1,0 +1,8 @@
+<span class="small" [ngClass]="customClass ? customClass : 'text-muted'" *ngIf="isVisible">
+  <ng-container *ngIf="customMessage">
+    {{ customMessage }}
+  </ng-container>
+  <ng-container *ngIf="!customMessage">
+    {{ addressee.fullName }} is typing...
+  </ng-container>
+</span>

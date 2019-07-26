@@ -18,6 +18,7 @@ import {Store, StoreModule} from '@ngrx/store';
 import { reducer } from './data/reducer';
 import { reducer as contactMessageReducer } from './data/contact-message.reducer';
 import { reducer as profileReducer } from './data/profile.reducer';
+import { reducer as userContactReducer } from './data/user-contact.reducer';
 import { AvatarManagerComponent } from './components/common/avatar-manager/avatar-manager.component';
 import { AboutPageComponent } from './components/profile/about-page/about-page.component';
 import { ContactListPageComponent } from './components/my-profile/contact-list-page/contact-list-page.component'
@@ -31,7 +32,7 @@ import { ContactPageComponent } from './components/my-profile/contact-page/conta
 import { ContactMessageComponent } from './components/my-profile/contact-page/contact-message/contact-message.component';
 import { MessageFormComponent } from './components/my-profile/contact-page/message-form/message-form.component';
 import {MessagesSocketService} from './sockets/messages-socket.service';
-import { AddresseeTypingComponent } from './components/my-profile/contact-page/addressee-typing/addressee-typing.component';
+import { AddresseeTypingComponent } from './components/common/addressee-typing/addressee-typing.component';
 import { EditFormComponent } from './components/my-profile/contact-page/contact-message/edit-form/edit-form.component';
 import { AddresseeControlComponent } from './components/my-profile/contact-page/addressee-control/addressee-control.component';
 import {UsersSocketService} from './sockets/users-socket.service';
@@ -73,6 +74,7 @@ import {ClientNewMessageNumberChanged} from './data/profile.actions';
     StoreModule.forFeature('client', reducer),
     StoreModule.forFeature('clientProfile', profileReducer),
     StoreModule.forFeature('clientContactMessage', contactMessageReducer),
+    StoreModule.forFeature('clientUserContact', userContactReducer),
   ],
   providers: [
       ProfileService,
