@@ -39,6 +39,7 @@ import {UsersSocketService} from './sockets/users-socket.service';
 import { ProfileStateObserverComponent } from './components/common/profile-state-observer/profile-state-observer.component';
 import {State} from '../app.state';
 import {ClientNewMessageNumberChanged} from './data/profile.actions';
+import { UserMenuComponent } from './components/profile/user-menu/user-menu.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import {ClientNewMessageNumberChanged} from './data/profile.actions';
     EditFormComponent,
     AddresseeControlComponent,
     ProfileStateObserverComponent,
+    UserMenuComponent,
   ],
   imports: [
     CommonModule,

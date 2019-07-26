@@ -26,19 +26,7 @@
         </ng-container>
 
         <ng-container *ngIf="user.id !== (authorizedUser | async).id">
-          <ul class="list-group list-group-flush">
-
-            <li class="list-group-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-              <a [routerLink]="'/client/profile/' + user.id"> <i class="fa fa-user"></i> Profile</a>
-            </li>
-
-            <li class="list-group-item" [routerLinkActive]="'active'">
-              <a [routerLink]="'/client/profile/contacts/' + user.id"> <i class="fa fa-envelope"></i> Send Message</a>
-            </li>
-            <li class="list-group-item">
-              <a href="#"> <i class="fa fa-tasks"></i> Block the User</a>
-            </li>
-          </ul>
+          <app-client-user-menu [user]="user"></app-client-user-menu>
         </ng-container>
 
     </section>

@@ -39,3 +39,8 @@ a
     background-color: #fff;
     box-shadow: 0 0 5px #99999957 !important;
 }
+
+.list-group-item.active a
+{
+  color: #fff !important;
+}
