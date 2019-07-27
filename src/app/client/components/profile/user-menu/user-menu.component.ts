@@ -1,10 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import User from '../../../../core/data/model/user.model';
 import {ProfileService} from '../../../services/profile.service';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {State} from '../../../../app.state';
 import {GlobalNotifyErrorMessage} from '../../../../core/data/actions';
 import {NotifyMessage} from '../../../../core/data/model/notify-message.model';
+import {first} from 'rxjs/operators';
+import {LanguageSkill} from '../../../../core/data/model/language-skill.model';
+import {ClientAddSkillWindowChangeState} from '../../../data/actions';
+import {PracticeSessionService} from '../../../services/practice-session.service';
 
 @Component({
   selector: 'app-client-user-menu',
@@ -15,6 +19,8 @@ export class UserMenuComponent implements OnInit {
 
   @Input() user: User;
 
+  authorizedUser: User;
+
   iBlockUser: boolean = false;
   userBlockedMe: boolean = false;
 
@@ -22,12 +28,15 @@ export class UserMenuComponent implements OnInit {
 
   constructor(
     private service: ProfileService,
+    private practiceSessionService: PracticeSessionService,
     private store: Store<State>
   ) { }
 
   async ngOnInit() {
 
     this.ready = false;
+
+     this.authorizedUser = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
 
      const iBlockUserGet = this.service.isUserBlockedByMe(this.user).toPromise();
      const userBlockedMeGet = this.service.amIBlockedBy(this.user).toPromise();
@@ -59,5 +68,20 @@ export class UserMenuComponent implements OnInit {
     catch (error) {
       this.store.dispatch(new GlobalNotifyErrorMessage(new NotifyMessage('Error: Can not to unblock the user. Try later!')));
     }
+  }
+
+  async onSelectPracticeSkillHandler(skill: LanguageSkill)
+  {
+    try {
+      await this.practiceSessionService.init(this.user, skill).toPromise();
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
+  onCreateSkillClickHandler(event)
+  {
+    this.store.dispatch(new ClientAddSkillWindowChangeState(true));
   }
 }

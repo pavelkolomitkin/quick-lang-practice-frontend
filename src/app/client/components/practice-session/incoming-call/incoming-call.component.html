@@ -1,0 +1,20 @@
+<ng-container *ngIf="session">
+
+  <div class="call-container">
+    <div class="card">
+      <div class="card-body">
+        <div class="stat-widget-one">
+          <div class="stat-icon dib" style="width: 60px; height: 60px;">
+            <app-user-avatar [user]="session.caller" [size]="'small'"></app-user-avatar>
+<!--            <i class="ti-user text-primary border-primary"></i>-->
+          </div>
+          <div class="stat-content dib">
+            <div class="stat-text"><b>{{ session.caller.fullName }}</b> suggests to practice</div>
+            <div class="stat-digit">{{ session.skill.language.name }}<small class="text-muted">({{ session.skill.level.title }})</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>

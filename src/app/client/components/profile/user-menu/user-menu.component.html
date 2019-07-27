@@ -8,16 +8,53 @@
     <li class="list-group-item" [routerLinkActive]="'active'">
       <a [routerLink]="'/client/profile/contacts/' + user.id"> <i class="fa fa-envelope"></i> Send Message</a>
     </li>
+
+    <li class="list-group-item">
+      <div class="btn-group">
+        <button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Practice Language
+        </button>
+        <div class="dropdown-menu">
+          <ng-container *ngIf="authorizedUser.skills.length > 0">
+
+            <div
+              class="btn dropdown-item"
+              *ngFor="let skill of authorizedUser.skills"
+              (click)="onSelectPracticeSkillHandler(skill)"
+            >
+              <h5>{{ skill.language.name }}</h5>
+              <small class="text-muted">{{ skill.level.title }}</small>
+            </div>
+
+          </ng-container>
+          <ng-container *ngIf="authorizedUser.skills.length === 0">
+
+            <div class="dropdown-item" (click)="onCreateSkillClickHandler($event)">
+              <span class="btn text-success">Create one to suggest to practice!</span>
+            </div>
+
+          </ng-container>
+
+
+<!--          <a class="dropdown-item" href="#">Action</a>-->
+<!--          <a class="dropdown-item" href="#">Another action</a>-->
+<!--          <a class="dropdown-item" href="#">Something else here</a>-->
+<!--          <div class="dropdown-divider"></div>-->
+<!--          <a class="dropdown-item" href="#">Separated link</a>-->
+        </div>
+      </div>
+    </li>
+
   </ng-container>
 
   <ng-container *ngIf="iBlockUser">
     <li class="list-group-item">
-      <span class="btn btn-outline-danger" (click)="onUnBlockClickHandler($event)"> <i class="fa fa-tasks"></i> Unblock User</span>
+      <span class="btn btn-outline-danger" (click)="onUnBlockClickHandler($event)"> <i class="fa fa-unlock"></i> Unblock User</span>
     </li>
   </ng-container>
   <ng-container *ngIf="!iBlockUser">
     <li class="list-group-item">
-      <span class="btn btn-outline-danger" (click)="onBlockClickHandler($event)" > <i class="fa fa-tasks"></i> Block User</span>
+      <span class="btn btn-outline-danger" (click)="onBlockClickHandler($event)" > <i class="fa fa-lock"></i> Block User</span>
     </li>
   </ng-container>
 

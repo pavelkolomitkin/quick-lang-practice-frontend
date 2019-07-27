@@ -19,6 +19,7 @@ import { reducer } from './data/reducer';
 import { reducer as contactMessageReducer } from './data/contact-message.reducer';
 import { reducer as profileReducer } from './data/profile.reducer';
 import { reducer as userContactReducer } from './data/user-contact.reducer';
+import { reducer as practiceSessionReducer } from './data/practice-session.reducer';
 import { AvatarManagerComponent } from './components/common/avatar-manager/avatar-manager.component';
 import { AboutPageComponent } from './components/profile/about-page/about-page.component';
 import { ContactListPageComponent } from './components/my-profile/contact-list-page/contact-list-page.component'
@@ -40,6 +41,13 @@ import { ProfileStateObserverComponent } from './components/common/profile-state
 import {State} from '../app.state';
 import {ClientNewMessageNumberChanged} from './data/profile.actions';
 import { UserMenuComponent } from './components/profile/user-menu/user-menu.component';
+import {PracticeSessionService} from './services/practice-session.service';
+import {PracticeSessionsSocketService} from './sockets/practice-sessions-socket.service';
+import { PracticeSessionObserverComponent } from './components/common/practice-session-observer/practice-session-observer.component';
+import { PracticeSessionViewManagerComponent } from './components/practice-session/practice-session-view-manager/practice-session-view-manager.component';
+import { IncomingCallComponent } from './components/practice-session/incoming-call/incoming-call.component';
+import { PracticeSessionWindowComponent } from './components/practice-session/practice-session-window/practice-session-window.component';
+import { PracticeSessionEndComponent } from './components/practice-session/practice-session-end/practice-session-end.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +76,11 @@ import { UserMenuComponent } from './components/profile/user-menu/user-menu.comp
     AddresseeControlComponent,
     ProfileStateObserverComponent,
     UserMenuComponent,
+    PracticeSessionObserverComponent,
+    PracticeSessionViewManagerComponent,
+    IncomingCallComponent,
+    PracticeSessionWindowComponent,
+    PracticeSessionEndComponent,
   ],
   imports: [
     CommonModule,
@@ -77,14 +90,17 @@ import { UserMenuComponent } from './components/profile/user-menu/user-menu.comp
     StoreModule.forFeature('clientProfile', profileReducer),
     StoreModule.forFeature('clientContactMessage', contactMessageReducer),
     StoreModule.forFeature('clientUserContact', userContactReducer),
+    StoreModule.forFeature('clientPracticeSession', practiceSessionReducer),
   ],
   providers: [
       ProfileService,
       LanguageSkillService,
       UserContactService,
       ContactMessageService,
+      PracticeSessionService,
       UsersSocketService,
       MessagesSocketService,
+      PracticeSessionsSocketService
   ],
   entryComponents: [
   ],
