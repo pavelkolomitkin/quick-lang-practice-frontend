@@ -1,1 +1,3 @@
-<app-client-incoming-call [session]="incomingCall"></app-client-incoming-call>
+<ng-container *ngIf="!!preInitialized">
+  <app-client-practice-session-window [session]="preInitialized"></app-client-practice-session-window>
+</ng-container>

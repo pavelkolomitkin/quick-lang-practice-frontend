@@ -3,6 +3,7 @@ import {PracticeSession} from '../../core/data/model/practice-session.model';
 
 export interface State {
 
+  preInitialized: PracticeSession;
   lastInitialized: PracticeSession;
   lastEnded: PracticeSession;
   lastInProcess: PracticeSession;
@@ -12,6 +13,7 @@ export interface State {
 
 const initialState: State = {
 
+  preInitialized: null,
   lastInitialized: null,
   lastEnded: null,
   lastInProcess: null,
@@ -22,6 +24,13 @@ const initialState: State = {
 export function reducer(state = initialState, action: actions.PracticeSessionActions): State {
 
   switch (action.type) {
+
+    case actions.CLIENT_PRACTICE_SESSION_PRE_INITIALIZE:
+
+      return {
+        ...state,
+        preInitialized: action.session
+      };
 
     case actions.CLIENT_PRACTICE_SESSION_INITIALIZED:
 

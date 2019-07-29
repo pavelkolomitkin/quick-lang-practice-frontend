@@ -5,6 +5,10 @@ import User from '../../../../core/data/model/user.model';
 import {filter, first} from 'rxjs/operators';
 import {PracticeSession} from '../../../../core/data/model/practice-session.model';
 import {Subscription} from 'rxjs';
+import {ActiveToast, ToastrService} from 'ngx-toastr';
+import {IncomingCallComponent} from '../incoming-call/incoming-call.component';
+import {PracticeSessionService} from '../../../services/practice-session.service';
+import {ClientPracticeSessionPreInitialize} from '../../../data/practice-session.actions';
 
 @Component({
   selector: 'app-client-practice-session-view-manager',
@@ -15,34 +19,38 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
 
   authorizedUser: User;
 
-  incomingCall: PracticeSession;
-  initializedSession: PracticeSession;
+  preInitialized: PracticeSession;
+  incomingCallToasts: ActiveToast<any>[] = [];
 
+  preInitializeSessionSubscription: Subscription;
   initializedSessionSubscription: Subscription;
 
 
   constructor(
-    private store: Store<State>
+    private store: Store<State>,
+    private toastr: ToastrService,
+    private sessionService: PracticeSessionService,
   ) { }
 
   async ngOnInit() {
 
     this.authorizedUser = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
 
+    this.preInitializeSessionSubscription = this.store.pipe(
+      select(state => state.clientPracticeSession.preInitialized),
+      filter(result => !!result)
+    ).subscribe((session: PracticeSession) => {
+      this.preInitialized = session;
+    });
+
     this.initializedSessionSubscription = this.store.pipe(
-      select(state => state.clientPracticeSession.lastInitialized)
+      select(state => state.clientPracticeSession.lastInitialized),
+      filter(result => !!result)
     ).subscribe((session: PracticeSession) => {
 
-      if (session)
+      if (this.authorizedUser.id === session.callee.id)
       {
-        if (this.authorizedUser.id === session.callee.id)
-        {
-          this.incomingCall = session;
-        }
-        else if (this.authorizedUser.id === session.caller.id)
-        {
-          this.initializedSession = session;
-        }
+        this.showIncomingCall(session);
       }
     });
 
@@ -50,8 +58,49 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
+    this.preInitializeSessionSubscription.unsubscribe();
     this.initializedSessionSubscription.unsubscribe();
 
+  }
+
+  showIncomingCall(session: PracticeSession)
+  {
+    const toast = this.toastr.show('', '', {
+      toastComponent: IncomingCallComponent,
+      positionClass: 'toast-bottom-left',
+      disableTimeOut: true,
+      toastClass: 'ngx-toastr ng-trigger ng-trigger-flyInOut client-toast',
+      tapToDismiss: false
+    });
+
+    // @ts-ignore
+    toast.toastRef.componentInstance.session = session;
+
+    toast.toastRef.componentInstance.acceptEvent.subscribe(async (session: PracticeSession) => {
+
+      this.store.dispatch(new ClientPracticeSessionPreInitialize(session));
+      this.hideIncomingCall(session);
+
+    });
+    toast.toastRef.componentInstance.rejectEvent.subscribe( async (session: PracticeSession) => {
+
+      this.hideIncomingCall(session);
+
+    });
+
+    this.incomingCallToasts.push(toast);
+  }
+
+  hideIncomingCall(session: PracticeSession)
+  {
+    const index = this.incomingCallToasts.findIndex((item) => item.toastRef.componentInstance.session.id === session.id);
+    if (index !== -1)
+    {
+      const toast = this.incomingCallToasts[index];
+      toast.toastRef.close();
+
+      this.incomingCallToasts.splice(index, 1);
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="message-container">
+<div class="message-container bg-dark">
 
   <a class="action-link" [routerLink]="'/client/profile/contacts/' + contactMessage.author.id">
 
@@ -9,31 +9,11 @@
 
       <div class="col-8">
         <h5>{{ contactMessage.author.fullName }}</h5>
-        <div class="text-muted font-italic">
+        <div class="font-italic">
           {{ contactMessage.text.length > 17 ? (contactMessage.text | slice:0:17) + '...' : contactMessage.text }}
         </div>
       </div>
 
-      <!--  <div class="col-9">-->
-      <!--    <div *ngIf="title" [class]="options.titleClass" [attr.aria-label]="title">-->
-      <!--      {{ title }}-->
-      <!--    </div>-->
-      <!--    <div *ngIf="message && options.enableHtml" role="alert" aria-live="polite"-->
-      <!--         [class]="options.messageClass" [innerHTML]="message">-->
-      <!--    </div>-->
-      <!--    <div *ngIf="message && !options.enableHtml" role="alert" aria-live="polite"-->
-      <!--         [class]="options.messageClass" [attr.aria-label]="message">-->
-      <!--      {{ message }}-->
-      <!--    </div>-->
-      <!--  </div>-->
-      <!--  <div class="col-3 text-right" *ngIf="!!contactMessage">-->
-      <!--    <a *ngIf="!options.closeButton" class="btn btn-pink btn-sm" (click)="action($event)">-->
-      <!--    </a>-->
-      <!--    <a *ngIf="options.closeButton" (click)="remove()" class="btn btn-pink btn-sm">-->
-      <!--      close-->
-      <!--    </a>-->
-      <!--  </div>-->
-      <!--  -->
 
     </div>
     <div *ngIf="options.progressBar">

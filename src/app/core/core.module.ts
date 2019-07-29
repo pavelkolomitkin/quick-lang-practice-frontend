@@ -39,6 +39,7 @@ import {LanguageLevelService} from './services/language-level.service';
 import {ConfirmActionService} from './services/confirm-action.service';
 import {ClientNewMessageToastComponent} from '../client/components/common/client-new-message-toast/client-new-message-toast.component';
 import {TooltipModule} from 'ngx-bootstrap';
+import {IncomingCallComponent} from '../client/components/practice-session/incoming-call/incoming-call.component';
 
 const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: BaseApiUrlInterceptor, multi: true },
@@ -62,6 +63,7 @@ const httpInterceptorProviders = [
     MessageNotifierComponent,
     ConfirmationComponent,
     ClientNewMessageToastComponent,
+    IncomingCallComponent
   ],
   imports: [
     CommonModule,
@@ -120,7 +122,8 @@ const httpInterceptorProviders = [
     MessageNotifierComponent,
   ],
   entryComponents: [
-    ClientNewMessageToastComponent
+    ClientNewMessageToastComponent,
+    IncomingCallComponent
   ]
 })
 export class CoreModule { }

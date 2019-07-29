@@ -8,9 +8,11 @@ import {LanguageSkill} from '../../core/data/model/language-skill.model';
 @Injectable()
 export class PracticeSessionService extends BaseService
 {
-  init(addressee: User, skill: LanguageSkill)
+  init(addressee: User, skill: LanguageSkill, peer: string)
   {
-    return this.http.post<{ session: PracticeSession }>('/client/practice-session/init/' + addressee.id + '/' + skill.id, {}).pipe(
+    return this.http.post<{ session: PracticeSession }>('/client/practice-session/init/' + addressee.id + '/' + skill.id, {
+      peer
+    }).pipe(
       map(({ session }) => session)
     );
   }
@@ -24,7 +26,9 @@ export class PracticeSessionService extends BaseService
 
   accept(session: PracticeSession)
   {
-    return this.http.put<{ session: PracticeSession }>('/client/practice-session/accept/' + session.id, {}).pipe(
+    return this.http.put<{ session: PracticeSession }>('/client/practice-session/accept/' + session.id, {
+      peer: session.calleePeer
+    }).pipe(
       map(({ session }) => session)
     );
   }

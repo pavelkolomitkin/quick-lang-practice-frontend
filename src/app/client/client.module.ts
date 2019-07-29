@@ -45,9 +45,9 @@ import {PracticeSessionService} from './services/practice-session.service';
 import {PracticeSessionsSocketService} from './sockets/practice-sessions-socket.service';
 import { PracticeSessionObserverComponent } from './components/common/practice-session-observer/practice-session-observer.component';
 import { PracticeSessionViewManagerComponent } from './components/practice-session/practice-session-view-manager/practice-session-view-manager.component';
-import { IncomingCallComponent } from './components/practice-session/incoming-call/incoming-call.component';
 import { PracticeSessionWindowComponent } from './components/practice-session/practice-session-window/practice-session-window.component';
 import { PracticeSessionEndComponent } from './components/practice-session/practice-session-end/practice-session-end.component';
+import {UserMediaService} from './services/user-media.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +78,6 @@ import { PracticeSessionEndComponent } from './components/practice-session/pract
     UserMenuComponent,
     PracticeSessionObserverComponent,
     PracticeSessionViewManagerComponent,
-    IncomingCallComponent,
     PracticeSessionWindowComponent,
     PracticeSessionEndComponent,
   ],
@@ -93,6 +92,7 @@ import { PracticeSessionEndComponent } from './components/practice-session/pract
     StoreModule.forFeature('clientPracticeSession', practiceSessionReducer),
   ],
   providers: [
+      UserMediaService,
       ProfileService,
       LanguageSkillService,
       UserContactService,

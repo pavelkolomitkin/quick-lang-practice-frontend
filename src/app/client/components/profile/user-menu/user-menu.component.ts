@@ -9,6 +9,8 @@ import {first} from 'rxjs/operators';
 import {LanguageSkill} from '../../../../core/data/model/language-skill.model';
 import {ClientAddSkillWindowChangeState} from '../../../data/actions';
 import {PracticeSessionService} from '../../../services/practice-session.service';
+import {ClientPracticeSessionPreInitialize} from '../../../data/practice-session.actions';
+import {PracticeSession} from '../../../../core/data/model/practice-session.model';
 
 @Component({
   selector: 'app-client-user-menu',
@@ -72,12 +74,12 @@ export class UserMenuComponent implements OnInit {
 
   async onSelectPracticeSkillHandler(skill: LanguageSkill)
   {
-    try {
-      await this.practiceSessionService.init(this.user, skill).toPromise();
-    }
-    catch (error) {
-      console.log(error);
-    }
+    const session: PracticeSession = new PracticeSession();
+    session.caller = this.authorizedUser;
+    session.callee = this.user;
+    session.skill = skill;
+
+    this.store.dispatch(new ClientPracticeSessionPreInitialize(session));
   }
 
   onCreateSkillClickHandler(event)

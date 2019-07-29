@@ -1,20 +1,39 @@
 <ng-container *ngIf="session">
 
-  <div class="call-container">
-    <div class="card">
-      <div class="card-body">
-        <div class="stat-widget-one">
-          <div class="stat-icon dib" style="width: 60px; height: 60px;">
+  <div class="incoming-call-container pulse">
+    <div class="row" [style.display]="state.value === 'inactive' ? 'none' : ''">
+      <div class="col-4">
+        <div style="width: 60px; height: 60px; margin: 0 auto;">
+          <a [routerLink]="'/client/profile/' + session.caller.id">
             <app-user-avatar [user]="session.caller" [size]="'small'"></app-user-avatar>
-<!--            <i class="ti-user text-primary border-primary"></i>-->
+          </a>
+        </div>
+      </div>
+
+      <div class="col-8">
+        <div>
+          <b class="d-block">{{ session.caller.fullName }}</b>
+          <small>suggests to practice</small>
+        </div>
+        <div class="text-info">
+          {{ session.skill.language.name }} <small class="text-warning">{{ session.skill.level.title }}</small>
+        </div>
+        <div class="controls">
+          <div class="btn btn-success control mr-2" (click)="onAcceptClickHandler($event)">
+            <i class="fa fa-phone"></i>
           </div>
-          <div class="stat-content dib">
-            <div class="stat-text"><b>{{ session.caller.fullName }}</b> suggests to practice</div>
-            <div class="stat-digit">{{ session.skill.language.name }}<small class="text-muted">({{ session.skill.level.title }})</small></div>
+          <div class="btn btn-danger control" (click)="onRejectClickHandler($event)">
+            <i class="fa fa-times"></i>
           </div>
         </div>
       </div>
+
+
     </div>
+    <div *ngIf="options.progressBar">
+      <div class="toast-progress" [style.width]="width + '%'"></div>
+    </div>
+
   </div>
 
 </ng-container>

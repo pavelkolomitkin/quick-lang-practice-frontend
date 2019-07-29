@@ -4,18 +4,22 @@ import {LanguageSkill} from './language-skill.model';
 
 export class PracticeSession
 {
-  id: string;
+  id?: string;
 
   caller: User;
 
+  callerPeer: string;
+
   callee: User;
+
+  calleePeer: string;
 
   skill: LanguageSkill;
 
-  progressStartTime: string;
+  progressStartTime?: string;
 
-  progressEndTime: string;
+  progressEndTime?: string;
 
-  status: PracticeSessionStatus;
+  status?: PracticeSessionStatus;
 
 }
