@@ -24,6 +24,8 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
 
   preInitializeSessionSubscription: Subscription;
   initializedSessionSubscription: Subscription;
+  endedSessionSubscription: Subscription;
+  unAnsweredSessionSubscription: Subscription;
 
 
   constructor(
@@ -54,12 +56,28 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.endedSessionSubscription = this.store.pipe(
+      select(state => state.clientPracticeSession.lastEnded),
+      filter(result => !!result)
+    ).subscribe((session: PracticeSession) => {
+      this.hideIncomingCall(session);
+    });
+
+    this.unAnsweredSessionSubscription = this.store.pipe(
+      select(state => state.clientPracticeSession.lastUnAnswered),
+      filter(result => !!result)
+    ).subscribe((session: PracticeSession) => {
+      this.hideIncomingCall(session);
+    });
+
   }
 
   ngOnDestroy() {
 
     this.preInitializeSessionSubscription.unsubscribe();
     this.initializedSessionSubscription.unsubscribe();
+    this.endedSessionSubscription.unsubscribe();
+    this.unAnsweredSessionSubscription.unsubscribe();
 
   }
 
@@ -84,6 +102,12 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
     });
     toast.toastRef.componentInstance.rejectEvent.subscribe( async (session: PracticeSession) => {
 
+      try {
+        await this.sessionService.end(session).toPromise();
+      }
+      catch (error) {
+        console.log(error);
+      }
       this.hideIncomingCall(session);
 
     });
@@ -97,10 +121,15 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
     if (index !== -1)
     {
       const toast = this.incomingCallToasts[index];
-      toast.toastRef.close();
+      //toast.toastRef.close();
+      toast.toastRef.manualClose();
 
       this.incomingCallToasts.splice(index, 1);
     }
   }
 
+  onWindowCloseHandler(session: PracticeSession)
+  {
+    this.preInitialized = null;
+  }
 }

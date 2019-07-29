@@ -6,8 +6,6 @@ export class UserMediaService
 {
   getUserMedia(audio: boolean, video: boolean)
   {
-    //return await getUserMedia();
-    //return getUserMedia(() => {})
     return new Promise((resolve, reject) => {
 
       getUserMedia((error, stream) => {

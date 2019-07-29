@@ -48,6 +48,7 @@ import { PracticeSessionViewManagerComponent } from './components/practice-sessi
 import { PracticeSessionWindowComponent } from './components/practice-session/practice-session-window/practice-session-window.component';
 import { PracticeSessionEndComponent } from './components/practice-session/practice-session-end/practice-session-end.component';
 import {UserMediaService} from './services/user-media.service';
+import {PeerConnectionFactoryService} from './services/peer-connection-factory.service';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import {UserMediaService} from './services/user-media.service';
       PracticeSessionService,
       UsersSocketService,
       MessagesSocketService,
-      PracticeSessionsSocketService
+      PracticeSessionsSocketService,
+      PeerConnectionFactoryService
   ],
   entryComponents: [
   ],

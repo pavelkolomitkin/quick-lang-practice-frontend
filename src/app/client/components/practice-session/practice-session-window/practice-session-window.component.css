@@ -12,27 +12,42 @@
 .window-container
 {
   position: fixed;
+  z-index: 9999;
 }
 
-.window-container.normal {
+.window-container.normal, .window-container.fullscreen {
   top: 10%;
   width: 100%;
   margin: 0 auto;
   padding-left: 10%;
   padding-right: 10%;
-  z-index: 9999;
+
 }
 
-.window-container.minimized {}
+.window-container.minimized {
+
+  left: 10px;
+  bottom: 10px;
+  width: 30%;
+  min-width: 200px;
+}
 
 
 
-.window-container.fullscreen {}
+/*.window-container.fullscreen {*/
+/*  */
+/*}*/
 
 .window-container .window {
   position: relative;
   min-width: 100%;
   min-height: 600px;
+}
+
+.window-container.minimized .window
+{
+  height: 200px;
+  min-height: unset;
 }
 
 .window-container .window .header-panel {
@@ -67,6 +82,11 @@
 
 }
 
+.window-container .window .header-panel .controls .control a:hover
+{
+  color: #cccccc !important;
+}
+
 
 .window-container .window .addressee-screen {
   position: absolute;
@@ -82,12 +102,12 @@
   height: 100%;
 }
 
-.window-container .window .addressee-screen .initialize-container {
+.window-container .window .addressee-screen .state-indicator-container {
   width: 100%;
   height: 100%;
 }
 
-.window-container .window .addressee-screen .initialize-container .indicator
+.window-container .window .addressee-screen .state-indicator-container .indicator
 {
   position: absolute;
   top: 50%;

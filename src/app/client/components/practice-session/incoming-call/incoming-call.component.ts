@@ -35,7 +35,7 @@ import {Toast, ToastPackage, ToastrService} from 'ngx-toastr';
           opacity: 1,
         }),
         style({
-          transform: 'translate3d(100%, 0, 0) skewX(30deg)',
+          transform: 'translate3d(-100%, 0, 0) skewX(30deg)',
           opacity: 0,
         }),
       ]))),
