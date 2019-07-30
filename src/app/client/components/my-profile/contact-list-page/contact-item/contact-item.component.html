@@ -1,6 +1,6 @@
 <td style="width: 60px">
-  <div style="width: 60px; height: 60px;">
-    <app-user-avatar [user]="contact.addressee" [size]="'small'"></app-user-avatar>
+  <div class="avatar-container small">
+    <app-online-status-avatar [user]="contact.addressee" [size]="'small'"></app-online-status-avatar>
   </div>
 </td>
 <td>{{ contact.addressee.fullName }}</td>
@@ -19,12 +19,16 @@
 
     <ng-container *ngIf="contact.lastMessage; else deletedMessage;">
       <div *ngIf="authorizedUser && (authorizedUser.id == contact.lastMessage.author.toString())"
-        style="width: 30px; height: 30px; display: inline-block; margin-right: 5px;"
+           class="avatar-container x-small mr-2"
       >
-        <app-user-avatar
+        <app-online-status-avatar
           [user]="authorizedUser"
-          [size]="'small'"
-        ></app-user-avatar>
+          [size]="'x-small'"
+        ></app-online-status-avatar>
+<!--        <app-user-avatar-->
+<!--          [user]="authorizedUser"-->
+<!--          [size]="'small'"-->
+<!--        ></app-user-avatar>-->
       </div>
 
       <span style="font-size: 14px; word-break: break-word;">

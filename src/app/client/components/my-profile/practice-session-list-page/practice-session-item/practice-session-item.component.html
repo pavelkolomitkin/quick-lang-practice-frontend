@@ -18,16 +18,19 @@
 
     <div>
       <a [routerLink]="'/client/profile/' + session.caller.id" class="avatar-container small mr-2">
-        <app-user-avatar
+        <app-online-status-avatar
           [user]="session.caller"
           [size]="'small'"
-        ></app-user-avatar>
+        ></app-online-status-avatar>
       </a>
       <span class="mr-2 text-muted">
           <i class="fa fa-arrow-right"></i>
         </span>
       <a [routerLink]="'/client/profile/' + session.callee.id" class="avatar-container small">
-        <app-user-avatar [user]="session.callee" [size]="'small'"></app-user-avatar>
+        <app-online-status-avatar
+          [user]="session.callee"
+          [size]="'small'"
+        ></app-online-status-avatar>
       </a>
     </div>
 
