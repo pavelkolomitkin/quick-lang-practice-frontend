@@ -2,3 +2,20 @@
 {
 
 }
+
+.card-header
+{
+  position: relative;
+}
+
+.card-header .date
+{
+  position: absolute;
+  right: 15px;
+  top: 15px
+}
+
+.small-avatar-container
+{
+  display: inline-block;
+}
