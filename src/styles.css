@@ -51,9 +51,20 @@ a
   display: block;
 }
 
-.small-avatar-container
+.avatar-container
 {
-  display: block;
+  display: inline-block;
+}
+
+.avatar-container.small
+{
   width: 60px;
   height: 60px;
 }
+
+.avatar-container.medium
+{
+  width: 85px;
+  height: 85px;
+}
+

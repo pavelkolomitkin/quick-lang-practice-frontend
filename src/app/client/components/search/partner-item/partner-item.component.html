@@ -1,0 +1,33 @@
+<section class="card">
+  <div class="card-header user-header alt bg-info">
+    <div class="media">
+      <a class="avatar-container medium" [routerLink]="'/client/profile/' + user.id">
+        <app-user-avatar [user]="user" [size]="'medium'"></app-user-avatar>
+      </a>
+      <div class="media-body">
+        <h3 class="text-light display-6">{{ user.fullName }}</h3>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      {{ relevantLanguageSkill.language.name }} <span class="badge pull-right" [ngClass]="'badge-' + getStyleBySkillLevel(relevantLanguage)">{{ relevantLanguageSkill.level.title }}</span>
+    </li>
+
+    <ng-container *ngIf="additionDisplayedSkills.length > 0">
+
+      <li class="list-group-item" *ngFor="let skill of additionDisplayedSkills">
+        {{ skill.language.name }} <span class="badge pull-right" [ngClass]="'badge-' + getStyleBySkillLevel(skill.language)">{{ skill.level.title }}</span>
+      </li>
+
+    </ng-container>
+
+    <li class="list-group-item">
+      <a [routerLink]="'/client/profile/' + user.id"> Profile
+        <span class="badge badge-success pull-right" *ngIf="additionNotDisplayedSkillNumber > 0">{{ additionNotDisplayedSkillNumber }} addition skill(s)</span>
+      </a>
+    </li>
+
+  </ul>
+</section>

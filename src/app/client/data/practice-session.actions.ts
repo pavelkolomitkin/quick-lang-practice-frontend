@@ -8,6 +8,8 @@ export const CLIENT_PRACTICE_SESSION_ENDED = 'CLIENT_PRACTICE_SESSION_ENDED';
 export const CLIENT_PRACTICE_SESSION_IN_PROCESS = 'CLIENT_PRACTICE_SESSION_IN_PROCESS';
 export const CLIENT_PRACTICE_SESSION_UNANSWERED = 'CLIENT_PRACTICE_SESSION_UNANSWERED';
 
+export const CLIENT_PRACTICE_SESSION_RESET = 'CLIENT_PRACTICE_SESSION_RESET';
+
 export class ClientPracticeSessionPreInitialize implements Action
 {
   readonly type = CLIENT_PRACTICE_SESSION_PRE_INITIALIZE;
@@ -43,9 +45,16 @@ export class ClientPracticeSessionUnAnswered implements Action
   constructor(public session: PracticeSession) {}
 }
 
+export class ClientPracticeSessionReset implements Action {
+
+  readonly type = CLIENT_PRACTICE_SESSION_RESET;
+
+}
+
 export type PracticeSessionActions = ClientPracticeSessionInitialized
   | ClientPracticeSessionPreInitialize
   | ClientPracticeSessionEnded
   | ClientPracticeSessionInProcess
   | ClientPracticeSessionUnAnswered
+  | ClientPracticeSessionReset
   ;

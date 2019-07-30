@@ -52,6 +52,11 @@ import {PeerConnectionFactoryService} from './services/peer-connection-factory.s
 import { PracticeSessionListPageComponent } from './components/my-profile/practice-session-list-page/practice-session-list-page.component';
 import { PracticeSessionItemComponent } from './components/my-profile/practice-session-list-page/practice-session-item/practice-session-item.component';
 import { EditableNameComponent } from './components/my-profile/editable-name/editable-name.component';
+import { SearchFormComponent } from './components/search/search-form/search-form.component';
+import { PartnerItemComponent } from './components/search/partner-item/partner-item.component';
+import {SearchPartnerService} from './services/search-partner.service';
+import {EffectsModule} from '@ngrx/effects';
+import {ProfileEffects} from './data/effects/profile.effects';
 
 @NgModule({
   declarations: [
@@ -87,6 +92,8 @@ import { EditableNameComponent } from './components/my-profile/editable-name/edi
     PracticeSessionListPageComponent,
     PracticeSessionItemComponent,
     EditableNameComponent,
+    SearchFormComponent,
+    PartnerItemComponent,
   ],
   imports: [
     CommonModule,
@@ -97,6 +104,9 @@ import { EditableNameComponent } from './components/my-profile/editable-name/edi
     StoreModule.forFeature('clientContactMessage', contactMessageReducer),
     StoreModule.forFeature('clientUserContact', userContactReducer),
     StoreModule.forFeature('clientPracticeSession', practiceSessionReducer),
+    EffectsModule.forFeature([
+      ProfileEffects
+    ])
   ],
   providers: [
       UserMediaService,
@@ -108,11 +118,13 @@ import { EditableNameComponent } from './components/my-profile/editable-name/edi
       UsersSocketService,
       MessagesSocketService,
       PracticeSessionsSocketService,
-      PeerConnectionFactoryService
+      PeerConnectionFactoryService,
+      SearchPartnerService
   ],
   entryComponents: [
   ],
   exports: [
+    EffectsModule
   ]
 })
 export class ClientModule {

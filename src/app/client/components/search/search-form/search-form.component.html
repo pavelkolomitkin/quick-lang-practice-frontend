@@ -1,0 +1,16 @@
+<form #form="ngForm">
+  <div class="form-group">
+    <label for="selectedLanguage">Select Language</label>
+    <select
+      class="form-control"
+      [(ngModel)]="selectedLanguage"
+      [compareWith]="compareEntity"
+      [required]="true"
+      name="selectedLanguage"
+      id="selectedLanguage"
+      (ngModelChange)="onLanguageSelectHandler($event)"
+    >
+      <option *ngFor="let language of (languages | async)" [ngValue]="language">{{ language.name }}</option>
+    </select>
+  </div>
+</form>

@@ -1,16 +1,27 @@
 <ng-container *ngIf="pageReady">
-  <div
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    [infiniteScrollDisabled]="infinityScrollDisabled"
-    (scrolled)="onScroll()">
 
-    <app-client-practice-session-item
-      *ngFor="let session of list"
-      [session]="session"
-      [user]="authorizedUser"
-    ></app-client-practice-session-item>
+  <ng-container *ngIf="list.length > 0">
 
-  </div>
+    <div
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      [infiniteScrollDisabled]="infinityScrollDisabled"
+      (scrolled)="onScroll()">
+
+      <app-client-practice-session-item
+        *ngFor="let session of list"
+        [session]="session"
+        [user]="authorizedUser"
+      ></app-client-practice-session-item>
+
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="list.length === 0">
+    <p class="alert alert-info">You haven't any sessions. Try to find a partner to practice your desired language!</p>
+  </ng-container>
+
+
 </ng-container>

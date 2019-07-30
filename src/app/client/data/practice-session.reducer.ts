@@ -63,6 +63,18 @@ export function reducer(state = initialState, action: actions.PracticeSessionAct
         lastUnAnswered: action.session
       };
 
+    case actions.CLIENT_PRACTICE_SESSION_RESET:
+
+      return {
+        ...state,
+        preInitialized: null,
+        preInitializedMediaType: null,
+        lastInitialized: null,
+        lastEnded: null,
+        lastInProcess: null,
+        lastUnAnswered: null,
+      };
+
     default:
 
       return state;
