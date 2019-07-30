@@ -45,10 +45,13 @@ import {Toast, ToastPackage, ToastrService} from 'ngx-toastr';
 })
 export class IncomingCallComponent extends Toast implements OnInit {
 
-  @Output('onAcceptInit') acceptEvent: EventEmitter<PracticeSession> = new EventEmitter<PracticeSession>();
+  @Output('onAcceptInit') acceptEvent: EventEmitter<{ session:  PracticeSession, type: string }> = new EventEmitter<{ session:  PracticeSession, type: string }>();
   @Output('onRejectInit') rejectEvent: EventEmitter<PracticeSession> = new EventEmitter<PracticeSession>();
 
   session: PracticeSession;
+
+  audioInputEnabled: boolean = false;
+  videoInputEnabled: boolean = false;
 
   constructor(
     protected toastrService: ToastrService,
@@ -61,9 +64,12 @@ export class IncomingCallComponent extends Toast implements OnInit {
 
   }
 
-  async onAcceptClickHandler(event)
+  async onAcceptClickHandler(event, type: string)
   {
-    this.acceptEvent.emit(this.session);
+    this.acceptEvent.emit({
+      session: this.session,
+      type: type
+    });
   }
 
   async onRejectClickHandler(event)

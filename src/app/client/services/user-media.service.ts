@@ -8,7 +8,7 @@ export class UserMediaService
   {
     return new Promise((resolve, reject) => {
 
-      getUserMedia((error, stream) => {
+      getUserMedia({ audio, video }, (error, stream) => {
 
         if (error)
         {
@@ -21,5 +21,21 @@ export class UserMediaService
       });
 
     });
+  }
+
+  async getAvailableAudioDevices()
+  {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const result = devices.map(device => device.kind === 'audioinput');
+
+    return result;
+  }
+
+  async getAvailableVideoDevices()
+  {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const result = devices.map(device => device.kind === 'videoinput');
+
+    return result;
   }
 }

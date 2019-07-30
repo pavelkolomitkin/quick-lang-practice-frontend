@@ -1,3 +1,7 @@
 <ng-container *ngIf="!!preInitialized">
-  <app-client-practice-session-window [session]="preInitialized" (onClose)="onWindowCloseHandler($event)"></app-client-practice-session-window>
+  <app-client-practice-session-window
+    [session]="preInitialized"
+    [mediaType]="preInitializedMediaType"
+    (onClose)="onWindowCloseHandler($event)"
+  ></app-client-practice-session-window>
 </ng-container>

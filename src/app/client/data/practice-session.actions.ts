@@ -12,7 +12,7 @@ export class ClientPracticeSessionPreInitialize implements Action
 {
   readonly type = CLIENT_PRACTICE_SESSION_PRE_INITIALIZE;
 
-  constructor(public session: PracticeSession) {}
+  constructor(public session: PracticeSession, public mediaType: string) {}
 }
 
 export class ClientPracticeSessionInitialized implements Action

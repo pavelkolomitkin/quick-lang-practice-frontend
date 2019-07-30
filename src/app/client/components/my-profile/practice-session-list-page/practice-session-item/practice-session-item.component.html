@@ -1,0 +1,61 @@
+<div class="card" [ngClass]="session.status.code === 'unAnswered' ? 'un-answered' : ''">
+  <div class="card-header">
+    Practice <b>{{ session.skill.language.name }}</b> with <b>{{ this.addressee.fullName }}</b>
+
+    <ng-container *ngIf="session.status.code === 'unAnswered'">
+      <div app-date-time [value]="session.createdAt"></div>
+    </ng-container>
+    <ng-container *ngIf="session.status.code !== 'unAnswered'">
+      <div app-date-time [value]="session.progressStartTime"></div>
+    </ng-container>
+
+    <div class="controls">
+      <div class="control" (click)="onDeleteClickHandler($event)">
+        <i class="fa fa-times"></i>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-3">
+        <a [routerLink]="'/client/profile/' + session.caller.id" class="small-avatar-container">
+          <app-user-avatar
+            [user]="session.caller"
+            [size]="'small'"
+          ></app-user-avatar>
+        </a>
+      </div>
+      <div class="col-2">
+        <i class="fa fa-arrow-right"></i>
+      </div>
+      <div class="col-3">
+        <a [routerLink]="'/client/profile/' + session.callee.id" class="small-avatar-container">
+          <app-user-avatar [user]="session.callee" [size]="'small'"></app-user-avatar>
+        </a>
+      </div>
+      <div class="col-4"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <b>Level</b>
+      </div>
+      <div class="col-5">
+        <span class="text-muted font-italic">{{ session.skill.level.title }}</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="session.status.code !== 'unAnswered'">
+      <div class="row">
+        <div class="col-3">
+          <b>Duration</b>
+        </div>
+        <div class="col-5">
+          <span class="text-muted">{{ sessionDuration }}</span>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

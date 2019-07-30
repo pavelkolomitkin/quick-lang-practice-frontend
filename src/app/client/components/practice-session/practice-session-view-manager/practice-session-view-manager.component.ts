@@ -4,11 +4,12 @@ import {State} from '../../../../app.state';
 import User from '../../../../core/data/model/user.model';
 import {filter, first} from 'rxjs/operators';
 import {PracticeSession} from '../../../../core/data/model/practice-session.model';
-import {Subscription} from 'rxjs';
+import {combineLatest, Subscription} from 'rxjs';
 import {ActiveToast, ToastrService} from 'ngx-toastr';
 import {IncomingCallComponent} from '../incoming-call/incoming-call.component';
 import {PracticeSessionService} from '../../../services/practice-session.service';
 import {ClientPracticeSessionPreInitialize} from '../../../data/practice-session.actions';
+import {UserMediaService} from '../../../services/user-media.service';
 
 @Component({
   selector: 'app-client-practice-session-view-manager',
@@ -20,6 +21,7 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
   authorizedUser: User;
 
   preInitialized: PracticeSession;
+  preInitializedMediaType: string;
   incomingCallToasts: ActiveToast<any>[] = [];
 
   preInitializeSessionSubscription: Subscription;
@@ -32,18 +34,29 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
     private store: Store<State>,
     private toastr: ToastrService,
     private sessionService: PracticeSessionService,
+    private mediaService: UserMediaService
   ) { }
 
   async ngOnInit() {
 
     this.authorizedUser = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
 
-    this.preInitializeSessionSubscription = this.store.pipe(
-      select(state => state.clientPracticeSession.preInitialized),
-      filter(result => !!result)
-    ).subscribe((session: PracticeSession) => {
+    this.preInitializeSessionSubscription = combineLatest(
+      this.store.pipe(
+        select(state => state.clientPracticeSession.preInitialized),
+        filter(result => !!result)
+      ),
+      this.store.pipe(
+        select(state => state.clientPracticeSession.preInitializedMediaType),
+        filter(result => !!result)
+      )
+    ).subscribe(([session, type]) => {
+
       this.preInitialized = session;
+      this.preInitializedMediaType = type;
+
     });
+
 
     this.initializedSessionSubscription = this.store.pipe(
       select(state => state.clientPracticeSession.lastInitialized),
@@ -81,8 +94,11 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
 
   }
 
-  showIncomingCall(session: PracticeSession)
+  async showIncomingCall(session: PracticeSession)
   {
+    const isAudioInputAvailable: boolean = (await this.mediaService.getAvailableAudioDevices()).length > 0;
+    const isVideoInputAvailable: boolean = (await this.mediaService.getAvailableVideoDevices()).length > 0;
+
     const toast = this.toastr.show('', '', {
       toastComponent: IncomingCallComponent,
       positionClass: 'toast-bottom-left',
@@ -93,10 +109,12 @@ export class PracticeSessionViewManagerComponent implements OnInit, OnDestroy {
 
     // @ts-ignore
     toast.toastRef.componentInstance.session = session;
+    toast.toastRef.componentInstance.audioInputEnabled = isAudioInputAvailable;
+    toast.toastRef.componentInstance.videoInputEnabled = isVideoInputAvailable;
 
-    toast.toastRef.componentInstance.acceptEvent.subscribe(async (session: PracticeSession) => {
+    toast.toastRef.componentInstance.acceptEvent.subscribe(async ({session, type}) => {
 
-      this.store.dispatch(new ClientPracticeSessionPreInitialize(session));
+      this.store.dispatch(new ClientPracticeSessionPreInitialize(session, type));
       this.hideIncomingCall(session);
 
     });

@@ -11,6 +11,7 @@ import {ClientAddSkillWindowChangeState} from '../../../data/actions';
 import {PracticeSessionService} from '../../../services/practice-session.service';
 import {ClientPracticeSessionPreInitialize} from '../../../data/practice-session.actions';
 import {PracticeSession} from '../../../../core/data/model/practice-session.model';
+import {UserMediaService} from '../../../services/user-media.service';
 
 @Component({
   selector: 'app-client-user-menu',
@@ -22,6 +23,8 @@ export class UserMenuComponent implements OnInit {
   @Input() user: User;
 
   authorizedUser: User;
+  iHaveAudioDevice: boolean = false;
+  iHaveVideoDevice: boolean = false;
 
   iBlockUser: boolean = false;
   userBlockedMe: boolean = false;
@@ -31,12 +34,16 @@ export class UserMenuComponent implements OnInit {
   constructor(
     private service: ProfileService,
     private practiceSessionService: PracticeSessionService,
-    private store: Store<State>
+    private store: Store<State>,
+    private mediaService: UserMediaService
   ) { }
 
   async ngOnInit() {
 
-    this.ready = false;
+     this.ready = false;
+     this.iHaveAudioDevice = (await this.mediaService.getAvailableAudioDevices()).length > 0;
+     this.iHaveVideoDevice = (await this.mediaService.getAvailableVideoDevices()).length > 0;
+
 
      this.authorizedUser = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
 
@@ -72,14 +79,14 @@ export class UserMenuComponent implements OnInit {
     }
   }
 
-  async onSelectPracticeSkillHandler(skill: LanguageSkill)
+  async onSelectPracticeSkillHandler(skill: LanguageSkill, type: string)
   {
     const session: PracticeSession = new PracticeSession();
     session.caller = this.authorizedUser;
     session.callee = this.user;
     session.skill = skill;
 
-    this.store.dispatch(new ClientPracticeSessionPreInitialize(session));
+    this.store.dispatch(new ClientPracticeSessionPreInitialize(session, type));
   }
 
   onCreateSkillClickHandler(event)

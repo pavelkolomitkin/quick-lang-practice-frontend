@@ -4,6 +4,7 @@ import {PracticeSession} from '../../core/data/model/practice-session.model';
 export interface State {
 
   preInitialized: PracticeSession;
+  preInitializedMediaType: string;
   lastInitialized: PracticeSession;
   lastEnded: PracticeSession;
   lastInProcess: PracticeSession;
@@ -14,6 +15,7 @@ export interface State {
 const initialState: State = {
 
   preInitialized: null,
+  preInitializedMediaType: null,
   lastInitialized: null,
   lastEnded: null,
   lastInProcess: null,
@@ -29,7 +31,8 @@ export function reducer(state = initialState, action: actions.PracticeSessionAct
 
       return {
         ...state,
-        preInitialized: action.session
+        preInitialized: action.session,
+        preInitializedMediaType: action.mediaType
       };
 
     case actions.CLIENT_PRACTICE_SESSION_INITIALIZED:

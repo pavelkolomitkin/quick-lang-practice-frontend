@@ -28,7 +28,6 @@ import User from '../../../../core/data/model/user.model';
   selector: 'app-client-practice-session-window',
   templateUrl: './practice-session-window.component.html',
   styleUrls: ['./practice-session-window.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
 
@@ -52,12 +51,10 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
   addressee: User;
   authorizedUser: User;
 
-  durationSeconds: number;
-  timerDescriptor: number = null;
-
   @Output('onClose') closeEvent: EventEmitter<PracticeSession> = new EventEmitter<PracticeSession>();
 
   @Input() session: PracticeSession;
+  @Input() mediaType: string;
 
   @ViewChild('windowElement') windowElement: ElementRef;
 
@@ -66,7 +63,6 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
   @ViewChild('userVideo') userVideo: ElementRef;
 
   addresseeMediaStream: any;
-  isAddresseeVideoOn: boolean = false;
   @ViewChild('addresseeVideo') addresseeVideo: ElementRef;
 
   peer: Peer;
@@ -80,10 +76,11 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
     private sessionService: PracticeSessionService,
     private mediaService: UserMediaService,
     private peerService: PeerConnectionFactoryService,
-    private changeDetector: ChangeDetectorRef
   ) { }
 
   async ngOnInit() {
+
+    this.initializeFullScreen();
 
     this.authorizedUser = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
     this.addressee = this.session.caller.id !== this.authorizedUser.id ? this.session.caller : this.session.callee;
@@ -165,8 +162,6 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
 
 
     //this.initTimer();
-
-    this.initializeFullScreen();
   }
 
 
@@ -224,27 +219,6 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
 
   //======================== USER CONTROL ===========================
 
-  initTimer()
-  {
-    this.disposeTimer();
-
-    this.durationSeconds = 0;
-    this.timerDescriptor = setInterval(() => {
-
-      this.durationSeconds++;
-
-    }, 1000);
-  }
-
-  disposeTimer()
-  {
-    if (this.timerDescriptor)
-    {
-      clearInterval(this.timerDescriptor);
-      this.timerDescriptor = null;
-    }
-  }
-
   validateMediaSupport()
   {
     if (!Peer.WEBRTC_SUPPORT) {
@@ -267,7 +241,8 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
     if (videoTracks.length > 0)
     {
       const track = videoTracks[0];
-      this.isUserVideoOn = track.enabled;
+      track.enabled = this.isUserVideoOn = false;
+      // this.isUserVideoOn = track.enabled;
     }
 
     this.userVideo.nativeElement.srcObject = this.userMediaStream;
@@ -294,8 +269,15 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
 
   async initUserMediaStream()
   {
-    this.userMediaStream = await this.mediaService.getUserMedia(true, true);
+    if (this.mediaType === 'video')
+    {
+      this.userMediaStream = await this.mediaService.getUserMedia(true, true);
 
+    }
+    else if (this.mediaType === 'audio')
+    {
+      this.userMediaStream = await this.mediaService.getUserMedia(true, false);
+    }
   }
 
   onVideoStreamToggleHandler(event)
@@ -339,24 +321,6 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
 
       this.addresseeMediaStream = stream;
 
-      const tracks: MediaStreamTrack[] = this.addresseeMediaStream.getVideoTracks();
-      if (tracks.length > 0)
-      {
-        const track = tracks[0];
-        this.isAddresseeVideoOn = track.enabled;
-        track.onmute = () => {
-          console.log('ON ADDRESSEE VIDEO MUTE');
-          this.isAddresseeVideoOn = false;
-          this.changeDetector.markForCheck();
-        };
-        track.onunmute = () => {
-          console.log('ON ADDRESSEE VIDEO UNMUTE');
-          this.isAddresseeVideoOn = true;
-          this.changeDetector.markForCheck();
-        };
-
-      }
-
       this.addresseeVideo.nativeElement.srcObject = this.addresseeMediaStream;
       this.addresseeVideo.nativeElement.play();
 
@@ -378,13 +342,16 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
 
   async onEndButtonClickHandler(event)
   {
+    this.closedByMe = true;
+
     try {
-      this.closedByMe = true;
       this.session = await this.sessionService.end(this.session).toPromise();
     }
     catch (error) {
       console.log(error);
     }
+
+    this.closeEvent.emit(this.session);
   }
 
   onMinimizeClickHandler(event)

@@ -19,9 +19,22 @@
           {{ session.skill.language.name }} <small class="text-warning">{{ session.skill.level.title }}</small>
         </div>
         <div class="controls">
-          <div class="btn btn-success control mr-2" (click)="onAcceptClickHandler($event)">
+          <button
+            [disabled]="!videoInputEnabled"
+            class="btn control mr-2"
+            (click)="onAcceptClickHandler($event, 'video')"
+            [ngClass]="videoInputEnabled ? 'btn-danger' : 'disabled'"
+          >
+            <i class="fa fa-video"></i>
+          </button>
+          <button
+            class="btn  control mr-2"
+            [disabled]="!audioInputEnabled"
+            [ngClass]="audioInputEnabled ? 'btn-success' : 'disabled'"
+            (click)="onAcceptClickHandler($event, 'audio')"
+          >
             <i class="fa fa-phone"></i>
-          </div>
+          </button>
           <div class="btn btn-danger control" (click)="onRejectClickHandler($event)">
             <i class="fa fa-times"></i>
           </div>

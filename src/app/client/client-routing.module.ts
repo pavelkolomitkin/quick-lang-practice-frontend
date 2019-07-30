@@ -7,14 +7,16 @@ import {AboutPageComponent} from './components/profile/about-page/about-page.com
 import {ContactListPageComponent} from './components/my-profile/contact-list-page/contact-list-page.component';
 import {MyProfileComponent} from './components/my-profile/my-profile.component';
 import {ContactPageComponent} from './components/my-profile/contact-page/contact-page.component';
+import {PracticeSessionListPageComponent} from './components/my-profile/practice-session-list-page/practice-session-list-page.component';
 
 const routes: Routes = [
     { path: '', component: LayoutComponent, children: [
             { path: '', redirectTo: 'search', pathMatch: 'full' },
             { path: 'search', component: SearchComponent },
             { path: 'profile', component: MyProfileComponent, children: [
-                    { path: 'contacts', component: ContactListPageComponent },
-                    { path: 'contacts/:id', component: ContactPageComponent },
+                  { path: 'contacts', component: ContactListPageComponent },
+                  { path: 'contacts/:id', component: ContactPageComponent },
+                  { path: 'sessions', component: PracticeSessionListPageComponent }
                 ]
             },
             { path: 'profile/:id', component: ProfileComponent, children: [

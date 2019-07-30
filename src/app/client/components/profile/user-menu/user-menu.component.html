@@ -18,12 +18,29 @@
           <ng-container *ngIf="authorizedUser.skills.length > 0">
 
             <div
-              class="btn dropdown-item"
+              class="dropdown-item"
               *ngFor="let skill of authorizedUser.skills"
-              (click)="onSelectPracticeSkillHandler(skill)"
             >
               <h5>{{ skill.language.name }}</h5>
               <small class="text-muted">{{ skill.level.title }}</small>
+              <div>
+                <button class="btn btn-sm mr-2"
+                        [disabled]="!iHaveVideoDevice"
+                        [ngClass]="!iHaveVideoDevice ? 'disabled': 'btn-danger'"
+                        (click)="onSelectPracticeSkillHandler(skill, 'video')"
+                >
+                  <i class="fa fa-video"></i>
+                </button>
+                <button
+                  class="btn btn-sm"
+                  [disabled]="!iHaveAudioDevice"
+                  [ngClass]="!iHaveAudioDevice? 'disabled': 'btn-success'"
+                  (click)="onSelectPracticeSkillHandler(skill, 'audio')"
+                >
+                  <i class="fa fa-phone"></i>
+                </button>
+              </div>
+
             </div>
 
           </ng-container>

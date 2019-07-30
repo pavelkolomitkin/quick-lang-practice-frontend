@@ -22,4 +22,8 @@ export class PracticeSession
 
   status?: PracticeSessionStatus;
 
+  createdAt: string;
+
+  updatedAt: string;
+
 }

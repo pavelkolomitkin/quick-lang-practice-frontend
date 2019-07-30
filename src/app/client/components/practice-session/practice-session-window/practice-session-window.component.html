@@ -35,7 +35,6 @@
 
         <div class="indicator bg-danger" *ngIf="currentSessionState === 'error'">
           <i class="fa fa-exclamation-circle"></i>
-          <span class="text-danger">{{ errorMessage }}</span>
         </div>
 
         <div class="indicator bg-warning" *ngIf="currentSessionState === 'unAnswered'">
@@ -64,16 +63,18 @@
         <i class="fa fa-times"></i>
       </div>
 
-      <div class="btn btn-primary control" (click)="onVideoStreamToggleHandler($event)">
+      <div
+        *ngIf="!!userMediaStream && (mediaType === 'video')"
+        class="btn btn-primary control"
+        (click)="onVideoStreamToggleHandler($event)"
+        [tooltip]="'If you want to show yourself'"
+        [tooltipEnable]="true"
+      >
         <i class="fa fa-video-camera" *ngIf="isUserVideoOn"></i>
         <i class="fas fa-video-slash" *ngIf="!isUserVideoOn"></i>
       </div>
 
     </div>
-
-<!--    <div class="timer-container">-->
-<!--      <span>{{ durationSeconds | amDuration:'seconds' | amDateFormat:'HH:mm:ss' }}</span>-->
-<!--    </div>-->
 
     <div class="screen-size-panel">
 

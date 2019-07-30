@@ -49,6 +49,8 @@ import { PracticeSessionWindowComponent } from './components/practice-session/pr
 import { PracticeSessionEndComponent } from './components/practice-session/practice-session-end/practice-session-end.component';
 import {UserMediaService} from './services/user-media.service';
 import {PeerConnectionFactoryService} from './services/peer-connection-factory.service';
+import { PracticeSessionListPageComponent } from './components/my-profile/practice-session-list-page/practice-session-list-page.component';
+import { PracticeSessionItemComponent } from './components/my-profile/practice-session-list-page/practice-session-item/practice-session-item.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import {PeerConnectionFactoryService} from './services/peer-connection-factory.s
     PracticeSessionViewManagerComponent,
     PracticeSessionWindowComponent,
     PracticeSessionEndComponent,
+    PracticeSessionListPageComponent,
+    PracticeSessionItemComponent,
   ],
   imports: [
     CommonModule,
