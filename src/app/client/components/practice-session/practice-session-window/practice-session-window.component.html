@@ -1,0 +1,98 @@
+<ng-container *ngIf="(currentWindowSize === 'normal') || (currentWindowSize === 'fullscreen')">
+  <div class="practice-overlay"></div>
+</ng-container>
+
+<div class="window-container" [ngClass]="currentWindowSize">
+
+  <div class="window" #windowElement>
+
+    <div class="header-panel">
+      <div class="header-container">
+          <h5 class="label">Practice <b>{{ session.skill.language.name }}</b> with <b>{{ session.callee.fullName }}</b></h5>
+          <div class="controls">
+            <div class="btn control" *ngIf="addressee">
+              <a [routerLink]="'/client/profile/contacts/' + addressee.id" style="display: block;" (click)="onMessageClickHandler($event)">
+                <i class="fa fa-comments"></i>
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="addressee-screen" (dblclick)="onDoubleClickAddresseeScreenHandler($event)">
+      <video #addresseeVideo></video>
+
+      <div class="state-indicator-container">
+
+        <div class="indicator" *ngIf="currentSessionState === 'initializing'">
+          <i class="fas fa-phone"></i>
+        </div>
+
+        <div class="indicator bg-danger" *ngIf="currentSessionState === 'error'">
+          <i class="fa fa-exclamation-circle"></i>
+        </div>
+
+        <div class="indicator bg-warning" *ngIf="currentSessionState === 'unAnswered'">
+          <i class="fa fa-minus"></i>
+        </div>
+
+        <div class="indicator" *ngIf="currentSessionState === 'ended'">
+          <i class="fa fa-check"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="caller-screen" [ngStyle]="{ display: ((currentWindowSize === 'minimized' || !isUserVideoOn)) ? 'none': 'block' }">
+      <video #userVideo></video>
+    </div>
+
+    <div class="control-panel">
+
+      <div class="btn btn-danger control" title="End practicing" (click)="onEndButtonClickHandler($event)">
+        <i class="fa fa-times"></i>
+      </div>
+
+      <div
+        *ngIf="!!userMediaStream && (mediaType === 'video')"
+        class="btn btn-primary control"
+        (click)="onVideoStreamToggleHandler($event)"
+        [tooltip]="'If you want to show yourself'"
+        [tooltipEnable]="true"
+      >
+        <i class="fa fa-video-camera" *ngIf="isUserVideoOn"></i>
+        <i class="fas fa-video-slash" *ngIf="!isUserVideoOn"></i>
+      </div>
+
+    </div>
+
+    <div class="screen-size-panel">
+
+      <ng-container *ngIf="currentWindowSize !== 'minimized'">
+        <div class="btn control" title="Minimize" (click)="onMinimizeClickHandler($event)">
+          <i class="fa fa-minus-square"></i>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentWindowSize !== 'normal'">
+        <div class="btn control" title="Normal Size" (click)="onNormalSizeClickHandler($event)">
+          <i class="far fa-square"></i>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="currentWindowSize !== 'fullscreen'">
+        <div
+          *ngIf="fullScreenEnabled"
+          class="btn control"
+          title="Full Screen"
+          style="transform: rotate(45deg);"
+          (click)="onFullSizeClickHandler($event)"
+        >
+          <i class="fa fa-arrows-alt"></i>
+        </div>
+      </ng-container>
+
+    </div>
+
+  </div>
+
+</div>

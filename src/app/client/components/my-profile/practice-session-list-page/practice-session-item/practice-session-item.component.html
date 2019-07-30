@@ -1,0 +1,42 @@
+<div class="card" [ngClass]="session.status.code === 'unAnswered' ? 'un-answered' : ''">
+  <div class="card-header">
+    <span class="text-info">{{ session.skill.language.name }}</span>&nbsp;<a [routerLink]="'/client/profile/' + this.addressee.id">with {{ this.addressee.fullName }}</a>
+
+    <ng-container *ngIf="session.status.code === 'unAnswered'">
+      &nbsp;<span class="badge badge-danger">{{ session.status.title }}</span>
+    </ng-container>
+
+    <ng-container *ngIf="session.status.code === 'unAnswered'">
+      <small class="date text-muted" app-date-time [value]="session.createdAt"></small>
+    </ng-container>
+    <ng-container *ngIf="session.status.code !== 'unAnswered'">
+      <small class="date text-muted" app-date-time [value]="session.progressStartTime"></small>
+    </ng-container>
+
+  </div>
+  <div class="card-body">
+
+    <div>
+      <a [routerLink]="'/client/profile/' + session.caller.id" class="small-avatar-container mr-2">
+        <app-user-avatar
+          [user]="session.caller"
+          [size]="'small'"
+        ></app-user-avatar>
+      </a>
+      <span class="mr-2 text-muted">
+          <i class="fa fa-arrow-right"></i>
+        </span>
+      <a [routerLink]="'/client/profile/' + session.callee.id" class="small-avatar-container">
+        <app-user-avatar [user]="session.callee" [size]="'small'"></app-user-avatar>
+      </a>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <span class="text-muted font-italic">{{ session.skill.level.title }}</span>
+        <span class="text-muted" *ngIf="session.status.code !== 'unAnswered'"> ({{ sessionDuration }})</span>
+      </div>
+    </div>
+
+  </div>
+</div>

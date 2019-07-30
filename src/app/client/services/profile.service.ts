@@ -28,7 +28,8 @@ export class ProfileService extends BaseService
     update(user: User)
     {
         const body = {
-            aboutYourSelf: user.aboutYourSelf
+            aboutYourSelf: user.aboutYourSelf,
+            fullName: user.fullName
         };
 
         return this.http.put('/client/profile', body);

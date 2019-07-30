@@ -77,7 +77,7 @@ export class ContactMessageObserverComponent implements OnInit, OnDestroy {
           toastComponent: ClientNewMessageToastComponent,
           positionClass: 'toast-bottom-right',
           //disableTimeOut: true,
-          toastClass: 'ngx-toastr ng-trigger ng-trigger-flyInOut client-new-message-toast'
+          toastClass: 'ngx-toastr ng-trigger ng-trigger-flyInOut client-toast'
         });
 
         // @ts-ignore

@@ -33,14 +33,27 @@ a
     float: none !important;
 }
 
-.client-new-message-toast
+.client-toast
 {
     padding: 0 !important;;
     background-color: #fff;
     box-shadow: 0 0 5px #99999957 !important;
 }
 
+.list-group-item a
+{
+  display: block;
+}
+
 .list-group-item.active a
 {
   color: #fff !important;
+  display: block;
+}
+
+.small-avatar-container
+{
+  display: block;
+  width: 60px;
+  height: 60px;
 }

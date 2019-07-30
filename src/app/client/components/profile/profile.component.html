@@ -14,8 +14,15 @@
 
           </span>
           <div class="media-body">
-            <h2 class="text-light display-6">{{ user.fullName }}</h2>
-            <p></p>
+
+            <ng-container *ngIf="(user.id === (authorizedUser | async).id)">
+              <app-client-editable-name [user]="(authorizedUser | async)"></app-client-editable-name>
+            </ng-container>
+
+            <ng-container *ngIf="(user.id !== (authorizedUser | async).id)">
+              <h2 class="text-light display-6">{{ user.fullName }}</h2>
+              <p></p>
+            </ng-container>
           </div>
         </div>
       </div>

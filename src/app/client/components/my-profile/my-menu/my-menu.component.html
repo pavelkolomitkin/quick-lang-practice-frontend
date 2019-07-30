@@ -12,4 +12,10 @@
     </a>
   </li>
 
+  <li class="list-group-item" [routerLinkActive]="'active'">
+    <a [routerLink]=" '/client/profile/sessions' "> <i class="fa fa-video-camera"></i> Practice Sessions
+<!--      <span class="badge badge-success pull-right" *ngIf="(newMessageNumber | async) > 0">{{ (newMessageNumber | async) }}</span>-->
+    </a>
+  </li>
+
 </ul>

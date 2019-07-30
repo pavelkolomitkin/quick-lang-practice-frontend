@@ -19,6 +19,7 @@ import { reducer } from './data/reducer';
 import { reducer as contactMessageReducer } from './data/contact-message.reducer';
 import { reducer as profileReducer } from './data/profile.reducer';
 import { reducer as userContactReducer } from './data/user-contact.reducer';
+import { reducer as practiceSessionReducer } from './data/practice-session.reducer';
 import { AvatarManagerComponent } from './components/common/avatar-manager/avatar-manager.component';
 import { AboutPageComponent } from './components/profile/about-page/about-page.component';
 import { ContactListPageComponent } from './components/my-profile/contact-list-page/contact-list-page.component'
@@ -40,6 +41,17 @@ import { ProfileStateObserverComponent } from './components/common/profile-state
 import {State} from '../app.state';
 import {ClientNewMessageNumberChanged} from './data/profile.actions';
 import { UserMenuComponent } from './components/profile/user-menu/user-menu.component';
+import {PracticeSessionService} from './services/practice-session.service';
+import {PracticeSessionsSocketService} from './sockets/practice-sessions-socket.service';
+import { PracticeSessionObserverComponent } from './components/common/practice-session-observer/practice-session-observer.component';
+import { PracticeSessionViewManagerComponent } from './components/practice-session/practice-session-view-manager/practice-session-view-manager.component';
+import { PracticeSessionWindowComponent } from './components/practice-session/practice-session-window/practice-session-window.component';
+import { PracticeSessionEndComponent } from './components/practice-session/practice-session-end/practice-session-end.component';
+import {UserMediaService} from './services/user-media.service';
+import {PeerConnectionFactoryService} from './services/peer-connection-factory.service';
+import { PracticeSessionListPageComponent } from './components/my-profile/practice-session-list-page/practice-session-list-page.component';
+import { PracticeSessionItemComponent } from './components/my-profile/practice-session-list-page/practice-session-item/practice-session-item.component';
+import { EditableNameComponent } from './components/my-profile/editable-name/editable-name.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +80,13 @@ import { UserMenuComponent } from './components/profile/user-menu/user-menu.comp
     AddresseeControlComponent,
     ProfileStateObserverComponent,
     UserMenuComponent,
+    PracticeSessionObserverComponent,
+    PracticeSessionViewManagerComponent,
+    PracticeSessionWindowComponent,
+    PracticeSessionEndComponent,
+    PracticeSessionListPageComponent,
+    PracticeSessionItemComponent,
+    EditableNameComponent,
   ],
   imports: [
     CommonModule,
@@ -77,14 +96,19 @@ import { UserMenuComponent } from './components/profile/user-menu/user-menu.comp
     StoreModule.forFeature('clientProfile', profileReducer),
     StoreModule.forFeature('clientContactMessage', contactMessageReducer),
     StoreModule.forFeature('clientUserContact', userContactReducer),
+    StoreModule.forFeature('clientPracticeSession', practiceSessionReducer),
   ],
   providers: [
+      UserMediaService,
       ProfileService,
       LanguageSkillService,
       UserContactService,
       ContactMessageService,
+      PracticeSessionService,
       UsersSocketService,
       MessagesSocketService,
+      PracticeSessionsSocketService,
+      PeerConnectionFactoryService
   ],
   entryComponents: [
   ],
