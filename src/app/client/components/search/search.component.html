@@ -1,3 +1,39 @@
-<p>
-  search works!
-</p>
+<div *ngIf="pageReady">
+
+  <div>
+    <app-client-search-form
+      (onLanguageSelect)="onLanguageSelectHandler($event)"
+      [selectedLanguage]="selectedLanguage"
+    ></app-client-search-form>
+  </div>
+
+  <ng-container *ngIf="selectedLanguage">
+    <div class="search-results">
+      <ng-container>
+        <div class="row"
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollDisabled]="infinityScrollDisabled"
+          (scrolled)="onScroll()">
+
+          <div class="col-md-4" *ngFor="let user of list">
+            <app-client-partner-item
+              [user]="user"
+              [relevantLanguage]="selectedLanguage"
+            ></app-client-partner-item>
+          </div>
+
+        </div>
+      </ng-container>
+
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="list.length === 0">
+    <p class="alert alert-info">No one was found. Select an another language</p>
+  </ng-container>
+
+
+
+</div>

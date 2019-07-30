@@ -27,6 +27,8 @@ export default class User
 
     public skills: Array<LanguageSkill> = [];
 
+    public lastActivity: string;
+
     isAdmin()
     {
         return this.roles.includes('ROLE_ADMIN_USER');

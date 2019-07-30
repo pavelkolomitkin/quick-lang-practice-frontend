@@ -41,11 +41,6 @@ export class PracticeSessionListPageComponent implements OnInit, OnDestroy {
     await this.loadSessions();
 
     this.pageReady = true;
-
-    // this.route.queryParams.subscribe((params) => {
-    //
-    // })
-
   }
 
   ngOnDestroy() {

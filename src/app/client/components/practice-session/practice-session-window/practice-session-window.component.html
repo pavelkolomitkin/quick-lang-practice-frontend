@@ -20,11 +20,11 @@
     </div>
 
     <div class="addressee-screen" (dblclick)="onDoubleClickAddresseeScreenHandler($event)">
-      <video #addresseeVideo></video>
+      <video #addresseeVideo [ngStyle]="{ display: currentSessionState === 'inProcess' ? 'block' : 'none' }"></video>
 
       <div class="state-indicator-container">
 
-        <div class="indicator" *ngIf="currentSessionState === 'initializing'">
+        <div class="indicator call" *ngIf="currentSessionState === 'initializing'">
           <i class="fas fa-phone"></i>
         </div>
 

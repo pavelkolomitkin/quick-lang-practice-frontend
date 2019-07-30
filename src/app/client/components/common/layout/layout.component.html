@@ -2,23 +2,31 @@
 
   <app-client-header></app-client-header>
 
-  <div class="content pb-0">
-    <router-outlet></router-outlet>
+  <div class="container">
+    <div class="content pb-0" style="min-height: 704px;">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 
+
   <div class="clearfix"></div>
-<!--  <footer class="site-footer">-->
-<!--    <div class="footer-inner bg-white">-->
-<!--      <div class="row">-->
-<!--        <div class="col-sm-6">-->
-<!--          Copyright © 2018 Ela Admin-->
-<!--        </div>-->
-<!--        <div class="col-sm-6 text-right">-->
-<!--          Designed by <a href="https://colorlib.com">Colorlib</a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </footer>-->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner bg-white">
+        <div class="row">
+          <div class="col-sm-6">
+            &copy; 2019
+          </div>
+          <div class="col-sm-6 text-right">
+            Designed by <a href="https://www.facebook.com/pavelkolomitkin" target="_blank">Pavel Kolomytkin</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
 </div>
 <app-client-add-skill-window [user]="user | async"></app-client-add-skill-window>
 <app-client-message-receiver></app-client-message-receiver>

@@ -100,6 +100,7 @@
 .window-container .window .addressee-screen video {
   width: 100%;
   height: 100%;
+  background: url('../../../../../assets/picture/QLPracticeLogo-100x100.png') no-repeat center center;
 }
 
 .window-container .window .addressee-screen .state-indicator-container {
@@ -121,6 +122,12 @@
   color: #FFFFFF;
   padding-top: 9px;
   text-align: center;
+}
+
+.window-container .window .addressee-screen .state-indicator-container .indicator.call {
+
+  animation: shadow-pulse 1s infinite;
+
 }
 
 .window-container .window .caller-screen {
@@ -165,4 +172,14 @@
   color: #FFFFFF;
 }
 .window-container .window .screen-size-panel .control {
+}
+
+@keyframes shadow-pulse
+{
+  0% {
+    box-shadow: 0 0 0 0px rgba(3, 189, 255, 0.84);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
 }

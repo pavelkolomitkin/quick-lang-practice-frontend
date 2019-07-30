@@ -73,6 +73,8 @@ export class AvatarManagerComponent implements OnInit, OnDestroy {
         this.cleanUploadSubscription();
 
         const user: User = User.createFromRawData(data.uploaded);
+        this.user.avatar = user.avatar;
+        this.user.avatarThumbs = user.avatarThumbs;
         this.store.dispatch(new UserUpdated(user));
       }
 

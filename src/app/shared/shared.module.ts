@@ -18,6 +18,7 @@ import {ModalModule} from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 import {SocketIoModule} from 'ngx-socket-io';
+import { OnlineStatusAvatarComponent } from './components/online-status-avatar/online-status-avatar.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {SocketIoModule} from 'ngx-socket-io';
     NotFoundPageComponent,
     PaginatorComponent,
     DateTimeViewComponent,
-    UserAvatarComponent
+    UserAvatarComponent,
+    OnlineStatusAvatarComponent
   ],
   imports: [
     CommonModule,
@@ -61,6 +63,7 @@ import {SocketIoModule} from 'ngx-socket-io';
         MultiLinePipe,
         UserAvatarComponent,
         SocketIoModule,
+        OnlineStatusAvatarComponent
     ]
 })
 export class SharedModule {

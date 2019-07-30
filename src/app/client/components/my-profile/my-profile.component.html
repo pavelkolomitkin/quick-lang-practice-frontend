@@ -1,4 +1,4 @@
-<div class="row" *ngIf="!!user">
+<div class="row" *ngIf="!!(user | async)">
 
   <div class="col-md-4">
 
@@ -8,13 +8,13 @@
           <span style="width: 85px; height: 85px;">
 
             <app-user-avatar
-                    [user]="user"
+                    [user]="user | async"
                     [size]="'medium'"
             ></app-user-avatar>
 
           </span>
           <div class="media-body">
-            <app-client-editable-name [user]="user"></app-client-editable-name>
+            <app-client-editable-name [user]="user | async"></app-client-editable-name>
           </div>
         </div>
       </div>

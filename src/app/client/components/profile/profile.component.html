@@ -5,12 +5,12 @@
     <section class="card">
       <div class="card-header user-header alt bg-info">
         <div class="media">
-          <span style="width: 85px; height: 85px;">
+          <span class="avatar-container medium">
 
-            <app-user-avatar
-                    [user]="(user.id === (authorizedUser | async).id) ? (authorizedUser | async) : user"
-                    [size]="'medium'"
-            ></app-user-avatar>
+            <app-online-status-avatar
+              [user]="(user.id === (authorizedUser | async).id) ? (authorizedUser | async) : user"
+              [size]="'medium'"
+            ></app-online-status-avatar>
 
           </span>
           <div class="media-body">
