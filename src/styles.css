@@ -74,3 +74,13 @@ a
   height: 30px;
 }
 
+.content
+{
+  padding: 30px 0 !important;
+}
+
+
+.media-body
+{
+  padding-left: 5px;
+}

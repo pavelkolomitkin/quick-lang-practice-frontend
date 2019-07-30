@@ -123,6 +123,12 @@
   text-align: center;
 }
 
+.window-container .window .addressee-screen .state-indicator-container .indicator.call {
+
+  animation: shadow-pulse 1s infinite;
+
+}
+
 .window-container .window .caller-screen {
   position: absolute;
   bottom: 0;
@@ -165,4 +171,14 @@
   color: #FFFFFF;
 }
 .window-container .window .screen-size-panel .control {
+}
+
+@keyframes shadow-pulse
+{
+  0% {
+    box-shadow: 0 0 0 0px rgba(3, 189, 255, 0.84);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
 }

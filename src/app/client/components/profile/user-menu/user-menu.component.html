@@ -5,8 +5,13 @@
   </li>
 
   <ng-container *ngIf="!iBlockUser && !userBlockedMe">
+
     <li class="list-group-item" [routerLinkActive]="'active'">
       <a [routerLink]="'/client/profile/contacts/' + user.id"><i class="fa fa-envelope"></i> Send Message</a>
+    </li>
+
+    <li class="list-group-item" *ngIf="user.readyToPracticeSkill">
+      <span class="text-muted small">Wants to practice </span><span class="badge badge-success">{{ user.readyToPracticeSkill.language.name }}</span>
     </li>
 
     <li class="list-group-item">
