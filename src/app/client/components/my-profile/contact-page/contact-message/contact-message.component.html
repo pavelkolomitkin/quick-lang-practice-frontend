@@ -8,9 +8,9 @@
     <div class="msg-box" [ngClass]="isDeleted ? 'removed' : ''">
       <div class="inner-box pull-right" >
 
-        <div class="controls" *ngIf="!isDeleted">
+        <div class="controls" *ngIf="!isDeleted && !isEditing">
           <span class="control mr-2" (click)="onEditClickHandler($event)">
-            <i class="fa fa-pencil"></i>
+            <i class="fa fa-edit"></i>
           </span>
           <span class="control mr-2" (click)="onDeleteClickHandler($event)">
             <i class="fa fa-times"></i>

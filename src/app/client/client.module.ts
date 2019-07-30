@@ -51,6 +51,7 @@ import {UserMediaService} from './services/user-media.service';
 import {PeerConnectionFactoryService} from './services/peer-connection-factory.service';
 import { PracticeSessionListPageComponent } from './components/my-profile/practice-session-list-page/practice-session-list-page.component';
 import { PracticeSessionItemComponent } from './components/my-profile/practice-session-list-page/practice-session-item/practice-session-item.component';
+import { EditableNameComponent } from './components/my-profile/editable-name/editable-name.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { PracticeSessionItemComponent } from './components/my-profile/practice-s
     PracticeSessionEndComponent,
     PracticeSessionListPageComponent,
     PracticeSessionItemComponent,
+    EditableNameComponent,
   ],
   imports: [
     CommonModule,

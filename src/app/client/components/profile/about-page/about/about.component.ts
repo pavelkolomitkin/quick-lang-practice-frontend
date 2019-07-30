@@ -48,7 +48,8 @@ export class AboutComponent implements OnInit {
 
   saveValue()
   {
-    this.service.update(this.internalUser)
+    this.service
+      .update(this.internalUser)
         .toPromise()
         .then(() => {
           this._user.aboutYourSelf = this.userAbout;

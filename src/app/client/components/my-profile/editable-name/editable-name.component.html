@@ -1,0 +1,15 @@
+<ng-container *ngIf="isEditingFullName">
+              <textarea
+                (blur)="onFullNameTextBlurHandler($event)"
+                [(ngModel)]="fullNameValue"
+                placeholder="Your fullname..."
+              ></textarea>
+</ng-container>
+<ng-container *ngIf="!isEditingFullName">
+  <h2 class="text-light display-6">{{ user.fullName }}</h2>
+  <p style="color: #ffffff">
+              <span class="btn" title="Edit your name" (click)="onEditFullNameClickHandler($event)">
+                <i class="fa fa-edit"></i>
+              </span>
+  </p>
+</ng-container>
