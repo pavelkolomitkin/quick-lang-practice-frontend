@@ -1,5 +1,6 @@
 import * as Peer from 'simple-peer';
 import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class PeerConnectionFactoryService
@@ -24,7 +25,8 @@ export class PeerConnectionFactoryService
     const result = {
       ...params,
       stream: stream,
-      trickle: false
+      trickle: false,
+      config: {iceServers: environment.iceServers}
     };
 
     return result;
