@@ -20,12 +20,7 @@
     </div>
 
     <div class="addressee-screen" (dblclick)="onDoubleClickAddresseeScreenHandler($event)">
-      <video #addresseeVideo
-             (pause)="onAddresseeVideoEvent($event)"
-             (play)="onAddresseeVideoEvent($event)"
-             (suspend)="onAddresseeVideoEvent($event)"
-             (abort)="onAddresseeVideoEvent($event)"
-      ></video>
+      <video #addresseeVideo></video>
 
       <div class="state-indicator-container">
 
@@ -44,12 +39,6 @@
         <div class="indicator" *ngIf="currentSessionState === 'ended'">
           <i class="fa fa-check"></i>
         </div>
-
-<!--        <div class="indicator" [ngStyle]="{ display: (currentSessionState === 'inProcess') && (!isAddresseeVideoOn) ? 'block' : 'none' }">-->
-<!--          <i class="fas fa-video-slash"></i>-->
-<!--        </div>-->
-
-
       </div>
     </div>
 
