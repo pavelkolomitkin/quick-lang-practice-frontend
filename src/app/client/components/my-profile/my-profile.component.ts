@@ -16,16 +16,16 @@ import {UserUpdated} from '../../../security/data/actions';
 })
 export class MyProfileComponent implements OnInit {
 
-  user: User;
+  user: Observable<User>;
   newMessageNumber: Observable<number>;
 
   constructor(
       private store: Store<State>,
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
 
-    this.user = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
+    this.user = this.store.pipe(select(state => state.security.authorizedUser));
     this.newMessageNumber = this.store.pipe(select(state => state.clientProfile.newMessageNumber));
   }
 

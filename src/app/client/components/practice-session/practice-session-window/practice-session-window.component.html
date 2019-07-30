@@ -20,7 +20,7 @@
     </div>
 
     <div class="addressee-screen" (dblclick)="onDoubleClickAddresseeScreenHandler($event)">
-      <video #addresseeVideo></video>
+      <video #addresseeVideo [ngStyle]="{ display: currentSessionState === 'inProcess' ? 'block' : 'none' }"></video>
 
       <div class="state-indicator-container">
 
