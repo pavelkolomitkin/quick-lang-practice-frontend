@@ -55,38 +55,20 @@
     <app-form-field-error-list [field]="'passwordRepeat'" [errors]="validationErrors"></app-form-field-error-list>
   </div>
 
-  <div class="form-group">
-    <div class="checkbox icheck">
-      <label>
-        <input
-                type="checkbox"
-                ngModel
-                name="agreement"
-                required> {{ 'I_ACCEPT_AGREEMENT' | translate }}
-      </label>&nbsp;<span (click)="onAgreementClickHandler($event)" class="user-agreement-link text-primary">{{ 'USER_AGREEMENT' | translate }}</span>
-    </div>
-  </div>
+<!--  <div class="form-group">-->
+<!--    <div class="checkbox icheck">-->
+<!--      <label>-->
+<!--        <input-->
+<!--                type="checkbox"-->
+<!--                ngModel-->
+<!--                name="agreement"-->
+<!--                required> {{ 'I_ACCEPT_AGREEMENT' | translate }}-->
+<!--      </label>&nbsp;<span (click)="onAgreementClickHandler($event)" class="user-agreement-link text-primary">{{ 'USER_AGREEMENT' | translate }}</span>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="form-group">
     <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-flat">{{ 'SUBMIT_OK' | translate }}</button>
   </div>
 
-<!--  <div class="row">-->
-<!--    <div class="col-xs-8">-->
-<!--      <div class="checkbox icheck" style="margin-left: 20px;">-->
-<!--        <label>-->
-<!--          <input-->
-<!--                  type="checkbox"-->
-<!--                  ngModel-->
-<!--                  name="agreement"-->
-<!--                  required> {{ 'I_ACCEPT_AGREEMENT' | translate }}-->
-<!--        </label>&nbsp;<span (click)="onAgreementClickHandler($event)" class="user-agreement-link text-primary">{{ 'USER_AGREEMENT' | translate }}</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; /.col &ndash;&gt;-->
-<!--    <div class="col-xs-4">-->
-<!--      <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block btn-flat btn-block">{{ 'SUBMIT_OK' | translate }}</button>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; /.col &ndash;&gt;-->
-<!--  </div>-->
 </form>
