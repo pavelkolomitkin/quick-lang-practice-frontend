@@ -20,9 +20,12 @@ export class UserAvatarComponent implements OnInit {
   {
     this._user = user;
     let avatar = '';
-    if (this._user.avatarThumbs && (this._user.avatarThumbs[this.size]))
+
+    const size = this.getSize();
+
+    if (this._user.avatarThumbs && (this._user.avatarThumbs[size]))
     {
-      avatar = this._user.avatarThumbs[this.size] + '?' + Math.random();
+      avatar = this._user.avatarThumbs[size] + '?' + Math.random();
     }
     else {
       avatar = 'assets/picture/default_avatar.png';
@@ -38,4 +41,14 @@ export class UserAvatarComponent implements OnInit {
   ngOnInit() {
   }
 
+  getSize()
+  {
+    let result = this.size;
+    if (result.indexOf('x-') === 0)
+    {
+      result = result.slice(2);
+    }
+
+    return result;
+  }
 }
