@@ -1,7 +1,9 @@
 <div>
 
-  <div class="pull-right" style="width: 50px; height: 50px;">
-    <app-user-avatar [user]="addressee" [size]="'small'" ></app-user-avatar>
+  <div class="pull-right">
+    <a [routerLink]="'/client/profile/' + addressee.id" class="avatar-container m-small">
+      <app-online-status-avatar [user]="addressee" [size]="'m-small'"></app-online-status-avatar>
+    </a>
   </div>
 
   <div class="pull-right buttons">

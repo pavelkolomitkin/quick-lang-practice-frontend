@@ -9,8 +9,10 @@ export class SocketService extends Socket
         super({
             url,
             options: {
-                ...options,
-                query: "token=" + authToken
+              ...options,
+              query: 'token=' + authToken,
+              transports: ['websocket'],
+              secure: true,
             }
         });
     }

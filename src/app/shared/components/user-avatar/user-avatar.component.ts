@@ -44,10 +44,15 @@ export class UserAvatarComponent implements OnInit {
   getSize()
   {
     let result = this.size;
-    if (result.indexOf('x-') === 0)
-    {
-      result = result.slice(2);
-    }
+
+    ['x-', 'm-'].forEach((prefix) => {
+
+      if (result.indexOf(prefix) === 0)
+      {
+        result = result.slice(prefix.length);
+      }
+
+    });
 
     return result;
   }
