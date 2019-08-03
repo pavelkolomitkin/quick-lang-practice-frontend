@@ -25,7 +25,7 @@ export class UserAvatarComponent implements OnInit {
 
     if (this._user.avatarThumbs && (this._user.avatarThumbs[size]))
     {
-      avatar = this._user.avatarThumbs[size] + '?' + Math.random();
+      avatar = this._user.avatarThumbs[size];
     }
     else {
       avatar = 'assets/picture/default_avatar.png';

@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   lang: 'en',
-  baseApiUrl: 'http://localhost:3000/api',
-  baseSocketUrl: 'http://localhost:3000',
+  baseApiUrl: 'http://localhost:8080/api',
+  baseSocketUrl: 'http://localhost:8080',
   maxUploadFileSize: 7340032,
   maxUploadFileSizeLabel: '7M',
   onlineActivitySeconds: 60,
