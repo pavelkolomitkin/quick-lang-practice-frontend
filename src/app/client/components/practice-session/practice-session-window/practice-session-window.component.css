@@ -183,3 +183,88 @@
     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
   }
 }
+
+/*================================= MOBILE LANDSCAPE =============================*/
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .window-container.normal .window .caller-screen, .window-container.fullscreen .window .caller-screen
+  {
+    bottom: 55px;
+  }
+
+  .window-container.minimized
+  {
+    opacity: 0.2;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .window-container .window {
+
+    min-height: 300px;
+
+  }
+
+}
+
+@media (min-width: 410px) and (max-width: 830px) {
+
+  .window-container .window {
+
+    min-height: 300px;
+
+  }
+
+}
+
+@media (min-width: 320px) and (max-width: 568px) {
+
+
+
+  .window-container.normal
+  {
+    top: 20px;
+  }
+
+  .window-container .window {
+
+    min-height: 280px;
+
+  }
+
+  .window-container .window .caller-screen
+  {
+    width: 150px;
+    height: 150px;
+  }
+
+}
+
+
+
+/*===============================// MOBILE LANDSCAPE =============================*/
+
+
+/*================================= MOBILE PORTRAIT ==============================*/
+
+@media (min-width: 360px) and (max-width: 480px) {
+
+  .window-container .window {
+
+    min-height: 600px;
+
+  }
+
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .window-container .window {
+
+    min-height: 600px;
+
+  }
+}
+
+/*===============================// MOBILE PORTRAIT ==============================*/
