@@ -20,7 +20,11 @@
     </div>
 
     <div class="addressee-screen" (dblclick)="onDoubleClickAddresseeScreenHandler($event)">
-      <video #addresseeVideo [ngStyle]="{ display: currentSessionState === 'inProcess' ? 'block' : 'none' }"></video>
+      <video
+          #addresseeVideo
+          [ngStyle]="{ display: currentSessionState === 'inProcess' ? 'block' : 'none' }"
+          [autoplay]="true"
+      ></video>
 
       <div class="state-indicator-container">
 
@@ -43,7 +47,10 @@
     </div>
 
     <div class="caller-screen" [ngStyle]="{ display: ((currentWindowSize === 'minimized' || !isUserVideoOn)) ? 'none': 'block' }">
-      <video #userVideo></video>
+      <video #userVideo
+             [autoplay]="true"
+             [muted]="'muted'"
+      ></video>
     </div>
 
     <div class="control-panel">

@@ -213,6 +213,7 @@ export class PracticeSessionWindowComponent implements OnInit, OnDestroy {
       this.peer.destroy();
     }
 
+    this.disposeFullScreen();
     this.disposeUserMedia();
     this.disposeAddresseeMedia();
   }

@@ -8,7 +8,19 @@ export class UserMediaService
   {
     return new Promise((resolve, reject) => {
 
-      getUserMedia({ audio, video }, (error, stream) => {
+      let audioSettings:any = false;
+
+      if (audio)
+      {
+        audioSettings = {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+          googAutoGainControl: true
+        };
+      }
+
+      getUserMedia({ audio: audioSettings, video }, (error, stream) => {
 
         if (error)
         {
