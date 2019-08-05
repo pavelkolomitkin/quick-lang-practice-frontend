@@ -1,9 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import RegisterData from "../../data/model/register-data.model";
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {State} from '../../../app.state';
 import {GlobalUserAgreementVisibility} from '../../../core/data/actions';
+import {Observable} from 'rxjs';
+import {Language} from '../../../core/data/model/language.model';
+import {LanguageLevel} from '../../../core/data/model/language-level.model';
+import {first} from 'rxjs/operators';
 declare var $: any;
 
 @Component({
@@ -19,10 +23,21 @@ export class RegisterFormComponent implements OnInit {
 
   @Output('onSubmit') onSubmitEvent: EventEmitter<RegisterData> = new EventEmitter();
 
+  languages: Language[];
+  languageLevels: LanguageLevel[];
+
+  selectedLanguage: Language;
+  selectedLevel: LanguageLevel;
+
   constructor(private store: Store<State>) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
+    this.languages = await this.store.pipe(select(state => state.core.languages), first()).toPromise();
+    this.languageLevels = await this.store.pipe(select(state => state.core.languageLevels), first()).toPromise();
+
+    this.selectedLanguage = this.languages.find(item => item.code === 'EN');
+    this.selectedLevel = this.languageLevels.find(level => level.level === LanguageLevel.BEGINNER_LEVEL);
   }
 
   onSubmit(form:NgForm)
@@ -33,14 +48,21 @@ export class RegisterFormComponent implements OnInit {
       email: email,
       fullName: fullName,
       password: password,
-      passwordRepeat: passwordRepeat
+      passwordRepeat: passwordRepeat,
+      language: this.selectedLanguage,
+      languageLevel: this.selectedLevel
     };
 
     this.onSubmitEvent.emit(data);
   }
 
-  onAgreementClickHandler(event)
+  compareEntity(a: any, b: any)
   {
-    this.store.dispatch(new GlobalUserAgreementVisibility(true));
+    if (!a || !b)
+    {
+      return false;
+    }
+
+    return a.id === b.id;
   }
 }
