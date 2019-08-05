@@ -11,14 +11,22 @@ export class SecurityService extends BaseService
 {
   registerUser(data: RegisterData): Observable<any>
   {
-    return this.http.post('/security/register', data);
+    const body = {
+      ...data,
+      language: data.language.id,
+      level: data.languageLevel.id
+    };
+
+    return this.http.post('/security/register', body);
   }
 
   registerConfirm(confirmationKey: string): Observable<any>
   {
-    return this.http.put('/security/register-confirm', {
+    return this.http.put<{ token: string }>('/security/register-confirm', {
       key: confirmationKey
-    });
+    }).pipe(
+      map(({ token }) => token)
+    );
   }
 
   login(credentials: LoginCredentials)
