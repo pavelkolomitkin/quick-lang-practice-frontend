@@ -8,7 +8,7 @@
 
     <div class="header-panel">
       <div class="header-container">
-          <h5 class="label">Practice <b>{{ session.skill.language.name }}</b> with <b>{{ session.callee.fullName }}</b></h5>
+          <h5 class="label">Practice <b>{{ session.skill.language.name }}</b> with <b>{{ addressee.fullName }}</b></h5>
           <div class="controls">
             <div class="btn control" *ngIf="addressee">
               <a [routerLink]="'/client/profile/contacts/' + addressee.id" style="display: block;" (click)="onMessageClickHandler($event)">
