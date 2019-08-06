@@ -3,6 +3,18 @@
     margin-top: 8%;
 }
 
+.icons {
+  text-align: center;
+}
+.icons .icon {
+  display: inline-block;
+  background: #02c2e4;
+  color: #fff;
+  border-radius: 30px;
+  margin: 5px;
+  padding: 8px 15px;
+}
+
 .footer
 {
   text-align: center;
