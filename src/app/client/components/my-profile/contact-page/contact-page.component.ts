@@ -61,6 +61,8 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
     this.paramSubscription = this.route.params.subscribe(async (params) => {
 
+      this.clearChatSubscriptions();
+
       if (this.currentUser.id === params['id'])
       {
         this.router.navigateByUrl('/client/profile/' + params['id']);
@@ -75,7 +77,7 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         this.addressee = await this.profileService.get(params['id']).toPromise();
       }
       catch (error) {
-        console.log(error);
+
         //this.router.navigateByUrl('404');
         return
       }
@@ -93,7 +95,6 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         this.iAmBlocked = await this.profileService.amIBlockedBy(this.addressee).toPromise();
       }
       catch (error) {
-        console.log(error);
         return
       }
 
@@ -101,7 +102,6 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         this.iBlockedAddressee = await this.profileService.isUserBlockedByMe(this.addressee).toPromise();
       }
       catch (error) {
-        console.log(error);
         return
       }
 
@@ -114,8 +114,6 @@ export class ContactPageComponent implements OnInit, OnDestroy {
       {
         this.store.dispatch(new ClientContactMessageReceivedReset());
       }
-
-
 
       if (this.receivedMessageSubscription)
       {
@@ -145,11 +143,7 @@ export class ContactPageComponent implements OnInit, OnDestroy {
             }
           });
 
-
-
       this.scrollDownList();
-
-
 
       if (this.addresseeIsTypingSubscription)
       {
@@ -163,49 +157,59 @@ export class ContactPageComponent implements OnInit, OnDestroy {
         }
       });
 
-      this.pageReady = true;
-      this.store.dispatch(new ClientUserWatchingChat(this.addressee));
-    });
-
-
-    this.iAmBlockedSubscription = this.store.pipe(
+      this.iAmBlockedSubscription = this.store.pipe(
         select(state => state.clientProfile.lastUserBlockedMe),
         filter(result => !!result),
         filter(result => (result.id === this.addressee.id))
-        )
+      )
         .subscribe((addressee: User) => {
           this.iAmBlocked = true;
         });
 
-    this.iAmUnblockedSubscription = this.store.pipe(
+      this.iAmUnblockedSubscription = this.store.pipe(
         select(state => state.clientProfile.lastUserUnBlockedMe),
         filter(result => !!result),
         filter(result => (result.id === this.addressee.id))
-    )
+      )
         .subscribe((addressee: User) => {
-          this.iAmBlocked = false;
-        }
+            this.iAmBlocked = false;
+          }
         );
 
+
+      this.pageReady = true;
+      this.store.dispatch(new ClientUserWatchingChat(this.addressee));
+    });
   }
 
-  ngOnDestroy() {
-
-    this.paramSubscription.unsubscribe();
+  clearChatSubscriptions()
+  {
     if (this.receivedMessageSubscription)
     {
       this.receivedMessageSubscription.unsubscribe();
       this.receivedMessageSubscription = null;
     }
-
     if (this.addresseeIsTypingSubscription)
     {
       this.addresseeIsTypingSubscription.unsubscribe();
       this.addresseeIsTypingSubscription = null;
     }
 
-    this.iAmBlockedSubscription.unsubscribe();
-    this.iAmUnblockedSubscription.unsubscribe();
+    if (this.iAmBlockedSubscription)
+    {
+      this.iAmBlockedSubscription.unsubscribe();
+    }
+    if (this.iAmUnblockedSubscription)
+    {
+      this.iAmUnblockedSubscription.unsubscribe();
+    }
+  }
+
+  ngOnDestroy() {
+
+    this.paramSubscription.unsubscribe();
+
+    this.clearChatSubscriptions();
 
     this.store.dispatch(new ClientUserClosedChat());
   }
