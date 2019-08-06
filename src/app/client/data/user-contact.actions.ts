@@ -5,7 +5,9 @@ export const CLIENT_USER_CONTACT_CREATED = 'CLIENT_USER_CONTACT_CREATED';
 export const CLIENT_USER_CONTACT_NEW_MESSAGE = 'CLIENT_USER_CONTACT_NEW_MESSAGE';
 export const CLIENT_USER_CONTACT_NEW_MESSAGE_RESET = 'CLIENT_USER_CONTACT_NEW_MESSAGE_RESET';
 export const CLIENT_USER_CONTACT_MESSAGED_EDITED = 'CLIENT_USER_CONTACT_MESSAGED_EDITED';
+export const CLIENT_USER_CONTACT_MESSAGED_EDITED_RESET = 'CLIENT_USER_CONTACT_MESSAGED_EDITED_RESET';
 export const CLIENT_USER_CONTACT_MESSAGED_REMOVED = 'CLIENT_USER_CONTACT_MESSAGED_REMOVED';
+export const CLIENT_USER_CONTACT_MESSAGED_REMOVED_RESET = 'CLIENT_USER_CONTACT_MESSAGED_REMOVED_RESET';
 
 
 export class ClientUserContactCreated implements Action
@@ -34,6 +36,11 @@ export class ClientUserContactMessageEdited implements Action
   constructor(public contact: UserContact) {};
 }
 
+export class ClientUserContactMessageEditedReset implements Action
+{
+  readonly type = CLIENT_USER_CONTACT_MESSAGED_EDITED_RESET;
+}
+
 export class ClientUserContactMessageRemoved implements Action
 {
   readonly type = CLIENT_USER_CONTACT_MESSAGED_REMOVED;
@@ -41,9 +48,16 @@ export class ClientUserContactMessageRemoved implements Action
   constructor(public contact: UserContact) {};
 }
 
+export class ClientUserContactMessageRemovedReset implements Action
+{
+  readonly type = CLIENT_USER_CONTACT_MESSAGED_REMOVED_RESET;
+}
+
 export type UserContactActions = ClientUserContactCreated
   | ClientUserContactNewMessage
   | ClientUserContactNewMessageReset
   | ClientUserContactMessageEdited
+  | ClientUserContactMessageEditedReset
   | ClientUserContactMessageRemoved
+  | ClientUserContactMessageRemovedReset
   ;

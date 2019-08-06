@@ -6,7 +6,11 @@ import {State} from '../../../../app.state';
 import {Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
-import {ClientUserContactNewMessageReset} from '../../../data/user-contact.actions';
+import {
+  ClientUserContactMessageEditedReset,
+  ClientUserContactMessageRemovedReset,
+  ClientUserContactNewMessageReset
+} from '../../../data/user-contact.actions';
 
 @Component({
   selector: 'app-contact-list-page',
@@ -36,6 +40,8 @@ export class ContactListPageComponent implements OnInit, OnDestroy {
 
     this.contacts = [];
     this.store.dispatch(new ClientUserContactNewMessageReset());
+    this.store.dispatch(new ClientUserContactMessageEditedReset());
+    this.store.dispatch(new ClientUserContactMessageRemovedReset());
 
     await this.loadContacts();
 

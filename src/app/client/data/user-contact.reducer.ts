@@ -50,11 +50,25 @@ export function reducer(state = initialState, action: actions.UserContactActions
         lastContactEditedMessage: action.contact
       };
 
+    case actions.CLIENT_USER_CONTACT_MESSAGED_EDITED_RESET:
+
+      return {
+        ...state,
+        lastContactEditedMessage: null
+      };
+
     case actions.CLIENT_USER_CONTACT_MESSAGED_REMOVED:
 
       return {
         ...state,
         lastContactRemovedMessage: action.contact
+      };
+
+    case actions.CLIENT_USER_CONTACT_MESSAGED_REMOVED_RESET:
+
+      return {
+        ...state,
+        lastContactRemovedMessage: null
       };
 
     default:
