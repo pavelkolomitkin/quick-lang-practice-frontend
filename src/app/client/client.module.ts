@@ -57,6 +57,7 @@ import { PartnerItemComponent } from './components/search/partner-item/partner-i
 import {SearchPartnerService} from './services/search-partner.service';
 import {EffectsModule} from '@ngrx/effects';
 import {ProfileEffects} from './data/effects/profile.effects';
+import { WindowTabNewMessageFlasherComponent } from './components/common/window-tab-new-message-flasher/window-tab-new-message-flasher.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import {ProfileEffects} from './data/effects/profile.effects';
     EditableNameComponent,
     SearchFormComponent,
     PartnerItemComponent,
+    WindowTabNewMessageFlasherComponent,
   ],
   imports: [
     CommonModule,

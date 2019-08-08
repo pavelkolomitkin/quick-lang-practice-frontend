@@ -53,11 +53,15 @@ export class SearchComponent implements OnInit {
 
   async loadUsers()
   {
+    this.infinityScrollDisabled = true;
+
     if (this.selectedLanguage)
     {
       const list: User[] = await this.service.getList(this.selectedLanguage, this.currentPage).toPromise();
       this.list = this.list.concat(list);
     }
+
+    this.infinityScrollDisabled = false;
   }
 
   async onScroll()

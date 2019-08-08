@@ -38,9 +38,11 @@ export class ContactPageComponent implements OnInit, OnDestroy {
   addresseeIsTypingSubscription: Subscription;
   iAmBlockedSubscription: Subscription;
   iAmUnblockedSubscription: Subscription;
+  windowFocusChangeSubscription: Subscription;
 
   iAmBlocked: Boolean;
   iBlockedAddressee: Boolean;
+  isWindowFocused: boolean;
 
   pageReady: boolean = false;
 
@@ -58,6 +60,17 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
     // @ts-ignore
     this.currentUser = await this.store.pipe(select(state => state.security.authorizedUser), first()).toPromise();
+
+    this.windowFocusChangeSubscription = this.store.pipe(select(state => state.core.isWindowFocused)).subscribe( async (isFocused) => {
+
+      this.isWindowFocused = isFocused;
+
+      if (this.isWindowFocused)
+      {
+        await this.readLastContactMessages();
+      }
+
+    });
 
     this.paramSubscription = this.route.params.subscribe(async (params) => {
 
@@ -108,7 +121,6 @@ export class ContactPageComponent implements OnInit, OnDestroy {
       await this.loadMessages();
       await this.readLastContactMessages();
 
-
       const lastMessage = await this.store.pipe(select(state => state.clientContactMessage.lastReceivedMessage), first()).toPromise();
       if (lastMessage && (lastMessage.author.id === this.addressee.id))
       {
@@ -135,7 +147,10 @@ export class ContactPageComponent implements OnInit, OnDestroy {
 
             this.scrollDownList();
 
-            await this.readLastContactMessages();
+            if (this.isWindowFocused)
+            {
+              await this.readLastContactMessages();
+            }
 
             if (message.author.id === this.addressee.id)
             {
@@ -208,6 +223,7 @@ export class ContactPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
     this.paramSubscription.unsubscribe();
+    this.windowFocusChangeSubscription.unsubscribe();
 
     this.clearChatSubscriptions();
 

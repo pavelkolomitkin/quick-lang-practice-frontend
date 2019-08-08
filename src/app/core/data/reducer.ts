@@ -26,6 +26,8 @@ export interface State {
 
   languages: Array<Language>;
   languageLevels: Array<LanguageLevel>;
+
+  isWindowFocused: boolean;
 }
 
 const initialState: State = {
@@ -48,7 +50,9 @@ const initialState: State = {
   isUserAgreementVisible: false,
 
   languages: [],
-  languageLevels: []
+  languageLevels: [],
+
+  isWindowFocused: true
 };
 
 export function reducer(state = initialState, action: actions.CoreActions): State {
@@ -171,6 +175,13 @@ export function reducer(state = initialState, action: actions.CoreActions): Stat
       return {
         ...state,
         languageLevels: action.list
+      };
+
+    case actions.GLOBAL_WINDOW_FOCUS_CHANGED:
+
+      return {
+        ...state,
+        isWindowFocused: action.isFocused
       };
 
     default:

@@ -27,6 +27,8 @@ export const GLOBAL_USER_AGREEMENT_VISIBILITY = 'GLOBAL_USER_AGREEMENT_VISIBILIT
 export const GLOBAL_LANGUAGE_LIST_LOADED = 'GLOBAL_LANGUAGE_LIST_LOADED';
 export const GLOBAL_LANGUAGE_LEVEL_LIST_LOADED = 'GLOBAL_LANGUAGE_LEVEL_LIST_LOADED';
 
+export const GLOBAL_WINDOW_FOCUS_CHANGED = 'GLOBAL_WINDOW_FOCUS_CHANGED';
+
 
 export class GlobalPageTitle implements Action
 {
@@ -126,6 +128,13 @@ export class GlobalLanguageLevelListLoaded implements Action
   constructor(public list: Array<LanguageLevel>) {}
 }
 
+export class GlobalWindowFocusChanged implements Action
+{
+  readonly type = GLOBAL_WINDOW_FOCUS_CHANGED;
+
+  constructor(public isFocused: boolean) {}
+}
+
 
 export type CoreActions =
     GlobalProgressShow
@@ -149,4 +158,5 @@ export type CoreActions =
 
     | GlobalLanguageListLoaded
     | GlobalLanguageLevelListLoaded
+    | GlobalWindowFocusChanged
   ;
