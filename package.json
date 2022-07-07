@@ -27,7 +27,7 @@
     "buffer": "^5.2.1",
     "core-js": "^2.5.4",
     "getusermedia": "^2.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngx-bootstrap": "^5.1.0",
     "ngx-infinite-scroll": "^7.2.0",
     "ngx-moment": "^3.4.0",
